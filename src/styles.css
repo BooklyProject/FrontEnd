@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+.main-aperto{
+    padding: 16px;
+    margin-left: 250px;
+    transition: margin-left 0.5s;
+}
+
+.main-compatto{
+    padding: 16px;
+    margin-left: 85px;
+    transition: margin-left 0.5s;
+}
