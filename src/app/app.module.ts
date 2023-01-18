@@ -8,12 +8,14 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { BooksService } from './GoogleBooks/services/books.service';
 import { BookCardComponent } from './book-card/book-card.component';
 import { TruncatePipe } from './GoogleBooks/truncate-text.pipe';
+import { SchedaLibroComponent } from './scheda-libro/scheda-libro.component';
 @NgModule({
   declarations: [
     AppComponent,
     CatalogoComponent,
     BookCardComponent,
-    TruncatePipe
+    TruncatePipe,
+    SchedaLibroComponent
   ],
   imports: [
     BrowserModule,
