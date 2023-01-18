@@ -1,4 +1,9 @@
 # FrontEnd
+## RUN 
+**Eseguire i seguenti comandi nel path radice del progetto.**
+Usare *npm install* per installare il pacchetto node_modules.
+Usare *ng serve* per compilare ed eseguire il progetto.
+http://localhost:4200
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
 
