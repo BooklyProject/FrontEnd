@@ -1,1 +1,29 @@
-<app-sidenav></app-sidenav>
+<ng-container>
+<div class="sidenav" (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()"
+    [ngClass]="{
+        'sidenav-aperta': !miniSidebar,
+        'sidenav-compatta': miniSidebar
+    }">
+    <img src="assets/img/scott.png">
+    <a href="" (click)="changeWindow(1)"><span class="material-symbols-outlined">home</span><span class="textIcon"></span>Home</a>
+    <a href="" (click)="changeWindow(2)"><span class="material-symbols-outlined">person</span><span class="textIcon"></span>Utente</a>
+    <a href="" (click)="changeWindow(3)"><span class="material-symbols-outlined">menu_book</span><span class="textIcon"></span>Catalogo</a>
+    <a href="" (click)="changeWindow(4)"><span class="material-symbols-outlined">event</span><span class="textIcon"></span>Eventi</a>
+    <a class="settings" href="" (click)="changeWindow(5)"><span class="material-symbols-outlined">settings</span><span class="textIcon"></span>Settings</a>
+</div>
+<div [ngClass]="{
+    'main-aperto': !miniSidebar,
+    'main-compatto': miniSidebar
+    }">
+    <!--<div [ngSwitch]="window">        
+        <div *ngSwitchCase="1"><p>Home</p></div>
+        <div *ngSwitchCase="2"><p>Utente</p></div>
+        <div *ngSwitchCase="3">
+            <p>Catalogo</p>
+        </div>
+        <div *ngSwitchCase="4"><p>Eventi</p></div>
+        <div *ngSwitchCase="5"><p>Settings</p></div>
+    </div>-->
+    <app-catalogo></app-catalogo>
+</div>
+</ng-container>

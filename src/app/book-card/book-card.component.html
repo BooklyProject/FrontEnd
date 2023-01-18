@@ -1,0 +1,25 @@
+<div class="card p-1" *ngIf="volume">
+    <div class="card-container c-pointer" (click)="openBookDetailPage()">
+      <div class="card-overlay"></div>
+    </div>
+    <ng-container *ngIf="volume.volumeInfo">
+        <h6 class="h-40px my-2">
+          {{ volume.volumeInfo.title | truncate: 45 }}
+        </h6>
+      
+        <div class="h-56px custom-scrollbar">
+            <strong>Categorie:</strong>
+            <div *ngFor="let cat of volume.volumeInfo.categories; let index = index;">
+                {{ cat }}<span *ngIf="volume.volumeInfo.categories 
+                && volume.volumeInfo.categories.length > 1 && index < (volume.volumeInfo.categories.length - 1)">,</span>
+            </div>
+        </div>
+        <div class="h-56px custom-scrollbar">
+            <strong>Autori:</strong>
+            <div *ngFor="let cat of volume.volumeInfo.authors; let index = index;">
+                {{ cat }}<span *ngIf="volume.volumeInfo.authors 
+                && volume.volumeInfo.authors.length > 1 && index < (volume.volumeInfo.authors.length - 1)">,</span>
+            </div>
+        </div>
+      </ng-container>
+  </div>

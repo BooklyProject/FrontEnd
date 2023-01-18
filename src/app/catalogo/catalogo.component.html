@@ -1,1 +1,21 @@
-<p>catalogo works!</p>
+<div class="searchbar">
+<div class="input-group">
+	<input type="search" class="form-control rounded" placeholder="Cerca un libro..." (keyup.enter)="searchBook()" [(ngModel)]="book"/>
+	<button type="button" class="btn btn-outline-primary" (click)="searchBook()">Cerca</button>
+</div>
+</div>
+
+<div class="container" *ngIf="book != '' && booksCollection && params.searchTerm === book">
+<div class="container" *ngIf="!booksCollection.items; else collectionNotEmpty">
+	Nessun libro trovato
+</div>
+<ng-template #collectionNotEmpty>
+	{{ booksCollection.totalItems }} risultati per {{ params.searchTerm }}
+	<div class="cards-grid mt-3">
+	  <app-book-card
+		*ngFor="let item of booksCollection.items"
+		[volume]="item"
+	  ></app-book-card>
+	</div>
+</ng-template>
+</div>
