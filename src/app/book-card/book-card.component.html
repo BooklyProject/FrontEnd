@@ -1,5 +1,9 @@
 <div class="card p-1" *ngIf="volume">
     <div class="card-container c-pointer" (click)="openBookDetailPage()">
+        <img [src]="volume.volumeInfo.imageLinks?.thumbnail ||
+        volume.volumeInfo.imageLinks?.smallThumbnail || placeholderImageUrl"
+        alt="No image"
+        class="cover-image"/>
       <div class="card-overlay"></div>
     </div>
     <ng-container *ngIf="volume.volumeInfo">

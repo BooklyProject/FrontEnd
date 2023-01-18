@@ -9,11 +9,10 @@ import { Volume } from '../GoogleBooks/models/volume.interface';
 export class BookCardComponent {
   @Input() volume: Volume | null = null;
 
+  public placeholderImageUrl = 'http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image';
+  
   protected openBookDetailPage(): void {
-    // if (this.volume?.id) {
-    //   const url = location.origin + `/book-detail/${this.volume.id}`;
-    //   window.open(url, '_blank');
-    // }
+    console.log("libro aperto");
   }
 
 }
