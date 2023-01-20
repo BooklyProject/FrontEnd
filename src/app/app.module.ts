@@ -9,13 +9,15 @@ import { BooksService } from './GoogleBooks/services/books.service';
 import { BookCardComponent } from './book-card/book-card.component';
 import { TruncatePipe } from './GoogleBooks/truncate-text.pipe';
 import { SchedaUtenteComponent } from './scheda-utente/scheda-utente.component';
+import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
 @NgModule({
   declarations: [
     AppComponent,
     CatalogoComponent,
     BookCardComponent,
     TruncatePipe,
-    SchedaUtenteComponent
+    SchedaUtenteComponent,
+    SchedaEventiComponent
   ],
   imports: [
     BrowserModule,
