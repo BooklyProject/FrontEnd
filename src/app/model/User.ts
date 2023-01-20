@@ -7,7 +7,6 @@ export interface User {
     password: string;
 	nome: string;
 	cognome: string;
-    provider: number;
     isBanned: boolean;
     userImage: string;
 }

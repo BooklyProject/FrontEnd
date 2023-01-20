@@ -12,17 +12,28 @@ export class AppComponent implements OnInit {
   title = 'FrontEnd';
   miniSidebar:boolean = true;
   window: number = 1;
-  user: User | null = null;
+  isLogged:Boolean = false;
+  sessionId: string = "";
 
   constructor(private server: ServerService) {
 
   }
 
   ngOnInit(): void {
-    this.server.getUser().subscribe((u) => {
-      this.user = u;
-      console.log(this.user);
-    });
+    const urlParams = new URLSearchParams(window.location.search);
+    var sessionId = urlParams.get("jsessionid");
+    console.log("sessionId1: " + sessionId);
+    if (sessionId){
+      this.server.checkLogin(sessionId).subscribe(ok => {
+      this.isLogged = ok;
+      console.log(sessionId);
+      if (ok){
+        if (sessionId != null){
+          this.sessionId = sessionId;
+        }
+      }
+      });
+    }
   }
 
   toggleSidebar() {

@@ -11,9 +11,15 @@ export class ServerService {
 
   constructor(private http: HttpClient) { }
 
-  url: string = 'https://localhost:8080';
+  url: string = 'http://localhost:8080';
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(this.url + "/checkUser");
+  checkLogin(sessionid: string): Observable<Boolean>{
+    //let queryParams = new HttpParams();
+    //queryParams.append("jsessionid", jsessionid);
+    return this.http.get<Boolean>(this.url + "/checkAuth", {params: {jsessionid: sessionid}});
+  }
+
+  getUser(sessionid: string): Observable<User> {
+    return this.http.post<User>(this.url + "/getUser", {params: {jsessionid: sessionid}});
   }
 }
