@@ -11,27 +11,27 @@
     </div>
     <div class="column2">
         <div class="info">
-            <h2><input type="text" value="gtnprnz" placeholder="Username"[ngClass]="{
+            <h2><input type="text" placeholder="Username" [(ngModel)]="username" [ngClass]="{
                 'userNonModificabile': !modifica,
                 'modificabile': modifica
             }"></h2>
-            <p class="pNome"><input type="text" value="Pier Francesco" placeholder="Nome" [ngClass]="{
+            <p class="pNome"><input type="text" placeholder="Nome" [(ngModel)]="nome" [ngClass]="{
                 'nomeNonModificabile': !modifica,
                 'modificabile': modifica
             }"></p>
             <p class="pCognome">
-                <input type="text" value="Prinzivalli" placeholder="Cognome" [ngClass]="{
+                <input type="text" placeholder="Cognome" [(ngModel)]="cognome" [ngClass]="{
                     'cognomeNonModificabile': !modifica,
                     'cognomeModificabile': modifica
                 }">
             </p>
-            <p class="pEmail"><input type="text" value="prinzivalligaetanokr@gmail.com" placeholder="Email" [ngClass]="{
+            <p class="pEmail"><input type="text" placeholder="Email" [(ngModel)]="email" [ngClass]="{
                 'emailNonModificabile': !modifica,
                 'emailModificabile': modifica
             }"></p>
-            <button (click)="modificaInfo() "type="button" class="btn btn-outline-primary" [ngClass]="{
+            <button (click)="confermaInfo()" type="button" class="btn btn-outline-primary" [ngClass]="{
                 'nonCliccabile': !modifica
-            }">Conferma</button><button (click)="modificaInfo() "type="button" class="btn btn-outline-danger annulla" [ngClass]="{
+            }">Conferma</button><button (click)="annullaInfo()" type="button" class="btn btn-outline-danger annulla" [ngClass]="{
                 'nonCliccabile': !modifica
             }">Annulla</button>             
         </div>
