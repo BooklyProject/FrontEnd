@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './model/User';
 import { ServerService } from './server.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class AppComponent implements OnInit {
   miniSidebar:boolean = true;
   window: number = 1;
   isLogged:Boolean = false;
-  sessionId: string = "";
+  session: string = "";
 
   constructor(private server: ServerService) {
 
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
       console.log(sessionId);
       if (ok){
         if (sessionId != null){
-          this.sessionId = sessionId;
+          this.session = sessionId;
         }
       }
       });
@@ -42,7 +41,8 @@ export class AppComponent implements OnInit {
 
   changeWindow(data: number) {
     console.log("data: "+ data);
-    console.log("window: " + this.window);
+    console.log("window1: " + this.window);
     this.window = data;
+    console.log("window2: " + this.window);
   }
 }

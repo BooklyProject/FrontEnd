@@ -1,14 +1,14 @@
 import { Volume } from "../GoogleBooks/models/volume.interface";
 
 export interface User {
-    //id: BigInt;
+    id: BigInt;
     email: string;
     username: string;
     password: string;
 	nome: string;
 	cognome: string;
     isBanned: boolean;
-    //userImage: string;
+    userImage: string;
 }
 
 export interface Recensione{

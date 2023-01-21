@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../model/User';
 import { ServerService } from '../server.service';
 
@@ -9,21 +9,29 @@ import { ServerService } from '../server.service';
 })
 export class SchedaUtenteComponent implements OnInit {
 
-  @Input() sessionId: string = "";
+  sessionId: string = "";
   modifica:boolean = false;
-  nome: string = "Emanuele";
-  cognome: string = "Conforti";
-  email: string = "manu.conforti@gmail.com";
-  username: string = "ciccio";
-  utente: User = {email: "manu.conforti@gmail.com", username: "ciccio", password: "paswd",
-                  nome: "Emanuele", cognome: "Conforti", isBanned: false} ;
+  nome: string = "";
+  cognome: string = "";
+  email: string = "";
+  username: string = "";
+  utente: User | null = null;
 
   ngOnInit(): void {
+    const urlParams = new URLSearchParams(window.location.search); // da chiedere: perchè non prende @Input()?
+    var sessionId = urlParams.get("jsessionid");
+    if(sessionId != null) {
+      this.sessionId = sessionId;
+    }
     console.log("sessionid: " + this.sessionId);
     this.server.getUser(this.sessionId).subscribe((u) => {
-      console.log("utente: " + u);
+      console.log("utente: " + u.nome);
       if(u != null) {
         this.utente = u;
+        this.nome = this.utente.nome;
+        this.cognome = this.utente.cognome;
+        this.email = this.utente.email;
+        this.username  =this.utente.username;
       }
     });
   }
@@ -39,15 +47,19 @@ export class SchedaUtenteComponent implements OnInit {
       this.utente.email = this.email;
       this.utente.username = this.username;
       this.modificaInfo();
+      console.log(this.utente);
     }
   }
 
   annullaInfo() {
-    this.modificaInfo();
-    this.nome = this.utente.nome;
-    this.cognome = this.utente.cognome;
-    this.email = this.utente.email;
-    this.username = this.utente.username;
+    if(this.utente != null) {
+      this.modificaInfo();
+      this.nome = this.utente.nome;
+      this.cognome = this.utente.cognome;
+      this.email = this.utente.email;
+      this.username = this.utente.username;
+      console.log(this.utente);
+    }
   }
 
   constructor(private server: ServerService) {

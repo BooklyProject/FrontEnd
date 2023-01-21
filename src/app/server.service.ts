@@ -20,6 +20,6 @@ export class ServerService {
   }
 
   getUser(sessionid: string): Observable<User> {
-    return this.http.post<User>(this.url + "/getUser", {params: {jsessionid: sessionid}});
+    return this.http.get<User>(this.url + "/getUser", {params: {jsessionid: sessionid}});
   }
 }
