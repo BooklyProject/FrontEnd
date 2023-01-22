@@ -1,15 +1,15 @@
-<ng-container> <!-- *ngIf="session"-->
+<ng-container *ngIf="sessionId">
 <div class="sidenav" (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()"
     [ngClass]="{
         'sidenav-aperta': !miniSidebar,
         'sidenav-compatta': miniSidebar
     }">
     <img src="assets/img/scott.png">
-    <a href="home"><span class="material-symbols-outlined">home</span><span class="textIcon"></span>Home</a>
-    <a href="utente"><span class="material-symbols-outlined">person</span><span class="textIcon"></span>Utente</a>
-    <a href="catalogo"><span class="material-symbols-outlined">menu_book</span><span class="textIcon"></span>Catalogo</a>
-    <a href="eventi"><span class="material-symbols-outlined">event</span><span class="textIcon"></span>Eventi</a>
-    <a class="settings" href="settings"><span class="material-symbols-outlined">settings</span><span class="textIcon"></span>Settings</a>
+    <a routerLink="" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">home</span><span class="textIcon"></span>Home</a>
+    <a routerLink="utente" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">person</span><span class="textIcon"></span>Utente</a>
+    <a routerLink="catalogo" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">menu_book</span><span class="textIcon"></span>Catalogo</a>
+    <a routerLink="eventi" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">event</span><span class="textIcon"></span>Eventi</a>
+    <a class="settings" routerLink="settings" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">settings</span><span class="textIcon"></span>Settings</a>
 </div>
 <div [ngClass]="{
     'main-aperto': !miniSidebar,

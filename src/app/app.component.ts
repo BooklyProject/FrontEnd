@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   miniSidebar:boolean = true;
   window: number = 1;
   isLogged:Boolean = false;
-  session: string = "";
+  sessionId: string = "";
 
   constructor(private server: ServerService) {
 
@@ -21,14 +21,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const urlParams = new URLSearchParams(window.location.search);
     var sessionId = urlParams.get("jsessionid");
-    console.log("sessionId1: " + sessionId);
+    console.log("sessionId login: " + sessionId);
     if (sessionId){
       this.server.checkLogin(sessionId).subscribe(ok => {
       this.isLogged = ok;
       console.log(sessionId);
       if (ok){
         if (sessionId != null){
-          this.session = sessionId;
+          this.sessionId = sessionId;
         }
       }
       });

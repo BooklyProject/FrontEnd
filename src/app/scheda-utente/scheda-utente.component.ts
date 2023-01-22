@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '../model/User';
 import { ServerService } from '../server.service';
 
@@ -18,20 +19,22 @@ export class SchedaUtenteComponent implements OnInit {
   utente: User | null = null;
 
   ngOnInit(): void {
-    const urlParams = new URLSearchParams(window.location.search); // da chiedere: perchè non prende @Input()?
-    var sessionId = urlParams.get("jsessionid");
-    if(sessionId != null) {
-      this.sessionId = sessionId;
-    }
-    console.log("sessionid: " + this.sessionId);
-    this.server.getUser(this.sessionId).subscribe((u) => {
-      console.log("utente: " + u.nome);
-      if(u != null) {
-        this.utente = u;
-        this.nome = this.utente.nome;
-        this.cognome = this.utente.cognome;
-        this.email = this.utente.email;
-        this.username  =this.utente.username;
+    this.route.queryParams.subscribe(data => {
+      var sessionId = data['jsessionid'];
+      
+      if(sessionId != null) {
+        this.sessionId = sessionId;
+        
+        this.server.getUser(this.sessionId).subscribe((u) => {
+          console.log("utente: " + u.nome);
+          if(u != null) {
+            this.utente = u;
+            this.nome = this.utente.nome;
+            this.cognome = this.utente.cognome;
+            this.email = this.utente.email;
+            this.username = this.utente.username;
+          }
+        });
       }
     });
   }
@@ -62,7 +65,7 @@ export class SchedaUtenteComponent implements OnInit {
     }
   }
 
-  constructor(private server: ServerService) {
+  constructor(private server: ServerService, private route: ActivatedRoute) {
 
   }
 }

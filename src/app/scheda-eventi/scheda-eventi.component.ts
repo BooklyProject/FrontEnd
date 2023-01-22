@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Evento } from '../model/Evento';
 import { ServerService } from '../server.service';
 
@@ -9,15 +10,28 @@ import { ServerService } from '../server.service';
 })
 export class SchedaEventiComponent implements OnInit {
 
+  sessionId: string = "";
   eventiCreati: Evento[] = [];
   eventiAccettati: Evento[] = [];
   eventiDisponibili: Evento[] = [];
 
-  ngOnInit() {
+  getEventi() {
 
   }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(data => {
+      var sessionId = data['jsessionid'];
+      
+      if(sessionId != null) {
+        this.sessionId = sessionId;
+        this.getEventi();
+        console.log("sessionId eventi: " + this.sessionId);
+      }
+    });
+  }
   
-  constructor(private server: ServerService) {
+  constructor(private server: ServerService, private route: ActivatedRoute) {
 
   }
 }

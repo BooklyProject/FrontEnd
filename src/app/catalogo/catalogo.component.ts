@@ -1,19 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../GoogleBooks/services/books.service';
 import { SearchParams } from '../GoogleBooks/models/search-params.interface';
 import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
 import { Volume } from '../GoogleBooks/models/volume.interface';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
-export class CatalogoComponent {
+export class CatalogoComponent implements OnInit {
 
-  constructor(private GoogleBooksService: BooksService) {
-
-  }
-
+  sessionId: string = "";
   booksCollection: CollectionResultModel<Volume[]> | null = null;
   book: string = "";
   params: SearchParams = {searchTerm: "", category: "", orderBy: "relevance", startIndex: 0};
@@ -31,6 +29,21 @@ export class CatalogoComponent {
           }
       });
     }
+  }
+
+  ngOnInit(): void {
+      this.route.queryParams.subscribe(data => {
+        var sessionId = data['jsessionid'];
+
+        if(sessionId != null) {
+          this.sessionId = sessionId;
+          console.log("sessionId catalogo: " + this.sessionId);
+        }
+      })
+  }
+
+  constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute) {
+
   }
 
 }
