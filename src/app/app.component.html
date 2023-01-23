@@ -1,5 +1,4 @@
-<!--
-<ng-container *ngIf="sessionId">
+<ng-container>  <!-- *ngIf="sessionId"-->
 <div class="sidenav" (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()"
     [ngClass]="{
         'sidenav-aperta': !miniSidebar,
@@ -10,15 +9,11 @@
     <a routerLink="utente" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">person</span><span class="textIcon"></span>Utente</a>
     <a routerLink="catalogo" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">menu_book</span><span class="textIcon"></span>Catalogo</a>
     <a routerLink="eventi" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">event</span><span class="textIcon"></span>Eventi</a>
-    <a class="settings" routerLink="settings" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">settings</span><span class="textIcon"></span>Settings</a>
+    <a routerLink="raccolte" [queryParams]="{jsessionid: sessionId}"><span class="material-symbols-outlined">collections_bookmark</span><span class="textIcon"></span>Raccolte</a>
 </div>
 <div [ngClass]="{
     'main-aperto': !miniSidebar,
     'main-compatto': miniSidebar}">
     <router-outlet></router-outlet>
 </div>
-</ng-container>
--->
-<ng-container>
-    <app-scheda-raccolte></app-scheda-raccolte>
 </ng-container>
