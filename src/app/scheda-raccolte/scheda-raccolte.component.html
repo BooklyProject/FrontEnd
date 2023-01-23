@@ -1,6 +1,20 @@
-<button type="button" class="btn btn-primary">Crea raccolta</button>
+<button type="button" class="btn btn-primary" (click)="creaRaccolta()" [ngClass]="{
+    'bottoneVisibile': !creazioneRaccolta,
+    'bottoneNonVisibile': creazioneRaccolta
+}">Crea evento</button>
 
+<div class="form" [ngClass]="{
+    'formVisibile': creazioneRaccolta,
+    'formNonVisibile': !creazioneRaccolta
+}">
 
+    <div class="form-outline mb-4">
+        <label class="form-label">Nome Raccolta</label>
+        <input type="text" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
+    <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
+</div>
 
 <div class="separator">
     <div class="line"></div>

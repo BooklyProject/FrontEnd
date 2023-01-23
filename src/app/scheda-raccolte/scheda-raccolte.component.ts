@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./scheda-raccolte.component.css']
 })
 export class SchedaRaccolteComponent {
+  creazioneRaccolta: boolean = false;
 
+  creaRaccolta(){
+    this.creazioneRaccolta = !this.creazioneRaccolta;
+  }
+  conferma(){
+    //OPERAZIONI
+    this.creaRaccolta();
+  }
+  annulla(){
+    this.creaRaccolta();
+  }
 }
