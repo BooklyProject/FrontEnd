@@ -20,6 +20,10 @@ export class SchedaEventiComponent implements OnInit {
 
   }
 
+  apriEvento(){
+    
+  }
+
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
       var sessionId = data['jsessionid'];
