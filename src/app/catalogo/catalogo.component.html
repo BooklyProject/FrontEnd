@@ -12,7 +12,7 @@
 <ng-template #collectionNotEmpty>
 	{{ booksCollection.totalItems }} risultati per {{ params.searchTerm }}
 	<div class="cards-grid mt-3">
-	  <app-book-card
+	  <app-book-card [sessionId]="sessionId"
 		*ngFor="let item of booksCollection.items"
 		[volume]="item"
 	  ></app-book-card>

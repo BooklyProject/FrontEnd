@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CatalogoComponent implements OnInit {
 
   sessionId: string = "";
-  booksCollection: CollectionResultModel<Volume[]> | null = null;
+  booksCollection: CollectionResultModel | null = null;
   book: string = "";
   params: SearchParams = {searchTerm: "", category: "", orderBy: "relevance", startIndex: 0};
 
@@ -26,6 +26,10 @@ export class CatalogoComponent implements OnInit {
       this.GoogleBooksService.getBooks(this.params).subscribe((response) => {
           if (response) {
             this.booksCollection = response;
+            this.booksCollection.items = this.booksCollection.items.filter(book => book.volumeInfo.industryIdentifiers &&
+                                              book.volumeInfo.authors && book.volumeInfo.categories &&
+                                              book.volumeInfo.description);
+            this.booksCollection.totalItems = this.booksCollection.items.length;
           }
       });
     }

@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   
   title = 'FrontEnd';
   miniSidebar:boolean = true;
-  window: number = 1;
   isLogged:Boolean = false;
   sessionId: string = "";
 
@@ -21,11 +20,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const urlParams = new URLSearchParams(window.location.search);
     var sessionId = urlParams.get("jsessionid");
-    console.log("sessionId login: " + sessionId);
     if (sessionId){
       this.server.checkLogin(sessionId).subscribe(ok => {
       this.isLogged = ok;
-      console.log(sessionId);
       if (ok){
         if (sessionId != null){
           this.sessionId = sessionId;
@@ -37,12 +34,5 @@ export class AppComponent implements OnInit {
 
   toggleSidebar() {
     this.miniSidebar = !this.miniSidebar;
-  }
-
-  changeWindow(data: number) {
-    console.log("data: "+ data);
-    console.log("window1: " + this.window);
-    this.window = data;
-    console.log("window2: " + this.window);
   }
 }

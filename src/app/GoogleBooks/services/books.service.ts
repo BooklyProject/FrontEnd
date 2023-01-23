@@ -19,8 +19,8 @@ export class BooksService {
    */
   public getBooks(
     searchParams: SearchParams
-  ): Observable<CollectionResultModel<Volume[]>> {
-    return this.httpClient.get<CollectionResultModel<Volume[]>>(this.baseUri, {
+  ): Observable<CollectionResultModel> {
+    return this.httpClient.get<CollectionResultModel>(this.baseUri, {
       params: {
         q: searchParams.searchTerm,
         subject: searchParams.category,
