@@ -21,6 +21,16 @@ h1{
 img{
     border: 5px solid black;
 }
+.visualizza{
+    display: block;
+}
+.nonVisualizza{
+    display: none;
+}
+.bottoneFoto{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .modifyButton{
     margin-top: 15px;
     margin-right: 10px;

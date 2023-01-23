@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Raccolta } from '../model/Raccolta';
 
 @Component({
   selector: 'app-scheda-raccolte',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./scheda-raccolte.component.css']
 })
 export class SchedaRaccolteComponent {
+  
   creazioneRaccolta: boolean = false;
+  raccolte: Raccolta[] = [];
 
   creaRaccolta(){
     this.creazioneRaccolta = !this.creazioneRaccolta;
@@ -17,5 +20,8 @@ export class SchedaRaccolteComponent {
   }
   annulla(){
     this.creaRaccolta();
+  }
+  apriRaccolta(){
+    
   }
 }

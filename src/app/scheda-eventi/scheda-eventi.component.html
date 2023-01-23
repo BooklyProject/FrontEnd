@@ -40,6 +40,7 @@
 
 <div class="container eventi">
     <div class="row">
+        <h2 class="testi" *ngIf="eventiCreati.length === 0">Aggiungi nuovo evento</h2>
         <div class="col-lg-4" *ngFor="let evento of eventiCreati">
             <div class="card card-margin">
                 <div class="card-header no-border">
@@ -79,6 +80,7 @@
 
 <div class="container eventi">
 <div class="row">
+    <h2 class="testi" *ngIf="eventiAccettati.length === 0">Partecipa ad un nuovo evento</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiAccettati">
         <div class="card card-margin">
             <div class="card-header no-border">
@@ -118,6 +120,7 @@
 
 <div class="container eventi">
 <div class="row">
+    <h2 class="testi" *ngIf="eventiDisponibili.length === 0">Non ci sono eventi disponibili</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiDisponibili">
         <div class="card card-margin">
             <div class="card-header no-border">

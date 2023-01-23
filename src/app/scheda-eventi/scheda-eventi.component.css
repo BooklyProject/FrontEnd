@@ -10,7 +10,10 @@
   height: 3px;
   background-color: #000;
 }
-
+.testi{
+  color: #B1BAC5;
+  text-align: center;
+}
 .formVisibile{
   display: block;
 }

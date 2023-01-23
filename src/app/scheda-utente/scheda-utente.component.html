@@ -29,6 +29,11 @@
                 'emailNonModificabile': !modifica,
                 'emailModificabile': modifica
             }"></p>
+            
+            <button class="btn btn-outline-primary bottoneFoto" [ngClass]="{
+                'visualizza': modifica,
+                'nonVisualizza': !modifica}">Modifica foto</button>
+
             <button (click)="confermaInfo()" type="button" class="btn btn-outline-primary" [ngClass]="{
                 'nonCliccabile': !modifica
             }">Conferma</button><button (click)="annullaInfo()" type="button" class="btn btn-outline-danger annulla" [ngClass]="{
