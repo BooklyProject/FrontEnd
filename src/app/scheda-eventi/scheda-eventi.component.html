@@ -1,4 +1,36 @@
-<button type="button" class="btn btn-primary">Crea evento</button>
+<button type="button" class="btn btn-primary" (click)="creaEvento()" [ngClass]="{
+    'bottoneVisibile': !creazioneEvento,
+    'bottoneNonVisibile': creazioneEvento
+}">Crea evento</button>
+
+<div class="form" [ngClass]="{
+    'formVisibile': creazioneEvento,
+    'formNonVisibile': !creazioneEvento
+}">
+
+    <div class="form-outline mb-4">
+        <label class="form-label">Nome evento</label>
+        <input type="text" class="form-control" />
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Descrizione</label>
+        <input type="text" class="form-control" />
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Luogo</label>
+        <input type="text" class="form-control" />
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Giorno</label>
+        <input type="date" class="form-control" />
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Ora</label>
+        <input type="time" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
+    <button type="button" class="btn btn-danger" (click)="creaEvento()" style="margin-left: 5px;">Annulla</button>
+</div>
 
 <div class="separator">
     <div class="line"></div>
@@ -47,26 +79,26 @@
 
 <div class="container eventi">
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4" *ngFor="let evento of eventiAccettati">
         <div class="card card-margin">
             <div class="card-header no-border">
-                <h5 class="card-title">Nome evento</h5>
+                <h5 class="card-title"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div class="widget-49-date-primary">
-                            <span class="widget-49-date-day">09</span>
-                            <span class="widget-49-date-month">apr</span>
+                            <span class="widget-49-date-day"> {{evento.data}} </span>
+                            <span class="widget-49-date-month"> {{evento.data}} </span>
                         </div>
                         <div class="widget-49-meeting-info">
-                            <span class="widget-49-pro-title">Luogo</span>
-                            <span class="widget-49-meeting-time">12:00</span>
+                            <span class="widget-49-pro-title">{{evento.luogo}}</span>
+                            <span class="widget-49-meeting-time">{{evento.data}}</span>
                         </div>
                     </div>
                     <div class="widget-49-meeting-points">
-                        <li class="widget-49-meeting-item"><span>Creatore evento</span></li>
-                        <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>23</span></li>
+                        <li class="widget-49-meeting-item"><span>{{evento.utente.username}}</span></li>
+                        <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
                         <a href="#" class="btn btn-sm btn-flash-border-primary">Non partecipare</a>
@@ -86,26 +118,26 @@
 
 <div class="container eventi">
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4" *ngFor="let evento of eventiDisponibili">
         <div class="card card-margin">
             <div class="card-header no-border">
-                <h5 class="card-title">Nome evento</h5>
+                <h5 class="card-title"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div class="widget-49-date-primary">
-                            <span class="widget-49-date-day">09</span>
-                            <span class="widget-49-date-month">apr</span>
+                            <span class="widget-49-date-day"> {{evento.data}} </span>
+                            <span class="widget-49-date-month"> {{evento.data}} </span>
                         </div>
                         <div class="widget-49-meeting-info">
-                            <span class="widget-49-pro-title">Luogo</span>
-                            <span class="widget-49-meeting-time">12:00</span>
+                            <span class="widget-49-pro-title">{{evento.luogo}}</span>
+                            <span class="widget-49-meeting-time">{{evento.data}}</span>
                         </div>
                     </div>
                     <div class="widget-49-meeting-points">
-                        <li class="widget-49-meeting-item"><span>Creatore evento</span></li>
-                        <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>23</span></li>
+                        <li class="widget-49-meeting-item"><span>{{evento.utente.username}}</span></li>
+                        <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
                         <a href="#" class="btn btn-sm btn-flash-border-primary">Partecipa</a>

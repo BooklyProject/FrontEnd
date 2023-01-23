@@ -11,6 +11,19 @@
   background-color: #000;
 }
 
+.formVisibile{
+  display: block;
+}
+.formNonVisibile{
+  display: none;
+}
+.bottoneVisibile{
+  display: block;
+}
+.bottoneNonVisibile{
+  display: none;
+}
+
 .eventi > .row{
   display: block;
   overflow-x: auto;

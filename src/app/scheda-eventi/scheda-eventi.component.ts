@@ -10,6 +10,7 @@ import { ServerService } from '../server.service';
 })
 export class SchedaEventiComponent implements OnInit {
 
+  creazioneEvento: boolean = false;
   sessionId: string = "";
   eventiCreati: Evento[] = [];
   eventiAccettati: Evento[] = [];
@@ -29,6 +30,15 @@ export class SchedaEventiComponent implements OnInit {
         console.log("sessionId eventi: " + this.sessionId);
       }
     });
+  }
+
+  creaEvento(){
+    this.creazioneEvento = !this.creazioneEvento;
+  }
+
+  conferma(){
+    //PRENDE I DATI
+    this.creazioneEvento = !this.creazioneEvento
   }
   
   constructor(private server: ServerService, private route: ActivatedRoute) {

@@ -10,6 +10,7 @@ import { BookCardComponent } from './book-card/book-card.component';
 import { TruncatePipe } from './GoogleBooks/truncate-text.pipe';
 import { SchedaUtenteComponent } from './scheda-utente/scheda-utente.component';
 import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
+import { SchedaRaccolteComponent } from './scheda-raccolte/scheda-raccolte.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
     BookCardComponent,
     TruncatePipe,
     SchedaUtenteComponent,
-    SchedaEventiComponent
+    SchedaEventiComponent,
+    SchedaRaccolteComponent
   ],
   imports: [
     BrowserModule,

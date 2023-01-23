@@ -1,0 +1,64 @@
+.separator{
+    display: flex;
+    align-items: center;
+}
+.separator h2{
+    padding: 0 2rem;
+}
+.separator .line{
+    flex: 1;
+    height: 3px;
+    background-color: #000;
+}
+
+.row{
+    min-height: 370px;
+}
+
+.raccolte > .row{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+  
+.raccolte > .row > .col-lg-4 {
+    display: inline-block;
+    float: none;
+}
+
+.card-custom {
+    overflow: hidden;
+    min-height: 350px;
+    min-width: 380px;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+}
+  
+.card-custom-img {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-color: inherit;
+}
+  
+  /* First border-left-width setting is a fallback */
+.card-custom-img::after {
+    position: absolute;
+    content: '';
+    top: 161px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-width: 40px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 545px;
+    border-left-width: calc(575px - 5vw);
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: inherit;
+}
+
+  
