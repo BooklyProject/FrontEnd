@@ -33,6 +33,7 @@ export class ServerService {
     console.log("descr: " + v.volumeInfo.description);
     return this.http.post<Boolean>(this.url + "/sendBook?jsessionid=" + sessionid, {isbn: isbn, nome: v.volumeInfo.title, 
       autore: v.volumeInfo.authors?.join(", "), generi: v.volumeInfo.categories?.join(", "), 
-      numeroPagine: v.volumeInfo.pageCount, lingua: v.volumeInfo.language, descrizione: v.volumeInfo.description});
+      numeroPagine: v.volumeInfo.pageCount, lingua: v.volumeInfo.language, descrizione: v.volumeInfo.description,
+      copertina: v.volumeInfo.imageLinks?.thumbnail});
   }
 }
