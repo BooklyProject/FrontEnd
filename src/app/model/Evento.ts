@@ -4,7 +4,8 @@ export interface Evento{
     id: BigInt;
     nome: string;
     descrizione: string;
-    data: number;
+    data: Date;
+    ora: Date;
     luogo: number;
     partecipanti: number;
     utente: User;
