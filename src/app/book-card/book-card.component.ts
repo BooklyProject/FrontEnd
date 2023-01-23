@@ -17,6 +17,7 @@ export class BookCardComponent {
     if(this.volume != null) {
       this.server.sendBook(this.sessionId, this.volume).subscribe(ok => {
           console.log("res: " + ok);
+          window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
       });
     }
   }

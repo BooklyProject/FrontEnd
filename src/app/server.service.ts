@@ -31,6 +31,7 @@ export class ServerService {
       }
     }
     console.log("descr: " + v.volumeInfo.description);
+    console.log("lingua: " + v.volumeInfo.language);
     return this.http.post<Boolean>(this.url + "/sendBook?jsessionid=" + sessionid, {
       isbn: isbn, 
       nome: v.volumeInfo.title, 
