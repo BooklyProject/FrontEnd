@@ -1,5 +1,6 @@
 .card {
-    background-color: black;
+    background-color: #0996e6;
+    cursor: pointer;
     min-height: 25rem;
     color: white;
 }
@@ -18,10 +19,9 @@
     width: 100%;
     opacity: 0;
     transition: 0.2s ease all;
-    background-color: black;
 }
 .card:hover {
-    opacity: 0.3;
+    background-color: #5bb8ec;
 }  
 
 .cover-image {

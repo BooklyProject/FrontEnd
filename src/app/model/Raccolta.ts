@@ -5,5 +5,5 @@ export interface Raccolta{
     id: BigInt
     nome: String
     utente: User
-    libro: Volume[]
+    libri: Volume[]
 }

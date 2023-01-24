@@ -108,7 +108,10 @@ export class SchedaEventiComponent implements OnInit {
 
   }
 
-  partecipa() {
+  partecipa(index: number) {
+    console.log("index: " + index);
+    this.eventiAccettati.push(this.eventiDisponibili[index]);
+    this.eventiDisponibili.splice(index, 1);
 
   }
   

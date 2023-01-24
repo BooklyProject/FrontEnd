@@ -16,6 +16,7 @@ export class SchedaUtenteComponent implements OnInit {
   cognome: string = "";
   email: string = "";
   username: string = "";
+  image: string = "";
   utente: User | null = null;
 
   ngOnInit(): void {
@@ -33,6 +34,8 @@ export class SchedaUtenteComponent implements OnInit {
             this.cognome = this.utente.cognome;
             this.email = this.utente.email;
             this.username = this.utente.username;
+            this.image = "data:image/png;base64, " + this.utente.userImage;
+
           }
         });
       }

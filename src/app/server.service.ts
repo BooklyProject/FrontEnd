@@ -66,7 +66,8 @@ export class ServerService {
       descrizione: e.descrizione,
       data: e.data,
       luogo: e.luogo,
-      partecipanti: e.partecipanti
+      partecipanti: e.partecipanti,
+      orario: e.ora
     });
   }
 }
