@@ -10,23 +10,23 @@
 
     <div class="form-outline mb-4">
         <label class="form-label">Nome evento</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" [(ngModel)]="nome"/>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label">Descrizione</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" [(ngModel)]="descrizione"/>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label">Luogo</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" [(ngModel)]="luogo"/>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label">Giorno</label>
-        <input type="date" class="form-control" />
+        <input type="date" class="form-control" [(ngModel)]="giorno"/>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label">Ora</label>
-        <input type="time" class="form-control" />
+        <input type="time" class="form-control" [(ngModel)]="ora"/>
     </div>
     <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
     <button type="button" class="btn btn-danger" (click)="creaEvento()" style="margin-left: 5px;">Annulla</button>
@@ -50,20 +50,18 @@
                     <div class="widget-49">
                         <div class="widget-49-title-wrapper">
                             <div class="widget-49-date-primary">
-                                <span class="widget-49-date-day"> {{evento.data.getDay}} </span>
-                                <span class="widget-49-date-month"> {{evento.data.getMonth}} </span>
+                                <span class="widget-49-date-day"> {{evento.data}} </span>
                             </div>
                             <div class="widget-49-meeting-info">
                                 <span class="widget-49-pro-title">{{evento.luogo}}</span>
-                                <span class="widget-49-meeting-time">{{evento.data.getTime}}</span>
+                                <span class="widget-49-meeting-time">{{evento.data}}</span>
                             </div>
                         </div>
                         <div class="widget-49-meeting-points">
-                            <li class="widget-49-meeting-item"><span>{{evento.utente.username}}</span></li>
                             <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                         </div>
                         <div class="widget-49-meeting-action">
-                            <a href="#" class="btn btn-sm btn-flash-border-primary">Elimina</a>
+                            <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="eliminaEvento()">Elimina</a>
                         </div>
                     </div>
                 </div>
@@ -90,20 +88,19 @@
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div class="widget-49-date-primary">
-                            <span class="widget-49-date-day"> {{evento.data.getDay}} </span>
-                            <span class="widget-49-date-month"> {{evento.data.getMonth}} </span>
+                            <span class="widget-49-date-day"> {{evento.data}} </span>
+                            <span class="widget-49-date-month"> {{evento.data}} </span>
                         </div>
                         <div class="widget-49-meeting-info">
                             <span class="widget-49-pro-title">{{evento.luogo}}</span>
-                            <span class="widget-49-meeting-time">{{evento.data.getTime}}</span>
+                            <span class="widget-49-meeting-time">{{evento.data}}</span>
                         </div>
                     </div>
                     <div class="widget-49-meeting-points">
-                        <li class="widget-49-meeting-item"><span>{{evento.utente.username}}</span></li>
                         <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">Non partecipare</a>
+                        <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="eliminaPart()">Non partecipare</a>
                     </div>
                 </div>
             </div>
@@ -130,20 +127,19 @@
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div class="widget-49-date-primary">
-                            <span class="widget-49-date-day"> {{evento.data.getDay}} </span>
-                            <span class="widget-49-date-month"> {{evento.data.getMonth}} </span>
+                            <span class="widget-49-date-day"> {{evento.data}} </span>
+                            <span class="widget-49-date-month"> {{evento.data}} </span>
                         </div>
                         <div class="widget-49-meeting-info">
                             <span class="widget-49-pro-title">{{evento.luogo}}</span>
-                            <span class="widget-49-meeting-time">{{evento.data.getTime}}</span>
+                            <span class="widget-49-meeting-time">{{evento.data}}</span>
                         </div>
                     </div>
                     <div class="widget-49-meeting-points">
-                        <li class="widget-49-meeting-item"><span>{{evento.utente.username}}</span></li>
                         <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">Partecipa</a>
+                        <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="partecipa()">Partecipa</a>
                     </div>
                 </div>
             </div>

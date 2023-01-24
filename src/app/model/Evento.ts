@@ -1,12 +1,9 @@
-import { User } from "./User";
 
 export interface Evento{
-    id: BigInt;
     nome: string;
     descrizione: string;
+    ora: string;
     data: Date;
-    ora: Date;
-    luogo: number;
+    luogo: string;
     partecipanti: number;
-    utente: User;
 }
