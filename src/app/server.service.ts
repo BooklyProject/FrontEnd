@@ -3,6 +3,7 @@ import { User } from './model/User';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Volume } from './GoogleBooks/models/volume.interface';
+import { Evento } from './model/Evento';
 
 
 @Injectable({
@@ -41,5 +42,31 @@ export class ServerService {
       lingua: v.volumeInfo.language, 
       descrizione: v.volumeInfo.description,
       copertina: v.volumeInfo.imageLinks?.thumbnail});
+  }
+
+  getEventiCreati(sessionid: string): Observable<Evento[]> {
+
+    return this.http.get<Evento[]>(this.url + "/myEvents", {params: {jsessionid: sessionid}});
+  }
+
+  getEventiAccettati(sessionid: string): Observable<Evento[]> {
+
+    return this.http.get<Evento[]>(this.url + "/myPartecipations", {params: {jsessionid: sessionid}});
+  }
+
+  getEventiDisponibili(sessionid: string): Observable<Evento[]> {
+    
+    return this.http.get<Evento[]>(this.url + "/events", {params: {jsessionid: sessionid}});
+  }
+
+  addEvent(sessionid: string, e: Evento): Observable<Boolean> {
+
+    return this.http.post<Boolean>(this.url + "/addEvent?jsessionid=" + sessionid, {
+      nome: e.nome,
+      descrizione: e.descrizione,
+      data: e.data,
+      luogo: e.luogo,
+      partecipanti: e.partecipanti
+    });
   }
 }
