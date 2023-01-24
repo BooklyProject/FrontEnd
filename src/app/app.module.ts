@@ -12,6 +12,7 @@ import { SchedaUtenteComponent } from './scheda-utente/scheda-utente.component';
 import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
 import { SchedaRaccolteComponent } from './scheda-raccolte/scheda-raccolte.component';
 import { PaginaRaccoltaComponent } from './pagina-raccolta/pagina-raccolta.component';
+import { PaginaEventoComponent } from './pagina-evento/pagina-evento.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { PaginaRaccoltaComponent } from './pagina-raccolta/pagina-raccolta.compo
     SchedaUtenteComponent,
     SchedaEventiComponent,
     SchedaRaccolteComponent,
-    PaginaRaccoltaComponent
+    PaginaRaccoltaComponent,
+    PaginaEventoComponent
   ],
   imports: [
     BrowserModule,
