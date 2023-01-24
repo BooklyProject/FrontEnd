@@ -13,6 +13,7 @@ import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
 import { SchedaRaccolteComponent } from './scheda-raccolte/scheda-raccolte.component';
 import { PaginaRaccoltaComponent } from './pagina-raccolta/pagina-raccolta.component';
 import { PaginaEventoComponent } from './pagina-evento/pagina-evento.component';
+import { SchedaSegnalazioniComponent } from './scheda-segnalazioni/scheda-segnalazioni.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { PaginaEventoComponent } from './pagina-evento/pagina-evento.component';
     SchedaEventiComponent,
     SchedaRaccolteComponent,
     PaginaRaccoltaComponent,
-    PaginaEventoComponent
+    PaginaEventoComponent,
+    SchedaSegnalazioniComponent
   ],
   imports: [
     BrowserModule,
