@@ -11,6 +11,25 @@
     <div class="form-outline mb-4">
         <label class="form-label">Nome Raccolta</label>
         <input type="text" class="form-control" />
+        <label class="form-label">Cerca libro da aggiungere</label>
+        <input type="text" class="form-control" [(ngModel)]="book"/>
+        <button type="button" class="btn btn-primary" style="margin-top: 5px;" (click)="cercaLibro()">Cerca libro</button>
+        
+        <div *ngIf="book != '' && booksCollection && params.searchTerm === book">
+            <div *ngIf="!booksCollection.items; else collectionNotEmpty">
+                Nessun libro trovato
+            </div>
+            <ng-template #collectionNotEmpty>
+                {{ booksCollection.totalItems }} risultati per {{ params.searchTerm }}
+                <div class="cards-grid mt-3">
+                    <app-book-card [sessionId]="sessionId"
+                        *ngFor="let item of booksCollection.items"
+                        [volume]="item"
+                    ></app-book-card>
+                </div>
+            </ng-template>
+        </div>
+
     </div>
     <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
     <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
@@ -25,7 +44,7 @@
 <div class="container raccolte">
     <div class="row">
         <h2 class="testi" *ngIf="raccolte.length === 0">Crea nuova raccolta</h2>
-        <div class="col-lg-4" (click)="apriRaccolta()" style="cursor: pointer;" *ngFor="let raccolta of raccolte">
+        <div class="col-lg-4" (click)="apriRaccolta()" style="cursor: pointer;" *ngFor="let raccolta of raccolte; let index = index;">
             <div class="card card-custom bg-white border-white border-0">
                 <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
                 <div class="card-body" style="overflow-y: auto">
@@ -33,7 +52,7 @@
                 <p class="card-text">Libri contenuti: 15</p>
                 </div>
                 <div class="card-footer" style="background: inherit; border-color: inherit;">
-                <a href="none" class="btn btn-outline-danger">Elimina</a>
+                <button type="button" class="btn btn-outline-danger" (click)="eliminaRaccolta(index)" >Elimina</button>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Volume } from './GoogleBooks/models/volume.interface';
 import { Evento } from './model/Evento';
+import { Raccolta } from './model/Raccolta';
 
 
 @Injectable({
@@ -81,5 +82,13 @@ export class ServerService {
   eliminaPartecipazione(sessionid: string, id: number): Observable<Boolean> {
     return this.http.post<Boolean>(this.url + "/deletePartecipation?jsessionid=" + sessionid, {idEvento: id});
 
+  }
+
+  getRaccolteCreate(sessionid: string): Observable<Raccolta[]> {
+    return this.http.get<Raccolta[]>(this.url + "/myCollections", {params: {jsessionid: sessionid}});
+  }
+
+  eliminaRaccolta(id: number): Observable<Boolean>{
+    return this.http.post<Boolean>(this.url + "/deleteCollection", {idRaccolta: id})
   }
 }
