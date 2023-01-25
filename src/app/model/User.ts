@@ -1,4 +1,3 @@
-import { Volume } from "../GoogleBooks/models/volume.interface";
 
 export interface User {
     id: BigInt;
@@ -11,12 +10,6 @@ export interface User {
     userImage: string;
 }
 
-export interface Recensione{
-    id: BigInt;
-    titolo: string;
-    testo: string;
-    numeroMiPiace: number;
-    numeroNonMiPiace: number;
-    scrittaDa: User;
-    libro: Volume;
+export interface Stats {
+    
 }

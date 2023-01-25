@@ -24,20 +24,28 @@ export class SchedaEventiComponent implements OnInit {
   getEventi() {
     this.server.getEventiCreati(this.sessionId).subscribe((e) => {
       this.eventiCreati = e;
-
-      for(let e of this.eventiCreati) {
-        const d: Date = e.data;
-        console.log("dataaa: " + d);
+      for(let i of this.eventiCreati) {
+        this.setPrintDate(i);
       }
     });
 
     this.server.getEventiAccettati(this.sessionId).subscribe((e) => {
         this.eventiAccettati = e;
+        for(let i of this.eventiCreati) {
+          this.setPrintDate(i);
+        }
     });
 
     this.server.getEventiDisponibili(this.sessionId).subscribe((e) => {
       this.eventiDisponibili = e;
+      for(let i of this.eventiCreati) {
+        this.setPrintDate(i);
+      }
     });
+  }
+
+  setPrintDate(e: Evento) {
+    e.printDate = e.data.toString();
   }
 
   apriEvento(){
@@ -51,7 +59,6 @@ export class SchedaEventiComponent implements OnInit {
       if(sessionId != null) {
         this.sessionId = sessionId;
         this.getEventi();
-        console.log("sessionId eventi: " + this.sessionId);
       }
     });
   }
@@ -71,18 +78,16 @@ export class SchedaEventiComponent implements OnInit {
 
     const date = new Date(+year, +month - 1, +day);
 
-    console.log(date);
-
     return date;
   }
 
   conferma(){
-    console.log("nome: " + this.nome);
     if(this.nome && this.descrizione && this.giorno && this.ora && this.luogo) {
       const data: Date = this.getData();
 
       if(data.getTime() > Date.now()) {
-        const e: Evento = {nome: this.nome, descrizione: this.descrizione, ora: this.ora, data: data, luogo: this.luogo, partecipanti: 0};
+        const e: Evento = {id: 0, nome: this.nome, descrizione: this.descrizione, orario: this.ora, data: data, luogo: this.luogo, partecipanti: 0, printDate: ""};
+         e.printDate = data.toISOString().substring(0, 10);
         this.server.addEvent(this.sessionId, e).subscribe( ok => {
           if(ok) {
             this.eventiCreati.push(e);
@@ -100,18 +105,34 @@ export class SchedaEventiComponent implements OnInit {
     this.creaEvento();
   }
   
-  eliminaEvento() {
-
+  eliminaEvento(index: number) {
+    this.server.eliminaEvento(this.sessionId, this.eventiCreati[index].id).subscribe(ok => {
+      if(ok) {
+        this.eventiCreati.splice(index, 1);
+      }
+    })
   }
 
-  eliminaPart() {
-
+  eliminaPart(index: number) {
+    this.server.eliminaPartecipazione(this.sessionId, this.eventiAccettati[index].id).subscribe(ok => {
+      if(ok) {
+        this.eventiDisponibili.push(this.eventiAccettati[index]);
+        this.eventiAccettati.splice(index, 1);
+      }
+    })
   }
 
   partecipa(index: number) {
-    console.log("index: " + index);
-    this.eventiAccettati.push(this.eventiDisponibili[index]);
-    this.eventiDisponibili.splice(index, 1);
+    this.server.partecipaAEvento(this.sessionId, this.eventiDisponibili[index].id).subscribe(ok => {
+      if(ok) {
+        this.eventiAccettati.push(this.eventiDisponibili[index]);
+        this.eventiDisponibili.splice(index, 1);
+      }
+      else {
+        alert("Attenzione, non è più possibile partecipare all'evento");
+      }
+    });
+    
 
   }
   

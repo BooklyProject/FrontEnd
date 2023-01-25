@@ -25,7 +25,6 @@ export class ServerService {
 
   sendBook(sessionid: string, v: Volume): Observable<Boolean> {
     var isbn;
-    console.log("isbn: " + v.volumeInfo.industryIdentifiers);
     for(let i of v.volumeInfo.industryIdentifiers) {
       if(i.type === "ISBN_13") {
         isbn = i.identifier;
@@ -67,7 +66,20 @@ export class ServerService {
       data: e.data,
       luogo: e.luogo,
       partecipanti: e.partecipanti,
-      orario: e.ora
+      orario: e.orario
     });
+  }
+
+  partecipaAEvento(sessionid: string, id: number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/partecipate?jsessionid=" + sessionid, {idEvento: id});
+  }
+
+  eliminaEvento(sessionid: string, id: number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/deleteEvent?jsessionid=" + sessionid, {idEvento: id});
+  }
+
+  eliminaPartecipazione(sessionid: string, id: number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/deletePartecipation?jsessionid=" + sessionid, {idEvento: id});
+
   }
 }
