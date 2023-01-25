@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="sessionId">
 <div class="sidenav" (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()"
     [ngClass]="{
         'sidenav-aperta': !miniSidebar,
@@ -14,6 +14,6 @@
 <div [ngClass]="{
     'main-aperto': !miniSidebar,
     'main-compatto': miniSidebar}">
-    <app-scheda-raccolte></app-scheda-raccolte>
+    <router-outlet></router-outlet>
 </div>
 </ng-container>

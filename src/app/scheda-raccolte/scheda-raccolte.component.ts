@@ -16,6 +16,8 @@ export class SchedaRaccolteComponent implements OnInit {
   creazioneRaccolta: boolean = false;
   raccolte: Raccolta[] = [];
 
+  nome: string = "";
+
   sessionId: string = "";
   booksCollection: CollectionResultModel | null = null;
   book: string = "";
@@ -30,27 +32,41 @@ export class SchedaRaccolteComponent implements OnInit {
   creaRaccolta(){
     this.creazioneRaccolta = !this.creazioneRaccolta;
   }
+
   conferma(){
-    //OPERAZIONI
-    this.creaRaccolta();
+    if(this.nome){
+      const r : Raccolta = {id:0, nome: this.nome, libri: []};
+      this.server.addRaccolta(this.sessionId, r.nome).subscribe( ok => {
+        if(ok){
+          this.raccolte.push(r);
+          this.creaRaccolta();
+          this.apriSchedaRaccolta();
+        } else {
+          alert("Errore: raccolta non creata.");
+        }
+      });
+    } else {
+      alert("Errore: inserire nome");
+    }
   }
 
   annulla(){
     this.creaRaccolta();
   }
 
-  apriRaccolta(){
+
+  apriSchedaRaccolta(){
     
   }
 
   eliminaRaccolta(index: number){
     this.server.eliminaRaccolta(this.raccolte[index].id).subscribe(ok => {
       if(ok) {
+        console.log(this.raccolte[index].nome)
         this.raccolte.splice(index, 1);
       }
     })
   }
-
 
   cercaLibro() {
     if(this.book === "") {

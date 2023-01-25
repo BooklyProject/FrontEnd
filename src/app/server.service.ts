@@ -91,4 +91,7 @@ export class ServerService {
   eliminaRaccolta(id: number): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/deleteCollection", {idRaccolta: id})
   }
+  addRaccolta(sessionid: string, nome: string): Observable<Boolean>{
+    return this.http.post<Boolean>(this.url + "/createCollection?jsessionid=" + sessionid, {nome: nome})
+  }
 }
