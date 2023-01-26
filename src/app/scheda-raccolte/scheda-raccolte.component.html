@@ -10,24 +10,6 @@
     <div class="form-outline mb-4">
         <label class="form-label">Nome Raccolta</label>
         <input type="text" class="form-control" [(ngModel)]="nome"/>
-        <label class="form-label">Cerca libro da aggiungere</label>
-        <input type="text" class="form-control" [(ngModel)]="book"/>
-        <button type="button" class="btn btn-primary" style="margin-top: 5px;" (click)="cercaLibro()">Cerca libro</button>
-        
-        <div *ngIf="book != '' && booksCollection && params.searchTerm === book">
-            <div *ngIf="!booksCollection.items; else collectionNotEmpty">
-                Nessun libro trovato
-            </div>
-            <ng-template #collectionNotEmpty>
-                {{ booksCollection.totalItems }} risultati per {{ params.searchTerm }}
-                <div class="cards-grid mt-3">
-                    <app-book-card [sessionId]="sessionId"
-                        *ngFor="let item of booksCollection.items"
-                        [volume]="item"
-                    ></app-book-card>
-                </div>
-            </ng-template>
-        </div>
     </div>
     <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
     <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
@@ -44,7 +26,7 @@
         <h2 class="testi" *ngIf="raccolte.length === 0">Crea nuova raccolta</h2>
         <div class="col-lg-4" (click)="apriSchedaRaccolta()" style="cursor: pointer;" *ngFor="let raccolta of raccolte; let index = index;">
             <div class="card card-custom bg-white border-white border-0">
-                <div *ngIf = "raccolta.libri.length > 0; else placeHolder">
+                <div *ngIf="raccolta.libri.length > 0; else placeHolder">
                     <div class="card-custom-img" style="background-image: url({{raccolta.libri[0].volumeInfo.imageLinks}})"></div>
                 </div>
                 <ng-template #placeHolder>
@@ -52,10 +34,13 @@
                 </ng-template>
                 <div class="card-body" style="overflow-y: auto">
                 <h4 class="card-title">{{raccolta.nome}}</h4>
-                <p class="card-text">Libri contenuti: {{raccolta.libri.length}}</p>
+                <p *ngIf="raccolta.libri.length === 0; else numeroLibri" class="card-text">Libri contenuti: 0</p>
+                <ng-template #numeroLibri>
+                    <p class="card-text">Libri contenuti: {{raccolta.libri.length}}</p>
+                </ng-template> 
                 </div>
                 <div class="card-footer" style="background: inherit; border-color: inherit;">
-                <button type="button" class="btn btn-outline-danger" (click)="eliminaRaccolta(index)" >Elimina</button>
+                <button type="button" class="btn btn-outline-danger" (click)="eliminaRaccolta(index)">Elimina</button>
                 </div>
             </div>
         </div>

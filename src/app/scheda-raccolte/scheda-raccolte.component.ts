@@ -56,7 +56,6 @@ export class SchedaRaccolteComponent implements OnInit {
 
 
   apriSchedaRaccolta(){
-    
   }
 
   eliminaRaccolta(index: number){
