@@ -96,7 +96,6 @@ export class ServerService {
   }
 
   getLibriDiRaccolta(id: number): Observable<Volume[]> {
-
     return this.http.post<Volume[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
   }
 }

@@ -4,14 +4,15 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { SchedaUtenteComponent } from './scheda-utente/scheda-utente.component';
 import { SchedaEventiComponent } from './scheda-eventi/scheda-eventi.component';
 import { SchedaRaccolteComponent } from './scheda-raccolte/scheda-raccolte.component';
+import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'catalogo', pathMatch: 'full'},
   {path: 'catalogo', component: CatalogoComponent},
   {path: 'eventi', component: SchedaEventiComponent},
   {path: 'utente', component: SchedaUtenteComponent},
-  {path: 'raccolte', component: SchedaRaccolteComponent}
-
+  {path: 'raccolte', component: SchedaRaccolteComponent},
+  {path: 'recensioni', component: SchedaRecensioniComponent}
 ];
 
 @NgModule({
