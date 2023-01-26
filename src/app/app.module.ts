@@ -27,7 +27,7 @@ import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni
     PaginaRaccoltaComponent,
     PaginaEventoComponent,
     SchedaSegnalazioniComponent,
-    SchedaRecensioniComponent
+    SchedaRecensioniComponent,
   ],
   imports: [
     BrowserModule,

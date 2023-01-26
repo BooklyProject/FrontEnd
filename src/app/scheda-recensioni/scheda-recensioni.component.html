@@ -1,59 +1,61 @@
-<div class="buttonCrea">
-    <button id="creaRecensione" type="button" class="btn btn-primary">Scrivi recensione</button>
-</div>
-<div class="recensione">
-    <div class="voto">
-        <label class="form-label">Voto</label><br>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio">
-            <label class="form-check-label" for="inlineRadio1">1</label>
+<div *ngIf="miaRecensione === null">
+    <div class="buttonCrea">
+        <label id="creaRecensione">Scrivi recensione</label>
+    </div>
+    <div class="recensione">
+        <div class="voto">
+            <label class="form-label">Voto</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label" for="inlineRadio1">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label" for="inlineRadio1">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label" for="inlineRadio1">4</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label" for="inlineRadio1">5</label>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio">
-            <label class="form-check-label" for="inlineRadio1">2</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio">
-            <label class="form-check-label" for="inlineRadio1">3</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio">
-            <label class="form-check-label" for="inlineRadio1">4</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio">
-            <label class="form-check-label" for="inlineRadio1">5</label>
+        <div class="form-outline mb-4">
+            <label class="form-label">Descrizione</label>
+            <input type="text" class="form-control" style="word-wrap: break-word;"/>
         </div>
     </div>
-    <div class="form-outline mb-4">
-        <label class="form-label">Descrizione</label>
-        <input type="text" class="form-control" style="word-wrap: break-word;"/>
+
+    <div class="bottoniRecensione">
+        <button id="confermaRecensione" type="button" class="btn btn-primary">Conferma</button>
+        <button id="annullaRecensione" type="button" class="btn btn-danger" style="margin-left: 5px;">Annulla</button>
     </div>
 </div>
 
-<div class="bottoniRecensione">
-    <button id="confermaRecensione" type="button" class="btn btn-primary">Conferma</button>
-    <button id="annullaRecensione" type="button" class="btn btn-danger" style="margin-left: 5px;">Annulla</button>
-</div>
-
-<div id="recensioni"  style="margin-top: 20px; margin-left: 30px;" class="recensioni">
+<div id="recensioni" class="recensioni" *ngFor="let rec of recensioni; let index = index;">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <p>Descrizione della recensione.</p>
+                            <p>{{rec.descrizione}}</p>
                             <div class="info">
                                 <p>Voto:</p>
                             </div>
-                            <!--<div class="attributi">
-                                <p th:text="${recensione.voto}"></p><br><br>
-                            </div>-->
+                            <div class="attributi">
+                                <p>{{rec.voto}}</p><br><br>
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row align-items-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25"/>
-                                    <p class="small mb-0 ms-2">Nome user</p>
+                                    <p class="small mb-0 ms-2"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="showCommentsIcon">                                        
@@ -68,13 +70,14 @@
                         </div>
                         <div id="commenti" class="commenti" [ngClass]="{
                             'apri-commenti': showComments,
-                            'nascondi-commenti': !showComments }">
+                            'nascondi-commenti': !showComments 
+                        }" *ngFor="let comm of rec.commenti; let index = index;">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-lg-8">
                                     <div class="card-body p-4">          
                                         <div class="card">
                                             <div class="card-body">
-                                                <p>Commento.</p>
+                                                <p>{{comm.descrizione}}</p>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex flex-row align-items-center">
                                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25"/>
@@ -94,9 +97,7 @@
                                         <input type="text" class="form-control scriviCommento" placeholder="Scrivi un commento">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-primary" type="button">Conferma</button>
-                                            <div class="iconHideComment">                                                
-                                                <i class="fa fa-angle-up" (click)="toggleComments()"></i>
-                                            </div>
+                                            <i class="fa fa-angle-up" style="margin-left: 15px;" (click)="toggleComments()"></i>
                                         </div>
                                     </div>
                                 </div>

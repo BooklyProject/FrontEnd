@@ -68,7 +68,7 @@ export class SchedaUtenteComponent implements OnInit {
     }
   }
 
-  logOut(){
+  logout(){
     
   }
 

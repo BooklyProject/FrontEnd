@@ -2,9 +2,8 @@
 
 <div class="modifyButton">
     <button (click)="modificaInfo() "type="button" class="btn btn-outline-primary" [ngClass]="{
-        'nonCliccabile': modifica
-    }">Modifica</button>
-<button (click)="logOut()" type="button" class="btn btn-danger" style="margin-left: 5px;">Logout</button>
+        'nonCliccabile': modifica }">Modifica</button>
+    <button (click)="logout()" type="button" class="btn btn-danger" style="margin-left: 5px;">Logout</button>
 </div>
 
 <!--INFO UTENTE-->
@@ -39,7 +38,8 @@
 
             <button (click)="confermaInfo()" type="button" class="btn btn-outline-primary" [ngClass]="{
                 'nonCliccabile': !modifica
-            }">Conferma</button><button (click)="annullaInfo()" type="button" class="btn btn-outline-danger annulla" [ngClass]="{
+            }">Conferma</button>
+            <button (click)="annullaInfo()" type="button" class="btn btn-outline-danger annulla" [ngClass]="{
                 'nonCliccabile': !modifica
             }">Annulla</button>             
         </div>
