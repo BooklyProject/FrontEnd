@@ -12,7 +12,7 @@
         <input type="text" class="form-control" id="nomeRaccolta" [(ngModel)]="nome"/>
     </div>
     <button type="button" class="btn btn-primary" (click) = "conferma()" onclick="document.getElementById('nomeRaccolta').value=''" >Conferma</button>
-    <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
+    <button type="button" class="btn btn-danger" (click)="annulla()" onclick="document.getElementById('nomeRaccolta').value=''" style="margin-left: 5px;">Annulla</button>
 </div>
 
 <div class="separator">
