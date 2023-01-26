@@ -1,8 +1,11 @@
 <h1>Profilo personale</h1>
 
-<button (click)="modificaInfo() "type="button" class="btn btn-outline-primary modifyButton" [ngClass]="{
-    'nonCliccabile': modifica
-}">Modifica</button>
+<div class="modifyButton">
+    <button (click)="modificaInfo() "type="button" class="btn btn-outline-primary" [ngClass]="{
+        'nonCliccabile': modifica
+    }">Modifica</button>
+<button (click)="logOut()" type="button" class="btn btn-danger" style="margin-left: 5px;">Logout</button>
+</div>
 
 <!--INFO UTENTE-->
 <div class="row">

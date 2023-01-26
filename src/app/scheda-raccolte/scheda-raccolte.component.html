@@ -9,9 +9,9 @@
 }">
     <div class="form-outline mb-4">
         <label class="form-label">Nome Raccolta</label>
-        <input type="text" class="form-control" [(ngModel)]="nome"/>
+        <input type="text" class="form-control" id="nomeRaccolta" [(ngModel)]="nome"/>
     </div>
-    <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
+    <button type="button" class="btn btn-primary" (click) = "conferma()" onclick="document.getElementById('nomeRaccolta').value=''" >Conferma</button>
     <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
 </div>
 
@@ -34,10 +34,7 @@
                 </ng-template>
                 <div class="card-body" style="overflow-y: auto">
                 <h4 class="card-title">{{raccolta.nome}}</h4>
-                <!--<p *ngIf="raccolta.libri.length === 0; else numeroLibri" class="card-text">Libri contenuti: 0</p>
-                <ng-template #numeroLibri>-->
                     <p class="card-text">Libri contenuti: {{raccolta.numLibri}}</p>
-                <!--</ng-template>--> 
                 </div>
                 <div class="card-footer" style="background: inherit; border-color: inherit;">
                 <button type="button" class="btn btn-outline-danger" (click)="eliminaRaccolta(index)">Elimina</button>

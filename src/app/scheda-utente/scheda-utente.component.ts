@@ -68,6 +68,10 @@ export class SchedaUtenteComponent implements OnInit {
     }
   }
 
+  logOut(){
+    
+  }
+
   constructor(private server: ServerService, private route: ActivatedRoute) {
 
   }
