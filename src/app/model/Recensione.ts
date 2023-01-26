@@ -6,6 +6,9 @@ export interface Recensione {
     numMiPiace: number;
     numNonMiPiace: number;
     commenti: Commento[];
+    userId: number,
+    username: string,
+    userImg: string
 }
 
 export interface Commento {

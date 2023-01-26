@@ -1,40 +1,25 @@
 <div *ngIf="miaRecensione === null">
     <div class="buttonCrea">
-        <label id="creaRecensione">Scrivi recensione</label>
+        <label id="creaRecensione"><h4>Recensisci:</h4></label>
     </div>
     <div class="recensione">
-        <div class="voto">
-            <label class="form-label">Voto</label><br>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" for="inlineRadio1">1</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" for="inlineRadio1">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" for="inlineRadio1">3</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" for="inlineRadio1">4</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" for="inlineRadio1">5</label>
-            </div>
-        </div>
+            <form [formGroup]="form" class="voto">
+                <div>Rating: {{form.value.rating1}}</div>
+                <div class="cont">
+                  <div class="stars">
+                    <ngx-star-rating formControlName="rating1" [id]="'rating'"></ngx-star-rating>
+                  </div>
+                </div>
+            </form>
         <div class="form-outline mb-4">
             <label class="form-label">Descrizione</label>
-            <input type="text" class="form-control" style="word-wrap: break-word;"/>
+            <input type="text" class="form-control" style="word-wrap: break-word;" [(ngModel)]="descrRecensione"/>
         </div>
     </div>
 
     <div class="bottoniRecensione">
-        <button id="confermaRecensione" type="button" class="btn btn-primary">Conferma</button>
-        <button id="annullaRecensione" type="button" class="btn btn-danger" style="margin-left: 5px;">Annulla</button>
+        <button id="confermaRecensione" type="button" class="btn btn-primary" (click)="creaRecensione()">Conferma</button>
+        <button id="annullaRecensione" type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="svuotaCampi()">Annulla</button>
     </div>
 </div>
 
@@ -54,17 +39,17 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25"/>
-                                    <p class="small mb-0 ms-2"></p>
+                                    <img src="{{rec.userImg}}" alt="avatar" width="25" height="25"/>
+                                    <p class="small mb-0 ms-2">{{rec.username}}</p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="showCommentsIcon">                                        
                                         <button type="button" class="small text-muted mb-0" id="mostraCommenti" (click)="toggleComments()">Commenti</button>
                                     </div>
-                                    <!--<i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                    <p class="small text-muted mb-0" th:text="${recensione.numeroMiPiace}"></p>
+                                    <i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+                                    <p class="small text-muted mb-0">{{rec.numMiPiace}}</p>
                                     <i class="fa fa-thumbs-down mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                    <p class="small text-muted mb-0" th:text="${recensione.numeroNonMiPiace}"></p>-->
+                                    <p class="small text-muted mb-0">{{rec.numNonMiPiace}}</p>
                                 </div>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Volume } from './GoogleBooks/models/volume.interface';
 import { Evento } from './model/Evento';
 import { Raccolta } from './model/Raccolta';
+import { Recensione } from './model/Recensione';
 
 
 @Injectable({
@@ -97,5 +98,24 @@ export class ServerService {
 
   getLibriDiRaccolta(id: number): Observable<Volume[]> {
     return this.http.post<Volume[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
+  }
+
+  addReview(sessionid: string, rec: Recensione): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/addReview?jsessionid=" + sessionid, {
+      descrizione: rec.descrizione,
+      voto: rec.voto,
+      numMiPiace: 0,
+      numNonMiPiace: 0
+    });
+  }
+
+  getRecensioni(sessionid: string): Observable<Recensione[]> {
+
+    return this.http.get<Recensione[]>(this.url + "/getReviews", {params: {jsessionid: sessionid}});
+  }
+
+  getScrittoreRecensione(idRec: number): Observable<User> {
+
+    return this.http.post<User>(this.url + "/getReviewWriter", {idRecensione: idRec});
   }
 }

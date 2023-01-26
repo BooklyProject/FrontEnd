@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { PaginaRaccoltaComponent } from './pagina-raccolta/pagina-raccolta.compo
 import { PaginaEventoComponent } from './pagina-evento/pagina-evento.component';
 import { SchedaSegnalazioniComponent } from './scheda-segnalazioni/scheda-segnalazioni.component';
 import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,8 @@ import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxStarRatingModule,
+    ReactiveFormsModule
   ],
   exports: [
     TruncatePipe

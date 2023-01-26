@@ -35,7 +35,6 @@ export class SchedaUtenteComponent implements OnInit {
             this.email = this.utente.email;
             this.username = this.utente.username;
             this.image = "data:image/png;base64, " + this.utente.userImage;
-
           }
         });
       }
@@ -69,7 +68,9 @@ export class SchedaUtenteComponent implements OnInit {
   }
 
   logout(){
-    
+    alert("Sei sicuro?");
+    window.location.href = "http://localhost:8080/doLogout";
+
   }
 
   constructor(private server: ServerService, private route: ActivatedRoute) {
