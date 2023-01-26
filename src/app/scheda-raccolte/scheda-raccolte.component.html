@@ -26,7 +26,7 @@
         <h2 class="testi" *ngIf="raccolte.length === 0">Crea nuova raccolta</h2>
         <div class="col-lg-4" (click)="apriSchedaRaccolta()" style="cursor: pointer;" *ngFor="let raccolta of raccolte; let index = index;">
             <div class="card card-custom bg-white border-white border-0">
-                <div *ngIf="raccolta.libri.length > 0; else placeHolder">
+                <div *ngIf="raccolta.numLibri > 0; else placeHolder">
                     <div class="card-custom-img" style="background-image: url({{raccolta.libri[0].volumeInfo.imageLinks}})"></div>
                 </div>
                 <ng-template #placeHolder>
@@ -34,10 +34,10 @@
                 </ng-template>
                 <div class="card-body" style="overflow-y: auto">
                 <h4 class="card-title">{{raccolta.nome}}</h4>
-                <p *ngIf="raccolta.libri.length === 0; else numeroLibri" class="card-text">Libri contenuti: 0</p>
-                <ng-template #numeroLibri>
-                    <p class="card-text">Libri contenuti: {{raccolta.libri.length}}</p>
-                </ng-template> 
+                <!--<p *ngIf="raccolta.libri.length === 0; else numeroLibri" class="card-text">Libri contenuti: 0</p>
+                <ng-template #numeroLibri>-->
+                    <p class="card-text">Libri contenuti: {{raccolta.numLibri}}</p>
+                <!--</ng-template>--> 
                 </div>
                 <div class="card-footer" style="background: inherit; border-color: inherit;">
                 <button type="button" class="btn btn-outline-danger" (click)="eliminaRaccolta(index)">Elimina</button>

@@ -94,4 +94,9 @@ export class ServerService {
   addRaccolta(sessionid: string, nome: string): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/createCollection?jsessionid=" + sessionid, {nome: nome})
   }
+
+  getLibriDiRaccolta(id: number): Observable<Volume[]> {
+
+    return this.http.post<Volume[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
+  }
 }

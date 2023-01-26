@@ -26,6 +26,12 @@ export class SchedaRaccolteComponent implements OnInit {
   getRaccolte(){
     this.server.getRaccolteCreate(this.sessionId).subscribe((r) => {
       this.raccolte = r;
+      for(let r of this.raccolte) {
+        this.server.getLibriDiRaccolta(r.id).subscribe(l => {
+          r.libri = l;
+          r.numLibri = r.libri.length;
+        });
+      }
     });
   }
 
@@ -35,7 +41,7 @@ export class SchedaRaccolteComponent implements OnInit {
 
   conferma(){
     if(this.nome){
-      const r : Raccolta = {id:0, nome: this.nome, libri: []};
+      const r : Raccolta = {id:0, nome: this.nome, libri: [], numLibri: 0};
       this.server.addRaccolta(this.sessionId, r.nome).subscribe( ok => {
         if(ok){
           this.raccolte.push(r);
