@@ -24,7 +24,7 @@
 <div class="container raccolte">
     <div class="row">
         <h2 class="testi" *ngIf="raccolte.length === 0">Crea nuova raccolta</h2>
-        <div class="col-lg-4" (click)="apriSchedaRaccolta()" style="cursor: pointer;" *ngFor="let raccolta of raccolte; let index = index;">
+        <div class="col-lg-4" style="cursor: pointer;" *ngFor="let raccolta of raccolte; let index = index;" (click)="apriSchedaRaccolta(index)">
             <div class="card card-custom bg-white border-white border-0">
                 <div *ngIf="raccolta.numLibri > 0; else placeHolder">
                     <div class="card-custom-img" style="background-image: url({{raccolta.libri[0].volumeInfo.imageLinks}})"></div>

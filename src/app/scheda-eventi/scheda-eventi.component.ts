@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, TitleStrategy } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Evento } from '../model/Evento';
 import { ServerService } from '../server.service';
 
@@ -31,14 +31,14 @@ export class SchedaEventiComponent implements OnInit {
 
     this.server.getEventiAccettati(this.sessionId).subscribe((e) => {
         this.eventiAccettati = e;
-        for(let i of this.eventiCreati) {
+        for(let i of this.eventiAccettati) {
           this.setPrintDate(i);
         }
     });
 
     this.server.getEventiDisponibili(this.sessionId).subscribe((e) => {
       this.eventiDisponibili = e;
-      for(let i of this.eventiCreati) {
+      for(let i of this.eventiDisponibili) {
         this.setPrintDate(i);
       }
     });

@@ -46,7 +46,7 @@ export class SchedaRaccolteComponent implements OnInit {
         if(ok){
           this.raccolte.push(r);
           this.creaRaccolta();
-          this.apriSchedaRaccolta();
+          this.apriSchedaRaccolta(this.raccolte.length - 1);
         } else {
           alert("Errore: raccolta non creata.");
         }
@@ -61,7 +61,9 @@ export class SchedaRaccolteComponent implements OnInit {
   }
 
 
-  apriSchedaRaccolta(){
+  apriSchedaRaccolta(index: number){
+    //window.location.href = "http://localhost:4200/apriRaccolta?raccolta=" + this.raccolte[index];
+
   }
 
   eliminaRaccolta(index: number){

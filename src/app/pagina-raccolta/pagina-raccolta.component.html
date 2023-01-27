@@ -11,7 +11,8 @@
     <div class="line"></div>
 </div>
 
-<div class="postcard light blue" *ngFor="let libro of raccolta">
+<div *ngIf="raccolta != null">
+<div class="postcard light blue" *ngFor="let libro of raccolta.libri">
     <a class="postcard__img_link" href="#">
         <img class="postcard__img" src="{{libro.volumeInfo.imageLinks}}" alt="Copertina libro" />
     </a>
@@ -27,4 +28,5 @@
         </ul>
         <button type="button" class="btn btn-outline-danger altoADestra" (click)="eliminaLibro()">Elimina libro</button>
     </div>
+</div>
 </div>
