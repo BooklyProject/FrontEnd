@@ -26,7 +26,6 @@ export class SchedaRecensioniComponent implements OnInit {
         this.recensioni.splice(index, 1);
       }
     })
-
   }
 
   toggleComments() {

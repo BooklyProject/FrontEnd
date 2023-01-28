@@ -1,4 +1,10 @@
-<div *ngIf="miaRecensione === null">
+<div class="separator">
+    <div class="line"></div>
+    <h2>Recensioni</h2>
+    <div class="line"></div>
+</div>
+
+<div *ngIf="miaRecensione === null; else placeHolder">
     <div class="buttonCrea">
         <label id="creaRecensione"><h4>Recensisci:</h4></label>
     </div>
@@ -21,6 +27,16 @@
         <button id="confermaRecensione" type="button" class="btn btn-primary" (click)="creaRecensione()">Conferma</button>
         <button id="annullaRecensione" type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="svuotaCampi()">Annulla</button>
     </div>
+</div>
+
+<ng-template #placeHolder>
+    <h2 style="color: lightgray; text-align: center;">Hai già recensito questo libro</h2>
+</ng-template>
+
+<div class="separator">
+    <div class="line"></div>
+    <h2>La mia recensione</h2>
+    <div class="line"></div>
 </div>
 
 <div id="recensioni" class="recensioni" *ngFor="let rec of recensioni; let index = index;">
