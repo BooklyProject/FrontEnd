@@ -19,6 +19,10 @@ export class SchedaUtenteComponent implements OnInit {
   image: string = "";
   utente: User | null = null;
 
+  modificaFoto(){
+    
+  }
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(data => {
       var sessionId = data['jsessionid'];

@@ -27,12 +27,10 @@
                     'cognomeModificabile': modifica
                 }">
             </p>
-            <p class="pEmail"><input type="text" placeholder="Email" [(ngModel)]="email" [ngClass]="{
-                'emailNonModificabile': !modifica,
-                'emailModificabile': modifica
-            }"></p>
             
-            <button class="btn btn-outline-primary bottoneFoto" [ngClass]="{
+            <p class="pEmail emailNonModificabile"><input type="text" placeholder="Email" [(ngModel)]="email"></p>
+            
+            <button (click)="modificaFoto()" class="btn btn-outline-primary bottoneFoto" [ngClass]="{
                 'visualizza': modifica,
                 'nonVisualizza': !modifica}">Modifica foto</button>
 
