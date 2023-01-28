@@ -18,6 +18,13 @@
     right:0;
 }
 
+.nonVisualizzare{
+	display: none;;
+}
+.visualizza{
+	display: block;
+}
+
 
 
 

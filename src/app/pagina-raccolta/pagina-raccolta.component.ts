@@ -9,15 +9,13 @@ import { Raccolta } from '../model/Raccolta';
 export class PaginaRaccoltaComponent implements OnInit {
 
     raccolta: Raccolta | null = null;
+    aggiunta: boolean = false;
 
     tornaIndietro(){
 
     }
     aggiungiLibro(){
-
-    }
-    eliminaRaccolta(){
-
+      this.aggiunta = !this.aggiunta;
     }
     eliminaLibro(){
 

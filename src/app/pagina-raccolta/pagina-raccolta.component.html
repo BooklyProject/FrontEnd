@@ -1,8 +1,22 @@
-<button type="button" class="btn btn-primary" (click)="tornaIndietro()">Torna indietro</button>
-
-<div class="altoADestra">
+<div class="altoADestra" [ngClass]="{
+    'nonVisualizzare': aggiunta,
+    'visualla': !aggiunta
+    }">
     <button type="button" class="btn btn-primary" (click)="aggiungiLibro()">Aggiungi libro</button>
-    <button type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="eliminaRaccolta()">Elimina raccolta</button>
+</div><br>
+
+<div class="form" [ngClass]="{
+    'nonVisualizzare': !aggiunta,
+    'visualla': aggiunta
+    }">
+    <div class="altoADestra">
+        <button type="button" class="btn btn-primary" (click)="aggiungiLibro()">Conferma</button>
+        <button type="button" class="btn btn-danger" (click)="aggiungiLibro()" style="margin-left: 5px;" >Annulla</button>
+    </div><br>
+    <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Cerca un libro..."/>
+        <button type="button" class="btn btn-outline-primary">Cerca</button>
+    </div>
 </div>
 
 <div class="separator">
