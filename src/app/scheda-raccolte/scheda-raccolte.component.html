@@ -1,3 +1,4 @@
+<div class="pagina1" *ngIf="raccoltaSelezionata === null; else apriRaccolta">
 <button type="button" class="btn btn-primary" (click)="creaRaccolta()" [ngClass]="{
     'bottoneVisibile': !creazioneRaccolta,
     'bottoneNonVisibile': creazioneRaccolta
@@ -27,13 +28,14 @@
         <div class="col-lg-4" *ngFor="let raccolta of raccolte; let index = index;">
             <div class="card card-custom bg-white border-white border-0">
                 <div *ngIf="raccolta.numLibri > 0; else placeHolder">
-                    <div class="card-custom-img" style="background-image: url({{raccolta.libri[0].volumeInfo.imageLinks}})"></div>
+                    <div class="card-custom-img"  (click)="selezionaRaccolta(index)" style="background-image: url('http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image'); cursor: pointer;"></div>
+                    <!--<div class="card-custom-img" style="background-image: ({{raccolta.libri[0].volumeInfo.imageLinks?.thumbnail}})"></div>-->
                 </div>
                 <ng-template #placeHolder>
-                    <div class="card-custom-img"  (click)="apriSchedaRaccolta(index)" style="background-image: url('http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image'); cursor: pointer;"></div>
+                    <div class="card-custom-img"  (click)="selezionaRaccolta(index)" style="background-image: url('http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image'); cursor: pointer;"></div>
                 </ng-template>
                 <div class="card-body" style="overflow-y: auto">
-                <h4 class="card-title"  (click)="apriSchedaRaccolta(index)" style="cursor: pointer;">{{raccolta.nome}}</h4>
+                <h4 class="card-title"  (click)="selezionaRaccolta(index)" style="cursor: pointer;">{{raccolta.nome}}</h4>
                     <p class="card-text">Libri contenuti: {{raccolta.numLibri}}</p>
                 </div>
                 <div class="card-footer" style="background: inherit; border-color: inherit;">
@@ -43,3 +45,8 @@
         </div>
     </div>
 </div>
+</div>
+
+<ng-template #apriRaccolta>
+    <app-pagina-raccolta [raccolta]="raccoltaSelezionata" [sessionId]="sessionId"></app-pagina-raccolta>
+</ng-template>

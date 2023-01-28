@@ -12,15 +12,6 @@ export class BookCardComponent {
   @Input() sessionId: string = "";
 
   public placeholderImageUrl = 'http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image';
-  
-  protected openBookDetailPage(): void {
-    if(this.volume != null) {
-      this.server.sendBook(this.sessionId, this.volume).subscribe(ok => {
-          console.log("res: " + ok);
-          window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
-      });
-    }
-  }
 
   constructor(private server: ServerService) {
 

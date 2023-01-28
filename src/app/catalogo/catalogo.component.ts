@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../GoogleBooks/services/books.service';
 import { SearchParams } from '../GoogleBooks/models/search-params.interface';
 import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
-import { Volume } from '../GoogleBooks/models/volume.interface';
 import { ActivatedRoute } from '@angular/router';
+import { Volume } from '../GoogleBooks/models/volume.interface';
+import { ServerService } from '../server.service';
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
@@ -46,7 +47,16 @@ export class CatalogoComponent implements OnInit {
       })
   }
 
-  constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute) {
+  openBookDetailPage(volume: Volume): void {
+    if(volume != null) {
+      this.server.sendBook(this.sessionId, volume).subscribe(ok => {
+          console.log("res: " + ok);
+          window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
+      });
+    }
+  }
+
+  constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute, private server: ServerService) {
 
   }
 

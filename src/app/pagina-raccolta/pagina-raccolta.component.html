@@ -2,7 +2,7 @@
     'nonVisualizzare': aggiunta,
     'visualla': !aggiunta
     }">
-    <button type="button" class="btn btn-primary" (click)="aggiungiLibro()">Aggiungi libro</button>
+    <button type="button" class="btn btn-primary" (click)="apriChiudiForm()">Aggiungi libro</button>
 </div><br>
 
 <div class="form" [ngClass]="{
@@ -10,36 +10,47 @@
     'visualla': aggiunta
     }">
     <div class="altoADestra">
-        <button type="button" class="btn btn-primary" (click)="aggiungiLibro()">Conferma</button>
-        <button type="button" class="btn btn-danger" (click)="aggiungiLibro()" style="margin-left: 5px;" >Annulla</button>
+        <button type="button" class="btn btn-primary" (click)="conferma()">Conferma</button>
+        <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;" >Annulla</button>
     </div><br>
     <div class="input-group">
-        <input type="search" class="form-control rounded" placeholder="Cerca un libro..."/>
-        <button type="button" class="btn btn-outline-primary">Cerca</button>
+        <input type="search" class="form-control rounded" placeholder="Cerca un libro..." (keyup.enter)="searchBook()" [(ngModel)]="book"/>
+	<button type="button" class="btn btn-outline-primary" (click)="searchBook()">Cerca</button>
+    </div>
+    <div class="container" *ngIf="book != '' && booksCollection && params.searchTerm === book">
+        <div class="container" *ngIf="!booksCollection.items; else collectionNotEmpty">
+            Nessun libro trovato
+        </div>
+        <ng-template #collectionNotEmpty>
+            {{ booksCollection.totalItems }} risultati per {{ params.searchTerm }}
+            <div class="cards-grid mt-3">
+              <app-book-card [sessionId]="sessionId"
+                *ngFor="let item of booksCollection.items; let index = index"
+                [volume]="item" (click)="addBook(item)" 
+              ></app-book-card>
+            </div>
+        </ng-template>
     </div>
 </div>
 
 <div class="separator">
     <div class="line"></div>
-    <h2>Nome Raccolta</h2>
+    <h2>{{raccolta?.nome}}</h2>
     <div class="line"></div>
 </div>
 
 <div *ngIf="raccolta != null">
 <div class="postcard light blue" *ngFor="let libro of raccolta.libri">
     <a class="postcard__img_link" href="#">
-        <img class="postcard__img" src="{{libro.volumeInfo.imageLinks}}" alt="Copertina libro" />
+        <img class="postcard__img" src="{{libro.volumeInfo.imageLinks?.thumbnail}}" alt="Copertina libro" />
     </a>
     <div class="postcard__text t-dark">
         <h1 class="postcard__title blue"><a href="#">{{libro.volumeInfo.title}}</a></h1>
-        <div class="postcard__subtitle small">
-            <i>{{libro.volumeInfo.authors}}</i>
+        <div class="postcard__subtitle small" *ngFor="let autore of libro.volumeInfo.authors">
+            <i>{{autore}}</i>
         </div>
         <div class="postcard__bar"></div>
         <div class="postcard__preview-txt">{{libro.volumeInfo.description}}</div>
-        <ul class="postcard__tagbox">
-            <li class="tag__item"><i class="fas fa-tag mr-2"></i>{{libro.volumeInfo.categories}}</li>
-        </ul>
         <button type="button" class="btn btn-outline-danger altoADestra" (click)="eliminaLibro()">Elimina libro</button>
     </div>
 </div>

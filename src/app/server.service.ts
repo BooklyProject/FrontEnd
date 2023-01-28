@@ -122,4 +122,16 @@ export class ServerService {
   eliminaRecensione(id: number): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/deleteReview", {idRecensione: id})
   }
+
+  addLibroRaccolta(idraccolta: number, libro: Volume): Observable<Boolean>{
+    return this.http.post<Boolean>(this.url + "/addBook?idRaccolta=" + idraccolta, {
+      isbn: libro.volumeInfo.industryIdentifiers[0].identifier,
+      nome: libro.volumeInfo.title, 
+      autore: libro.volumeInfo.authors?.join(", "), 
+      generi: libro.volumeInfo.categories?.join(", "), 
+      numeroPagine: libro.volumeInfo.pageCount, 
+      lingua: libro.volumeInfo.language, 
+      descrizione: libro.volumeInfo.description,
+      copertina: libro.volumeInfo.imageLinks?.thumbnail});    
+  }
 }

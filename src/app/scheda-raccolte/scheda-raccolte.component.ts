@@ -16,6 +16,8 @@ export class SchedaRaccolteComponent implements OnInit {
   creazioneRaccolta: boolean = false;
   raccolte: Raccolta[] = [];
 
+  raccoltaSelezionata: Raccolta | null = null;
+
   nome: string = "";
 
   sessionId: string = "";
@@ -46,7 +48,7 @@ export class SchedaRaccolteComponent implements OnInit {
         if(ok){
           this.raccolte.push(r);
           this.creaRaccolta();
-          this.apriSchedaRaccolta(this.raccolte.length - 1);
+          this.selezionaRaccolta(this.raccolte.length - 1);
         } else {
           alert("Errore: raccolta non creata.");
         }
@@ -61,9 +63,10 @@ export class SchedaRaccolteComponent implements OnInit {
   }
 
 
-  apriSchedaRaccolta(index: number){
-    //window.location.href = "http://localhost:4200/apriRaccolta?raccolta=" + this.raccolte[index];
-
+  selezionaRaccolta(index: number){
+    this.raccoltaSelezionata = this.raccolte[index];
+    console.log(this.raccoltaSelezionata.id, this.raccoltaSelezionata.nome)
+    //window.location.href = "http://localhost:4200/apriRaccolta" + "?jsessionid=" + this.sessionId + "&raccolta=" + this.raccolte[index];
   }
 
   eliminaRaccolta(index: number){

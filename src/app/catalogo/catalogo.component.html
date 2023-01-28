@@ -14,7 +14,7 @@
 	<div class="cards-grid mt-3">
 	  <app-book-card [sessionId]="sessionId"
 		*ngFor="let item of booksCollection.items"
-		[volume]="item"
+		[volume]="item" (click)="openBookDetailPage(item)"
 	  ></app-book-card>
 	</div>
 </ng-template>

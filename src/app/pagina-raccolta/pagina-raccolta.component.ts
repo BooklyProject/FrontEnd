@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Raccolta } from '../model/Raccolta';
+import { BooksService } from '../GoogleBooks/services/books.service';
+import { SearchParams } from '../GoogleBooks/models/search-params.interface';
+import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
+import { ActivatedRoute } from '@angular/router';
+import { ServerService } from '../server.service';
+import { Volume } from '../GoogleBooks/models/volume.interface';
 
 @Component({
   selector: 'app-pagina-raccolta',
@@ -8,22 +14,68 @@ import { Raccolta } from '../model/Raccolta';
 })
 export class PaginaRaccoltaComponent implements OnInit {
 
-    raccolta: Raccolta | null = null;
+    @Input() raccolta: Raccolta | null = null;
     aggiunta: boolean = false;
 
+    @Input() sessionId: string = "";
+    booksCollection: CollectionResultModel | null = null;
+    book: string = "";
+    params: SearchParams = {searchTerm: "", category: "", orderBy: "relevance", startIndex: 0};
+
+    addBook(item: Volume){
+      console.log(item.volumeInfo);
+      if(this.booksCollection != null && this.raccolta?.id != undefined){
+        this.server.addLibroRaccolta(this.raccolta?.id, item).subscribe(ok =>{
+          if(ok){
+            alert(item.volumeInfo.title + " aggiunto alla raccolta");
+            this.raccolta?.libri.push(item);
+            //SVUOTA CAMPO
+          } else {
+            alert("Libro non aggiunto alla raccolta")
+          }
+        });
+      }
+    }
+
+    conferma(){
+      this.apriChiudiForm();
+    }
+    annulla(){
+      //svuota form
+      this.apriChiudiForm();
+    }
     tornaIndietro(){
 
     }
-    aggiungiLibro(){
+    apriChiudiForm(){
       this.aggiunta = !this.aggiunta;
     }
     eliminaLibro(){
 
     }
 
+    searchBook() {
+      if(this.book === "") {
+        alert("Campo di ricerca vuoto!");
+      }
+      else {
+        this.params.searchTerm = this.book;
+        this.GoogleBooksService.getBooks(this.params).subscribe((response) => {
+            if (response) {
+              this.booksCollection = response;
+              this.booksCollection.items = this.booksCollection.items.filter(book => book.volumeInfo.industryIdentifiers &&
+                                                book.volumeInfo.authors && book.volumeInfo.categories &&
+                                                book.volumeInfo.description);
+              this.booksCollection.items = this.booksCollection.items.slice(0, 5);
+              this.booksCollection.totalItems = this.booksCollection.items.length;
+            }
+        });
+      }
+    }
+
     ngOnInit(): void {
-      const urlParams = new URLSearchParams(window.location.search);
-      var racc = urlParams.get("raccolta");
-      console.log("raccolta:" + racc);
+    }
+    constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute, private server: ServerService) {
+  
     }
 }
