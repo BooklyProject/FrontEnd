@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Raccolta } from '../model/Raccolta';
 import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
 import { SearchParams } from '../GoogleBooks/models/search-params.interface';
@@ -103,7 +103,6 @@ export class SchedaRaccolteComponent implements OnInit {
         this.sessionId = sessionId;
         console.log("sessionId catalogo: " + this.sessionId);
         this.getRaccolte();
-        this.raccoltaSelezionata = null;
       }
     })
 }
