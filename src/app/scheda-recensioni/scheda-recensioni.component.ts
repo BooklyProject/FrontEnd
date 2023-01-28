@@ -34,15 +34,18 @@ export class SchedaRecensioniComponent implements OnInit {
 
   creaRecensione() {
     if(this.miaRecensione == null) {
-    this.miaRecensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: ""};
-    this.server.addReview(this.sessionId, this.miaRecensione).subscribe(ok => {
-      if(ok) {
-        if(this.miaRecensione != null) {
-          this.recensioni.splice(0, 0, this.miaRecensione);
-          console.log("miaRec " + this.miaRecensione)
+      if(this.descrRecensione != "" && this.form.value.rating1 != 0){
+      this.miaRecensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: ""};
+      this.server.addReview(this.sessionId, this.miaRecensione).subscribe(ok => {
+        if(ok) {
+          if(this.miaRecensione != null) {
+            this.recensioni.splice(0, 0, this.miaRecensione);
+          }
         }
+      });
+      } else {
+        alert("Inserire voto e recensione")
       }
-    });
     }
     else {
       alert("Recensione su questo libro già presente!");
