@@ -118,4 +118,8 @@ export class ServerService {
 
     return this.http.post<User>(this.url + "/getReviewWriter", {idRecensione: idRec});
   }
+  
+  eliminaRecensione(id: number): Observable<Boolean>{
+    return this.http.post<Boolean>(this.url + "/deleteReview", {idRecensione: id})
+  }
 }

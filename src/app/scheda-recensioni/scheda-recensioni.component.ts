@@ -20,6 +20,15 @@ export class SchedaRecensioniComponent implements OnInit {
   sessionId: string = "";
   userLogged: User | null = null;
 
+  cancellaRecensione(index: number){
+    this.server.eliminaRecensione(this.recensioni[index].id).subscribe(ok => {
+      if(ok) {
+        this.recensioni.splice(index, 1);
+      }
+    })
+
+  }
+
   toggleComments() {
     this.showComments = !this.showComments;  
   } 

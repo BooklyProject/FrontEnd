@@ -1,4 +1,10 @@
-
+.altoDx{
+    margin-top: 15px;
+    margin-right: 10px;
+    position:absolute;
+    top:0;
+    right:0;
+}
 .recensioni {
     margin-top: 20px; 
     margin-left: 30px;
