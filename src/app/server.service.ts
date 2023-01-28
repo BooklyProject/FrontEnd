@@ -134,4 +134,7 @@ export class ServerService {
       descrizione: libro.volumeInfo.description,
       copertina: libro.volumeInfo.imageLinks?.thumbnail});    
   }
+  eliminaLibroRaccolta(idraccolta: number, isbn: string): Observable<Boolean>{
+    return this.http.get<Boolean>(this.url + "/deleteBook", {params: {idRaccolta: idraccolta ,ISBN: isbn}});
+  }
 }

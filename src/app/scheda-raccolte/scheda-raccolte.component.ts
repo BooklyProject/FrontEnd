@@ -103,6 +103,7 @@ export class SchedaRaccolteComponent implements OnInit {
         this.sessionId = sessionId;
         console.log("sessionId catalogo: " + this.sessionId);
         this.getRaccolte();
+        this.raccoltaSelezionata = null;
       }
     })
 }

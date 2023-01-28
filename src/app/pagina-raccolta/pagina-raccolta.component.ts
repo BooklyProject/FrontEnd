@@ -41,17 +41,16 @@ export class PaginaRaccoltaComponent implements OnInit {
       this.apriChiudiForm();
     }
     annulla(){
-      //svuota form
       this.apriChiudiForm();
-    }
-    tornaIndietro(){
-
     }
     apriChiudiForm(){
       this.aggiunta = !this.aggiunta;
     }
-    eliminaLibro(){
-
+    eliminaLibro(libro: Volume){
+      if(this.raccolta?.id != undefined){
+        this.server.eliminaLibroRaccolta(this.raccolta?.id, libro.volumeInfo.industryIdentifiers[0].identifier);
+      }
+      
     }
 
     searchBook() {
@@ -74,6 +73,7 @@ export class PaginaRaccoltaComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      
     }
     constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute, private server: ServerService) {
   
