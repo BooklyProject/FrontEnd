@@ -28,6 +28,7 @@ export class PaginaRaccoltaComponent implements OnInit {
         this.server.addLibroRaccolta(this.raccolta?.id, item).subscribe(ok =>{
           if(ok){
             alert(item.volumeInfo.title + " aggiunto alla raccolta");
+            console.log(item);
             this.raccolta?.libri.push(item);
             //SVUOTA CAMPO
           } else {
@@ -48,6 +49,7 @@ export class PaginaRaccoltaComponent implements OnInit {
     }
     eliminaLibro(libro: Volume){
       if(this.raccolta?.id != undefined){
+        console.log(libro);
         this.server.eliminaLibroRaccolta(this.raccolta?.id, libro.volumeInfo.industryIdentifiers[0].identifier);
       }
       

@@ -46,6 +46,7 @@ export class SchedaRaccolteComponent implements OnInit {
       const r : Raccolta = {id:0, nome: this.nome, libri: [], numLibri: 0};
       this.server.addRaccolta(this.sessionId, r.nome).subscribe( ok => {
         if(ok){
+          r.id = ok;
           this.raccolte.push(r);
           this.creaRaccolta();
           this.selezionaRaccolta(this.raccolte.length - 1);

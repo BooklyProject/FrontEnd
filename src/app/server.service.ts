@@ -89,14 +89,14 @@ export class ServerService {
     return this.http.get<Raccolta[]>(this.url + "/myCollections", {params: {jsessionid: sessionid}});
   }
 
-  eliminaRaccolta(id: number): Observable<Boolean>{
+  eliminaRaccolta(id: Number): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/deleteCollection", {idRaccolta: id})
   }
-  addRaccolta(sessionid: string, nome: string): Observable<Boolean>{
-    return this.http.post<Boolean>(this.url + "/createCollection?jsessionid=" + sessionid, {nome: nome})
+  addRaccolta(sessionid: string, nome: string): Observable<Number>{
+    return this.http.post<Number>(this.url + "/createCollection?jsessionid=" + sessionid, {nome: nome})
   }
 
-  getLibriDiRaccolta(id: number): Observable<Volume[]> {
+  getLibriDiRaccolta(id: Number): Observable<Volume[]> {
     return this.http.post<Volume[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
   }
 
@@ -123,7 +123,7 @@ export class ServerService {
     return this.http.post<Boolean>(this.url + "/deleteReview", {idRecensione: id})
   }
 
-  addLibroRaccolta(idraccolta: number, libro: Volume): Observable<Boolean>{
+  addLibroRaccolta(idraccolta: Number, libro: Volume): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/addBook?idRaccolta=" + idraccolta, {
       isbn: libro.volumeInfo.industryIdentifiers[0].identifier,
       nome: libro.volumeInfo.title, 
@@ -134,7 +134,8 @@ export class ServerService {
       descrizione: libro.volumeInfo.description,
       copertina: libro.volumeInfo.imageLinks?.thumbnail});    
   }
-  eliminaLibroRaccolta(idraccolta: number, isbn: string): Observable<Boolean>{
-    return this.http.get<Boolean>(this.url + "/deleteBook", {params: {idRaccolta: idraccolta ,ISBN: isbn}});
+  eliminaLibroRaccolta(idraccolta: Number, isbn: string): Observable<Boolean>{
+    var id = idraccolta.valueOf();
+    return this.http.get<Boolean>(this.url + "/deleteBook", {params: {idRaccolta: id ,ISBN: isbn}});
   }
 }
