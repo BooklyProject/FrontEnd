@@ -1,10 +1,4 @@
-<div class="separator">
-    <div class="line"></div>
-    <h2>Recensioni</h2>
-    <div class="line"></div>
-</div>
-
-<div *ngIf="miaRecensione === null; else placeHolder">
+<div *ngIf="miaRecensione === false">
     <div class="buttonCrea">
         <label id="creaRecensione"><h4>Recensisci:</h4></label>
     </div>
@@ -29,13 +23,15 @@
     </div>
 </div>
 
-<ng-template #placeHolder>
-    <h2 style="color: lightgray; text-align: center;">Hai già recensito questo libro</h2>
-</ng-template>
+<!--<div class="separator">
+    <div class="line"></div>
+    <h2>La mia recensione</h2>
+    <div class="line"></div>
+</div>-->
 
 <div class="separator">
     <div class="line"></div>
-    <h2>La mia recensione</h2>
+    <h2>Recensioni</h2>
     <div class="line"></div>
 </div>
 
@@ -45,7 +41,8 @@
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
                     <div class="card mb-4">
-                        <button type="button" (click)="cancellaRecensione(index)" class="altoDx btn-sm btn btn-danger">Cancella recensione</button>
+                        <button type="button" *ngIf="miaRecensione === true && userLogged && rec.userId === userLogged.id" 
+                        (click)="cancellaRecensione(index)" class="altoDx btn-sm btn btn-danger">Cancella recensione</button>
                         <div class="card-body">
                             <p>{{rec.descrizione}}</p>
                             <div class="info">

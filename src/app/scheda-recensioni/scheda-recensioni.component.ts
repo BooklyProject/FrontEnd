@@ -12,8 +12,8 @@ import { User } from '../model/User';
 export class SchedaRecensioniComponent implements OnInit {
   
   showComments: boolean = false;
-  miaRecensione: Recensione | null = null;
-  recensioni: Recensione[] = [];
+  miaRecensione: boolean = false;
+  public recensioni: Recensione[] = [];
   descrRecensione: string = "";
   public form: FormGroup;
   rating3: number;
@@ -24,8 +24,9 @@ export class SchedaRecensioniComponent implements OnInit {
     this.server.eliminaRecensione(this.recensioni[index].id).subscribe(ok => {
       if(ok) {
         this.recensioni.splice(index, 1);
+        this.miaRecensione = false;
       }
-    })
+    });
   }
 
   toggleComments() {
@@ -33,14 +34,13 @@ export class SchedaRecensioniComponent implements OnInit {
   } 
 
   creaRecensione() {
-    if(this.miaRecensione == null) {
-      if(this.descrRecensione != "" && this.form.value.rating1 != 0){
-      this.miaRecensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: ""};
-      this.server.addReview(this.sessionId, this.miaRecensione).subscribe(ok => {
+    if(this.miaRecensione === false) {
+      if(this.descrRecensione != ""){
+      const miaRecensione: Recensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: ""};
+      this.server.addReview(this.sessionId, miaRecensione).subscribe(ok => {
         if(ok) {
-          if(this.miaRecensione != null) {
-            this.recensioni.splice(0, 0, this.miaRecensione);
-          }
+          this.miaRecensione = true;
+          this.recensioni.splice(0, 0, miaRecensione);
         }
       });
       } else {
@@ -64,30 +64,40 @@ export class SchedaRecensioniComponent implements OnInit {
     if(sessionid != null) {
       this.sessionId = sessionid;
     }
+    let parentThis = this;
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
-      console.log("recensioni prese");
-      this.server.getUser(this.sessionId).subscribe(u => {
-        this.userLogged = u;
-
-        for(let rec of this.recensioni) {
-          this.server.getScrittoreRecensione(rec.id).subscribe(u => {
-            rec.username = u.username;
-            rec.userImg = "data:image/png;base64, " + u.userImage;
-          });
-        }
-        console.log("utente per rec");
-        if(this.recensioni.length > 0 && this.recensioni[0].userId === this.userLogged?.id)  {
-          console.log(this.recensioni[0].userId +" e " + this.userLogged.id);
-          this.miaRecensione = this.recensioni[0];
-        }
-      });
-      
     });
+
+      this.server.getUser(this.sessionId).subscribe(u => {
+        parentThis.userLogged = u;
+      });
+
+      for(let i = 0; i < this.recensioni.length; i++) {
+        this.server.getScrittoreRecensione(this.recensioni[i].id).subscribe(u => {
+          parentThis.recensioni[i].username = u.username;
+          parentThis.recensioni[i].userImg = "data:image/png;base64, " + u.userImage;
+          parentThis.recensioni[i].userId = u.id;
+          console.log("u: " + parentThis.recensioni[i].id + " - " + parentThis.recensioni[i].username);          
+        });
+      }
+      console.log("utente per rec");
+      console.log("rec-length: " + this.recensioni.length);
+      console.log("rec0-userId: " + this.recensioni[0].userId);
+      if(this.userLogged) {
+        console.log("rec-userLogged: " + this.userLogged.id);
+      }
+      if(this.recensioni.length > 0 && this.recensioni[0].userId === this.userLogged?.id)  {
+        console.log(this.recensioni[0].userId +" e " + this.userLogged.id);
+        this.miaRecensione = true;
+        }
+      console.log("miarec: " + this.miaRecensione);
   }
 
-
+  setUserRec(id: number, name: string, img: string, index: number) {
+    
+  }
   constructor(private fb: FormBuilder, private server: ServerService){
     this.rating3 = 0;
     this.form = this.fb.group({
