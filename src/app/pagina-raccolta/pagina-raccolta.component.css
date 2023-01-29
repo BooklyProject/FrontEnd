@@ -57,6 +57,7 @@
 	 overflow: hidden;
 	 position: relative;
 	 color: #fff;
+	 max-height: 350px;
 }
  .postcard.dark {
 	 background-color: #18151f;
@@ -80,6 +81,7 @@
 }
  .postcard .postcard__title {
 	 font-size: 1.75rem;
+	 margin-left: 5px;
 }
  .postcard .postcard__img {
 	 max-height: 180px;
@@ -151,6 +153,7 @@
 	}
 	 .postcard .postcard__title {
 		 font-size: 2rem;
+		 margin-left: 5px;
 	}
 	 .postcard .postcard__tagbox {
 		 justify-content: start;

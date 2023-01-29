@@ -41,10 +41,10 @@
 <div class="container eventi">
     <div class="row">
         <h2 class="testi" *ngIf="eventiCreati.length === 0">Aggiungi nuovo evento</h2>
-        <div class="col-lg-4" (click)="apriEvento()" style="cursor: pointer;" *ngFor="let evento of eventiCreati; let index = index;">
+        <div class="col-lg-4" *ngFor="let evento of eventiCreati; let index = index;">
             <div class="card card-margin">
                 <div class="card-header no-border">
-                    <h5 class="card-title"> {{evento.nome}}</h5>
+                    <h5 class="card-title" (click)="apriEvento(index)" style="cursor: pointer;">{{evento.nome}}</h5>
                 </div>
                 <div class="card-body pt-0">
                     <div class="widget-49">
@@ -79,10 +79,10 @@
 <div class="container eventi">
 <div class="row">
     <h2 class="testi" *ngIf="eventiAccettati.length === 0">Partecipa ad un nuovo evento</h2>
-    <div class="col-lg-4" (click)="apriEvento()" style="cursor: pointer;" *ngFor="let evento of eventiAccettati; let index = index;">
+    <div class="col-lg-4" *ngFor="let evento of eventiAccettati; let index = index;">
         <div class="card card-margin">
             <div class="card-header no-border">
-                <h5 class="card-title"> {{evento.nome}}</h5>
+                <h5 class="card-title" (click)="apriEvento(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">
@@ -117,10 +117,10 @@
 <div class="container eventi">
 <div class="row">
     <h2 class="testi" *ngIf="eventiDisponibili.length === 0">Non ci sono eventi disponibili</h2>
-    <div class="col-lg-4" (click)="apriEvento()" style="cursor: pointer;" *ngFor="let evento of eventiDisponibili; let index = index;">
+    <div class="col-lg-4" *ngFor="let evento of eventiDisponibili; let index = index;">
         <div class="card card-margin">
             <div class="card-header no-border">
-                <h5 class="card-title"> {{evento.nome}}</h5>
+                <h5 class="card-title" (click)="apriEvento(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">

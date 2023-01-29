@@ -1,3 +1,5 @@
+<div *ngIf="tornaIndietro === false; else placeholder">
+<button type="button" class="btn btn-primary" (click)="tornaAlleRaccolte()">Torna alle raccolte</button>
 <div class="altoADestra" [ngClass]="{
     'nonVisualizzare': aggiunta,
     'visualla': !aggiunta
@@ -41,9 +43,7 @@
 
 <div *ngIf="raccolta != null">
 <div class="postcard light blue" *ngFor="let libro of raccolta.libri">
-    <a class="postcard__img_link" href="#">
-        <img class="postcard__img" src="{{libro.copertina}}" alt="Copertina libro" />
-    </a>
+        <img class="postcard__img titolo" src="{{libro.copertina}}" alt="Copertina libro" />
     <div class="postcard__text t-dark">
         <h1 class="postcard__title blue"><a href="#">{{libro.nome}}</a></h1>
         <div class="postcard__subtitle small">
@@ -55,3 +55,8 @@
     </div>
 </div>
 </div>
+</div>
+
+<ng-template #placeholder>
+    <app-scheda-raccolte></app-scheda-raccolte>
+</ng-template>

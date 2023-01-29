@@ -58,6 +58,7 @@
 }
   
   /* First border-left-width setting is a fallback */
+  /*
 .card-custom-img::after {
     position: absolute;
     content: '';
@@ -75,7 +76,7 @@
     border-right-color: transparent;
     border-bottom-color: transparent;
     border-left-color: inherit;
-}
+}*/
 
 .cards-grid {
     display: grid;

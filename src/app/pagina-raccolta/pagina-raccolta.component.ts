@@ -17,11 +17,16 @@ export class PaginaRaccoltaComponent implements OnInit {
 
     @Input() raccolta: Raccolta | null = null;
     aggiunta: boolean = false;
+    tornaIndietro: boolean = false;
 
     @Input() sessionId: string = "";
     booksCollection: CollectionResultModel | null = null;
     book: string = "";
     params: SearchParams = {searchTerm: "", category: "", orderBy: "relevance", startIndex: 0};
+
+    tornaAlleRaccolte(){
+      this.tornaIndietro = !this.tornaIndietro;
+    }
 
     addBook(item: Volume){
       console.log(item.volumeInfo);

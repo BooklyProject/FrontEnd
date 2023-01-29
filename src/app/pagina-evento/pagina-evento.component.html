@@ -6,7 +6,7 @@
 
 <div class="separator">
     <div class="line"></div>
-    <h2>Nome evento</h2>
+    <h2>{{evento?.nome}}</h2>
     <div class="line"></div>
 </div>
 
@@ -15,9 +15,9 @@
 </div>
 
 <ul>
-    <li><h3>Descrizione</h3><p>Presentazione nuovo libro</p></li>
-    <li><h3>Data</h3><p>15 Giugno 2023</p></li>
-    <li><h3>Ora</h3><p>20:30</p></li>
-    <li><h3>Partecipanti</h3><p>0</p></li>
+    <li><h3>Descrizione</h3><p>{{evento?.descrizione}}</p></li>
+    <li><h3>Data</h3><p>{{evento?.printDate}}</p></li>
+    <li><h3>Ora</h3><p>{{evento?.orario}}</p></li>
+    <li><h3>Partecipanti</h3><p>{{evento?.partecipanti}}</p></li>
 </ul>
 

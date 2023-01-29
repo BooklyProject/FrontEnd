@@ -48,7 +48,7 @@ export class SchedaEventiComponent implements OnInit {
     e.printDate = e.data.toString();
   }
 
-  apriEvento(){
+  apriEvento(index: number){
     
   }
 

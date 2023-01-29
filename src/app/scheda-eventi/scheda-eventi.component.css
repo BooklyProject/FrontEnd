@@ -38,6 +38,10 @@
   float: none;
 }
 
+h5:hover{
+  color: #0076bd;
+}
+
 
 .card-margin {
   margin-bottom: 1.875rem;
