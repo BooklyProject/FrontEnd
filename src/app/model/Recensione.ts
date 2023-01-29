@@ -1,6 +1,6 @@
 
 export interface Recensione {
-    id: number;
+    id: Number;
     descrizione: string;
     voto: number;
     numMiPiace: number;
@@ -8,12 +8,16 @@ export interface Recensione {
     commenti: Commento[];
     userId: number,
     username: string,
-    userImg: string
+    userImg: string,
+    showComments: boolean
 }
 
 export interface Commento {
-    id: number;
+    id: Number;
     descrizione: string;
     numMiPiace: number;
     numNonMiPiace: number;
+    userId: number,
+    username: string,
+    userImg: string
 }

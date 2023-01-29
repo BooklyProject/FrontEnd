@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Volume } from './GoogleBooks/models/volume.interface';
 import { Evento } from './model/Evento';
 import { Raccolta } from './model/Raccolta';
-import { Recensione } from './model/Recensione';
+import { Recensione, Commento } from './model/Recensione';
 import { Libro } from './model/Libro';
 
 
@@ -101,8 +101,8 @@ export class ServerService {
     return this.http.post<Libro[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
   }
 
-  addReview(sessionid: string, rec: Recensione): Observable<Boolean> {
-    return this.http.post<Boolean>(this.url + "/addReview?jsessionid=" + sessionid, {
+  addReview(sessionid: string, rec: Recensione): Observable<Number> {
+    return this.http.post<Number>(this.url + "/addReview?jsessionid=" + sessionid, {
       descrizione: rec.descrizione,
       voto: rec.voto,
       numMiPiace: 0,
@@ -115,12 +115,11 @@ export class ServerService {
     return this.http.get<Recensione[]>(this.url + "/getReviews", {params: {jsessionid: sessionid}});
   }
 
-  getScrittoreRecensione(idRec: number): Observable<User> {
-
+  getScrittoreRecensione(idRec: Number): Observable<User> {
     return this.http.post<User>(this.url + "/getReviewWriter", {idRecensione: idRec});
   }
   
-  eliminaRecensione(id: number): Observable<Boolean>{
+  eliminaRecensione(id: Number): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/deleteReview", {idRecensione: id})
   }
 
@@ -141,5 +140,13 @@ export class ServerService {
   eliminaLibroRaccolta(idraccolta: Number, isbn: string): Observable<Boolean>{
     var id = idraccolta.valueOf();
     return this.http.get<Boolean>(this.url + "/deleteBook", {params: {idRaccolta: id ,ISBN: isbn}});
+  }
+
+  getCommenti(idRec: Number): Observable<Commento[]> {
+    return this.http.post<Commento[]>(this.url + "/getComments", {idRecensione: idRec});
+  }
+
+  addComment(sessionid: string, idRec: Number, descr: string): Observable<Number> {
+    return this.http.post<Number>(this.url + "/addComment?jsessionid=" + sessionid + "&idRec=" + idRec, {descrizione: descr});
   }
 }

@@ -83,8 +83,16 @@
     margin-bottom: 20px;
   }
   
-  div.stars {
+div.stars {
     width: 270px;
     display: inline-block;
-  }
+}
+
+.formVisibile{
+    display: block;
+}
+
+.formNonVisibile{
+    display: none;
+}
   

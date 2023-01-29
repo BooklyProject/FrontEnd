@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recensione } from '../model/Recensione';
+import { Recensione, Commento } from '../model/Recensione';
 import { ServerService } from '../server.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../model/User';
@@ -19,6 +19,7 @@ export class SchedaRecensioniComponent implements OnInit {
   rating3: number;
   sessionId: string = "";
   userLogged: User | null = null;
+  commento: string = "";
 
   cancellaRecensione(index: number){
     this.server.eliminaRecensione(this.recensioni[index].id).subscribe(ok => {
@@ -29,18 +30,27 @@ export class SchedaRecensioniComponent implements OnInit {
     });
   }
 
-  toggleComments() {
-    this.showComments = !this.showComments;  
+  toggleComments(index: number) {
+    this.recensioni[index].showComments = !this.recensioni[index].showComments;
   } 
 
   creaRecensione() {
     if(this.miaRecensione === false) {
       if(this.descrRecensione != ""){
-      const miaRecensione: Recensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: ""};
-      this.server.addReview(this.sessionId, miaRecensione).subscribe(ok => {
-        if(ok) {
+      const miaRecensione: Recensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: "", showComments: false};
+      this.server.addReview(this.sessionId, miaRecensione).subscribe(id => {
+        if(id) {
           this.miaRecensione = true;
-          this.recensioni.splice(0, 0, miaRecensione);
+          console.log("id rec: " + id);
+          miaRecensione.id = id;
+          if(this.userLogged) {
+            miaRecensione.username = this.userLogged?.username;
+            miaRecensione.userImg = "data:image/png;base64, " + this.userLogged.userImage;
+            miaRecensione.userId = this.userLogged.id;
+            console.log("u: " + miaRecensione.id + " - " + miaRecensione.username);
+            this.recensioni.splice(0, 0, miaRecensione);
+          }
+           
         }
       });
       } else {
@@ -56,6 +66,25 @@ export class SchedaRecensioniComponent implements OnInit {
     this.descrRecensione = "";
     this.form.value.rating1 = 0;
     console.log("rat: " +  this.form.value.rating1);
+    this.commento = "";
+  }
+
+  aggiungiCommento(index: number) {
+    if(this.commento) {
+      this.server.addComment(this.sessionId, this.recensioni[index].id, this.commento).subscribe(i => {
+        if(i) {
+          if(this.userLogged) {
+            var commento: Commento = {id: i, descrizione: this.commento, numMiPiace: 0, numNonMiPiace: 0, username: this.userLogged?.username, userImg: this.userLogged.userImage, userId: this.userLogged.id};
+            this.recensioni[index].commenti.push(commento);
+            this.svuotaCampi();
+          }
+        }
+      });
+    }
+  }
+
+  cancellaCommento(index: number) {
+
   }
 
   ngOnInit(): void {
@@ -64,40 +93,37 @@ export class SchedaRecensioniComponent implements OnInit {
     if(sessionid != null) {
       this.sessionId = sessionid;
     }
-    let parentThis = this;
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
-    });
 
       this.server.getUser(this.sessionId).subscribe(u => {
-        parentThis.userLogged = u;
+        this.userLogged = u;
       });
 
       for(let i = 0; i < this.recensioni.length; i++) {
         this.server.getScrittoreRecensione(this.recensioni[i].id).subscribe(u => {
-          parentThis.recensioni[i].username = u.username;
-          parentThis.recensioni[i].userImg = "data:image/png;base64, " + u.userImage;
-          parentThis.recensioni[i].userId = u.id;
-          console.log("u: " + parentThis.recensioni[i].id + " - " + parentThis.recensioni[i].username);          
+          this.recensioni[i].username = u.username;
+          this.recensioni[i].userImg = "data:image/png;base64, " + u.userImage;
+          this.recensioni[i].userId = u.id;
+          console.log("u: " + this.recensioni[i].id + " - " + this.recensioni[i].username); 
+          if(this.recensioni[i].userId === this.userLogged?.id) {
+            console.log(this.recensioni[0].userId + " e " + this.userLogged.id);
+            this.miaRecensione = true;
+          }         
+        });
+
+        this.server.getCommenti(this.recensioni[i].id).subscribe(c => {
+          this.recensioni[i].commenti = c;
         });
       }
       console.log("utente per rec");
       console.log("rec-length: " + this.recensioni.length);
-      console.log("rec0-userId: " + this.recensioni[0].userId);
-      if(this.userLogged) {
-        console.log("rec-userLogged: " + this.userLogged.id);
-      }
-      if(this.recensioni.length > 0 && this.recensioni[0].userId === this.userLogged?.id)  {
-        console.log(this.recensioni[0].userId +" e " + this.userLogged.id);
-        this.miaRecensione = true;
-        }
+      //console.log("rec0-userId: " + this.recensioni[0].userId);
       console.log("miarec: " + this.miaRecensione);
+    });
   }
 
-  setUserRec(id: number, name: string, img: string, index: number) {
-    
-  }
   constructor(private fb: FormBuilder, private server: ServerService){
     this.rating3 = 0;
     this.form = this.fb.group({

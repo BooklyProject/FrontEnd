@@ -1,4 +1,7 @@
-<div *ngIf="miaRecensione === false">
+<div [ngClass]="{
+    'formVisibile': !miaRecensione,
+    'formNonVisibile': miaRecensione
+}">
     <div class="buttonCrea">
         <label id="creaRecensione"><h4>Recensisci:</h4></label>
     </div>
@@ -41,7 +44,7 @@
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
                     <div class="card mb-4">
-                        <button type="button" *ngIf="miaRecensione === true && userLogged && rec.userId === userLogged.id" 
+                        <button type="button" *ngIf="miaRecensione === true && index === 0" 
                         (click)="cancellaRecensione(index)" class="altoDx btn-sm btn btn-danger">Cancella recensione</button>
                         <div class="card-body">
                             <p>{{rec.descrizione}}</p>
@@ -58,7 +61,7 @@
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="showCommentsIcon">                                        
-                                        <button type="button" class="small text-muted mb-0" id="mostraCommenti" (click)="toggleComments()">Commenti</button>
+                                        <button type="button" class="small text-muted mb-0" id="mostraCommenti" (click)="toggleComments(index)">Commenti</button>
                                     </div>
                                     <i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
                                     <p class="small text-muted mb-0">{{rec.numMiPiace}}</p>
@@ -68,35 +71,37 @@
                             </div>
                         </div>
                         <div id="commenti" class="commenti" [ngClass]="{
-                            'apri-commenti': showComments,
-                            'nascondi-commenti': !showComments 
-                        }" *ngFor="let comm of rec.commenti; let index = index;">
+                            'apri-commenti': rec.showComments,
+                            'nascondi-commenti': !rec.showComments
+                            }">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-lg-8">
-                                    <div class="card-body p-4">          
+                                    <div class="card-body p-4" *ngFor="let comm of rec.commenti; let index = index;">          
                                         <div class="card">
+                                            <button type="button" *ngIf="" 
+                                            (click)="cancellaCommento(index)" class="altoDx btn-sm btn btn-danger">Cancella commento</button>
                                             <div class="card-body">
                                                 <p>{{comm.descrizione}}</p>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex flex-row align-items-center">
-                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25"/>
-                                                        <p class="small mb-0 ms-2">Nome user</p>
+                                                        <img src="{{comm.userImg}}" alt="avatar" width="25" height="25"/>
+                                                        <p class="small mb-0 ms-2"></p>
                                                     </div>
                                                     <div class="d-flex flex-row align-items-center">
                                                         <i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                                        <p class="small text-muted mb-0">3</p>
+                                                        <p class="small text-muted mb-0">{{comm.numMiPiace}}</p>
                                                         <i class="fa fa-thumbs-down mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                                        <p class="small text-muted mb-0">3</p>
+                                                        <p class="small text-muted mb-0">{{comm.numNonMiPiace}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-group">
-                                        <input type="text" class="form-control scriviCommento" placeholder="Scrivi un commento">
+                                        <input type="text" class="form-control scriviCommento" placeholder="Scrivi un commento" [(ngModel)]="commento">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button">Conferma</button>
-                                            <i class="fa fa-angle-up" style="margin-left: 15px;" (click)="toggleComments()"></i>
+                                            <button class="btn btn-outline-primary" type="button" (click)="aggiungiCommento(index)">Conferma</button>
+                                            <i class="fa fa-angle-up" style="margin-left: 15px; cursor: pointer;" (click)="toggleComments(index)"></i>
                                         </div>
                                     </div>
                                 </div>
