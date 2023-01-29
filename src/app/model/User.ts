@@ -1,3 +1,4 @@
+import { Stats } from "./Stats";
 
 export interface User {
     id: number;
@@ -8,8 +9,5 @@ export interface User {
 	cognome: string;
     isBanned: boolean;
     userImage: string;
-}
-
-export interface Stats {
-    
+    stats: Stats;
 }
