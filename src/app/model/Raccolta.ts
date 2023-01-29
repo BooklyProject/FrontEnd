@@ -1,8 +1,8 @@
-import { Volume } from "../GoogleBooks/models/volume.interface";
+import { Libro } from "./Libro";
 
 export interface Raccolta{
     id: Number;
     nome: string;
-    libri: Volume[];
+    libri: Libro[];
     numLibri: number;
 }

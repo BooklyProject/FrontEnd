@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Raccolta } from '../model/Raccolta';
 import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
 import { SearchParams } from '../GoogleBooks/models/search-params.interface';
-import { BooksService } from '../GoogleBooks/services/books.service';
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../server.service';
 
@@ -15,22 +14,18 @@ export class SchedaRaccolteComponent implements OnInit {
   
   creazioneRaccolta: boolean = false;
   raccolte: Raccolta[] = [];
-
   raccoltaSelezionata: Raccolta | null = null;
-
   nome: string = "";
-
   sessionId: string = "";
-  booksCollection: CollectionResultModel | null = null;
-  book: string = "";
-  params: SearchParams = {searchTerm: "", category: "", orderBy: "relevance", startIndex: 0};
 
   getRaccolte(){
     this.server.getRaccolteCreate(this.sessionId).subscribe((r) => {
       this.raccolte = r;
       for(let r of this.raccolte) {
+        console.log("raccolta: " +  r.id + " " + r.nome);
         this.server.getLibriDiRaccolta(r.id).subscribe(l => {
           r.libri = l;
+          console.log("libri: " + r.libri);
           r.numLibri = r.libri.length;
         });
       }
@@ -39,6 +34,7 @@ export class SchedaRaccolteComponent implements OnInit {
 
   creaRaccolta(){
     this.creazioneRaccolta = !this.creazioneRaccolta;
+    this.nome = "";
   }
 
   conferma(){
@@ -67,7 +63,6 @@ export class SchedaRaccolteComponent implements OnInit {
   selezionaRaccolta(index: number){
     this.raccoltaSelezionata = this.raccolte[index];
     console.log(this.raccoltaSelezionata.id, this.raccoltaSelezionata.nome)
-    //window.location.href = "http://localhost:4200/apriRaccolta" + "?jsessionid=" + this.sessionId + "&raccolta=" + this.raccolte[index];
   }
 
   eliminaRaccolta(index: number){
@@ -79,7 +74,7 @@ export class SchedaRaccolteComponent implements OnInit {
     })
   }
 
-  cercaLibro() {
+  /*cercaLibro() {
     if(this.book === "") {
       alert("Campo di ricerca vuoto!");
     } else {
@@ -94,7 +89,7 @@ export class SchedaRaccolteComponent implements OnInit {
           }
       });
     }
-  }
+  }*/
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(data => {
@@ -108,7 +103,7 @@ export class SchedaRaccolteComponent implements OnInit {
     })
 }
 
-constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute, private server: ServerService) {
+constructor(private route: ActivatedRoute, private server: ServerService) {
 
 }
 }

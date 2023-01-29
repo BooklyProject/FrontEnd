@@ -10,10 +10,10 @@
 }">
     <div class="form-outline mb-4">
         <label class="form-label">Nome Raccolta</label>
-        <input type="text" class="form-control" id="nomeRaccolta" [(ngModel)]="nome"/>
+        <input type="text" class="form-control" [(ngModel)]="nome"/>
     </div>
-    <button type="button" class="btn btn-primary" (click) = "conferma()" onclick="document.getElementById('nomeRaccolta').value=''" >Conferma</button>
-    <button type="button" class="btn btn-danger" (click)="annulla()" onclick="document.getElementById('nomeRaccolta').value=''" style="margin-left: 5px;">Annulla</button>
+    <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
+    <button type="button" class="btn btn-danger" (click)="annulla()" style="margin-left: 5px;">Annulla</button>
 </div>
 
 <div class="separator">
@@ -28,8 +28,7 @@
         <div class="col-lg-4" *ngFor="let raccolta of raccolte; let index = index;">
             <div class="card card-custom bg-white border-white border-0">
                 <div *ngIf="raccolta.numLibri > 0; else placeHolder">
-                    <div class="card-custom-img"  (click)="selezionaRaccolta(index)" style="background-image: url('http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image'); cursor: pointer;"></div>
-                    <!--<div class="card-custom-img" style="background-image: ({{raccolta.libri[0].volumeInfo.imageLinks?.thumbnail}})"></div>-->
+                    <div class="card-custom-img" (click)="selezionaRaccolta(index)" style="background-image: url({{raccolta.libri[0].copertina}}); cursor: pointer;"></div>
                 </div>
                 <ng-template #placeHolder>
                     <div class="card-custom-img"  (click)="selezionaRaccolta(index)" style="background-image: url('http://placehold.jp/e0e0e0/ffffff/250x250.png?text=No%20image'); cursor: pointer;"></div>

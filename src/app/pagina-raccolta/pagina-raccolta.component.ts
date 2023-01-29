@@ -6,6 +6,7 @@ import { CollectionResultModel } from '../GoogleBooks/models/collection-result.i
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../server.service';
 import { Volume } from '../GoogleBooks/models/volume.interface';
+import { Libro } from '../model/Libro';
 
 @Component({
   selector: 'app-pagina-raccolta',
@@ -24,13 +25,27 @@ export class PaginaRaccoltaComponent implements OnInit {
 
     addBook(item: Volume){
       console.log(item.volumeInfo);
-      if(this.booksCollection != null && this.raccolta?.id != undefined){
-        this.server.addLibroRaccolta(this.raccolta?.id, item).subscribe(ok =>{
+      
+      if(this.booksCollection != null && this.raccolta?.id != undefined
+        && item.volumeInfo.authors && item.volumeInfo.categories && item.volumeInfo.imageLinks?.thumbnail){
+        var libro: Libro = {
+          isbn: item.volumeInfo.industryIdentifiers[0].identifier,
+          nome: item.volumeInfo.title, 
+          autore: item.volumeInfo.authors?.join(", "), 
+          generi: item.volumeInfo.categories?.join(", "), 
+          numeroPagine: item.volumeInfo.pageCount, 
+          lingua: item.volumeInfo.language, 
+          descrizione: item.volumeInfo.description,
+          copertina: item.volumeInfo.imageLinks?.thumbnail
+        };
+
+        this.server.addLibroRaccolta(this.raccolta?.id, libro).subscribe(ok =>{
           if(ok){
             alert(item.volumeInfo.title + " aggiunto alla raccolta");
             console.log(item);
-            this.raccolta?.libri.push(item);
-            //SVUOTA CAMPO
+            this.raccolta?.libri.push(libro);
+            this.book = "";
+            this.apriChiudiForm();
           } else {
             alert("Libro non aggiunto alla raccolta")
           }
@@ -47,12 +62,25 @@ export class PaginaRaccoltaComponent implements OnInit {
     apriChiudiForm(){
       this.aggiunta = !this.aggiunta;
     }
-    eliminaLibro(libro: Volume){
+    eliminaLibro(libro: Libro){
       if(this.raccolta?.id != undefined){
         console.log(libro);
-        this.server.eliminaLibroRaccolta(this.raccolta?.id, libro.volumeInfo.industryIdentifiers[0].identifier);
-      }
-      
+        this.server.eliminaLibroRaccolta(this.raccolta?.id, libro.isbn).subscribe(ok => {
+          if(ok) {
+            console.log("ok: " + ok);
+            if(this.raccolta) {
+              console.log("raccolta: " + this.raccolta.id);
+              const indexOfObject = this.raccolta.libri.findIndex((object) => {
+                return object.isbn === libro.isbn;
+              });
+              if (indexOfObject !== -1) {
+                this.raccolta.libri.splice(indexOfObject, 1);
+              }
+              console.log("raccolta.libri: " + this.raccolta.libri);
+            }
+          }
+        });
+      } 
     }
 
     searchBook() {
@@ -77,6 +105,7 @@ export class PaginaRaccoltaComponent implements OnInit {
     ngOnInit(): void {
       
     }
+
     constructor(private GoogleBooksService: BooksService, private route: ActivatedRoute, private server: ServerService) {
   
     }

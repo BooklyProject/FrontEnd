@@ -6,6 +6,7 @@ import { Volume } from './GoogleBooks/models/volume.interface';
 import { Evento } from './model/Evento';
 import { Raccolta } from './model/Raccolta';
 import { Recensione } from './model/Recensione';
+import { Libro } from './model/Libro';
 
 
 @Injectable({
@@ -96,8 +97,8 @@ export class ServerService {
     return this.http.post<Number>(this.url + "/createCollection?jsessionid=" + sessionid, {nome: nome})
   }
 
-  getLibriDiRaccolta(id: Number): Observable<Volume[]> {
-    return this.http.post<Volume[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
+  getLibriDiRaccolta(id: Number): Observable<Libro[]> {
+    return this.http.post<Libro[]>(this.url + "/getCollectionBooks", {idRaccolta: id});
   }
 
   addReview(sessionid: string, rec: Recensione): Observable<Boolean> {
@@ -123,17 +124,20 @@ export class ServerService {
     return this.http.post<Boolean>(this.url + "/deleteReview", {idRecensione: id})
   }
 
-  addLibroRaccolta(idraccolta: Number, libro: Volume): Observable<Boolean>{
+  addLibroRaccolta(idraccolta: Number, libro: Libro): Observable<Boolean>{
+    console.log("copertina: " + libro.copertina);
     return this.http.post<Boolean>(this.url + "/addBook?idRaccolta=" + idraccolta, {
-      isbn: libro.volumeInfo.industryIdentifiers[0].identifier,
-      nome: libro.volumeInfo.title, 
-      autore: libro.volumeInfo.authors?.join(", "), 
-      generi: libro.volumeInfo.categories?.join(", "), 
-      numeroPagine: libro.volumeInfo.pageCount, 
-      lingua: libro.volumeInfo.language, 
-      descrizione: libro.volumeInfo.description,
-      copertina: libro.volumeInfo.imageLinks?.thumbnail});    
+      isbn: libro.isbn,
+      nome: libro.nome, 
+      autore: libro.autore, 
+      generi: libro.generi, 
+      numeroPagine: libro.numeroPagine, 
+      lingua: libro.lingua, 
+      descrizione: libro.descrizione,
+      copertina: libro.copertina
+    });    
   }
+
   eliminaLibroRaccolta(idraccolta: Number, isbn: string): Observable<Boolean>{
     var id = idraccolta.valueOf();
     return this.http.get<Boolean>(this.url + "/deleteBook", {params: {idRaccolta: id ,ISBN: isbn}});

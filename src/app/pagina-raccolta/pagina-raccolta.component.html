@@ -42,15 +42,15 @@
 <div *ngIf="raccolta != null">
 <div class="postcard light blue" *ngFor="let libro of raccolta.libri">
     <a class="postcard__img_link" href="#">
-        <img class="postcard__img" src="{{libro.volumeInfo.imageLinks?.thumbnail}}" alt="Copertina libro" />
+        <img class="postcard__img" src="{{libro.copertina}}" alt="Copertina libro" />
     </a>
     <div class="postcard__text t-dark">
-        <h1 class="postcard__title blue"><a href="#">{{libro.volumeInfo.title}}</a></h1>
-        <div class="postcard__subtitle small" *ngFor="let autore of libro.volumeInfo.authors">
-            <i>{{autore}}</i>
+        <h1 class="postcard__title blue"><a href="#">{{libro.nome}}</a></h1>
+        <div class="postcard__subtitle small">
+            <i>{{libro.autore}}</i>
         </div>
         <div class="postcard__bar"></div>
-        <div class="postcard__preview-txt">{{libro.volumeInfo.description}}</div>
+        <div class="postcard__preview-txt">{{libro.descrizione}}</div>
         <button type="button" class="btn btn-outline-danger altoADestra" (click)="eliminaLibro(libro)">Elimina libro</button>
     </div>
 </div>
