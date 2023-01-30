@@ -30,9 +30,18 @@
             
             <p class="pEmail"><input class="emailNonModificabile" type="text" placeholder="Email" [(ngModel)]="email"></p>
             
+            <p class="pFile">
+                <input type="file" placeholder="Immagine" [(ngModel)]="image" [ngClass]="{
+                    'visuallizza': modifica,
+                    'nonVisualizza': !modifica
+                }">
+            </p>
+
+            <!--
             <button (click)="modificaFoto()" class="btn btn-outline-primary bottoneFoto" [ngClass]="{
                 'visualizza': modifica,
                 'nonVisualizza': !modifica}">Modifica foto</button>
+            -->
 
             <button (click)="confermaInfo()" type="button" class="btn btn-outline-primary" [ngClass]="{
                 'nonCliccabile': !modifica

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Stats } from '../model/Stats';
 import { User } from '../model/User';
@@ -21,10 +22,6 @@ export class SchedaUtenteComponent implements OnInit {
   utente: User | null = null;
 
   stats: Stats | null = null; 
-
-  modificaFoto(){
-    
-  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(data => {
@@ -63,6 +60,9 @@ export class SchedaUtenteComponent implements OnInit {
       this.utente.cognome = this.cognome;
       this.utente.email = this.email;
       this.utente.username = this.username;
+      if(this.image != null){
+        this.utente.userImage = "data:image/png;base64, " + this.image;
+      }
       this.modificaInfo();
       console.log(this.utente);
     }
@@ -75,6 +75,7 @@ export class SchedaUtenteComponent implements OnInit {
       this.cognome = this.utente.cognome;
       this.email = this.utente.email;
       this.username = this.utente.username;
+      this.image = "data:image/png;base64, " + this.utente.userImage;
       console.log(this.utente);
     }
   }
@@ -85,7 +86,7 @@ export class SchedaUtenteComponent implements OnInit {
 
   }
 
-  constructor(private server: ServerService, private route: ActivatedRoute) {
+  constructor(private server: ServerService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
 
   }
 }
