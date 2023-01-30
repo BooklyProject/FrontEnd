@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Stats } from '../model/Stats';
 import { User } from '../model/User';
 import { ServerService } from '../server.service';
 
@@ -18,6 +19,8 @@ export class SchedaUtenteComponent implements OnInit {
   username: string = "";
   image: string = "";
   utente: User | null = null;
+
+  stats: Stats | null = null; 
 
   modificaFoto(){
     
@@ -41,6 +44,11 @@ export class SchedaUtenteComponent implements OnInit {
             this.image = "data:image/png;base64, " + this.utente.userImage;
           }
         });
+        this.server.getStats(this.sessionId).subscribe((s) =>{
+          if(s != null){
+            this.stats = s;
+          }
+        })
       }
     });
   }

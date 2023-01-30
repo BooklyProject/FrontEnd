@@ -7,6 +7,7 @@ import { Evento } from './model/Evento';
 import { Raccolta } from './model/Raccolta';
 import { Recensione, Commento } from './model/Recensione';
 import { Libro } from './model/Libro';
+import { Stats } from './model/Stats';
 
 
 @Injectable({
@@ -148,5 +149,9 @@ export class ServerService {
 
   addComment(sessionid: string, idRec: Number, descr: string): Observable<Number> {
     return this.http.post<Number>(this.url + "/addComment?jsessionid=" + sessionid + "&idRec=" + idRec, {descrizione: descr});
+  }
+
+  getStats(sessionid: string): Observable<Stats>{
+    return this.http.get<Stats>(this.url + "/getStats", {params: {jsessionid: sessionid}})
   }
 }
