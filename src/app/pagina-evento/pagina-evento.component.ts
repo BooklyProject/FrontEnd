@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Evento } from '../model/Evento';
 
 @Component({
@@ -7,10 +7,11 @@ import { Evento } from '../model/Evento';
   styleUrls: ['./pagina-evento.component.css']
 })
 export class PaginaEventoComponent {
-  evento: Evento | null= null;
-  
-  tornaIndietro(){
+  @Input() evento: Evento | null= null;
+  tornaIndietro: boolean = false;
 
+  tornaAEventi(){
+    this.tornaIndietro = !this.tornaIndietro;
   }
   eliminaEvento(){
     

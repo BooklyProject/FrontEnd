@@ -10,6 +10,8 @@ import { ServerService } from '../server.service';
 })
 export class SchedaEventiComponent implements OnInit {
 
+  eventoSelezionato: Evento | null = null;
+
   creazioneEvento: boolean = false;
   sessionId: string = "";
   eventiCreati: Evento[] = [];
@@ -48,8 +50,14 @@ export class SchedaEventiComponent implements OnInit {
     e.printDate = e.data.toString();
   }
 
-  apriEvento(index: number){
-    
+  apriEventoCreato(index: number){
+    this.eventoSelezionato = this.eventiCreati[index];
+  }
+  apriEventoPartecipa(index: number){
+    this.eventoSelezionato = this.eventiAccettati[index];
+  }
+  apriEventoDisponibile(index: number){
+    this.eventoSelezionato = this.eventiDisponibili[index];
   }
 
   ngOnInit() {

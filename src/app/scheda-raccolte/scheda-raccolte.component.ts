@@ -62,7 +62,6 @@ export class SchedaRaccolteComponent implements OnInit {
 
   selezionaRaccolta(index: number){
     this.raccoltaSelezionata = this.raccolte[index];
-    console.log(this.raccoltaSelezionata.id, this.raccoltaSelezionata.nome)
   }
 
   eliminaRaccolta(index: number){
