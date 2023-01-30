@@ -150,6 +150,14 @@ export class ServerService {
   addComment(sessionid: string, idRec: Number, descr: string): Observable<Number> {
     return this.http.post<Number>(this.url + "/addComment?jsessionid=" + sessionid + "&idRec=" + idRec, {descrizione: descr});
   }
+  
+  deleteComment(idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/deleteComment", {idCommento: idComm});
+  }
+
+  getScrittoreCommento(idComm: Number): Observable<User> {
+    return this.http.post<User>(this.url + "/getCommentWriter", {idCommento: idComm});
+  }
 
   getStats(sessionid: string): Observable<Stats>{
     return this.http.get<Stats>(this.url + "/getStats", {params: {jsessionid: sessionid}})

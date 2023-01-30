@@ -73,8 +73,9 @@ export class SchedaRecensioniComponent implements OnInit {
     if(this.commento) {
       this.server.addComment(this.sessionId, this.recensioni[index].id, this.commento).subscribe(i => {
         if(i) {
+          console.log("id: " + i);
           if(this.userLogged) {
-            var commento: Commento = {id: i, descrizione: this.commento, numMiPiace: 0, numNonMiPiace: 0, username: this.userLogged?.username, userImg: this.userLogged.userImage, userId: this.userLogged.id};
+            var commento: Commento = {id: i, descrizione: this.commento, numMiPiace: 0, numNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id};
             this.recensioni[index].commenti.push(commento);
             this.svuotaCampi();
           }
@@ -83,7 +84,18 @@ export class SchedaRecensioniComponent implements OnInit {
     }
   }
 
-  cancellaCommento(index: number) {
+  cancellaCommento(id: Number, index: number) {
+    console.log("idComm: " + id);
+    this.server.deleteComment(id).subscribe(ok => {
+      if(ok) {
+        for(let i = 0; i < this.recensioni.length; i++) {
+          if(this.recensioni[i].commenti[index].id === id) {
+            this.recensioni[i].commenti.splice(index, 1);
+            break;
+          }
+        }
+      }
+    })
 
   }
 
@@ -115,6 +127,15 @@ export class SchedaRecensioniComponent implements OnInit {
 
         this.server.getCommenti(this.recensioni[i].id).subscribe(c => {
           this.recensioni[i].commenti = c;
+          
+          console.log("length comm: " + this.recensioni[i].commenti.length);
+          for(let j = 0; j < this.recensioni[i].commenti.length; j++) {
+            this.server.getScrittoreCommento(this.recensioni[i].commenti[j].id).subscribe(u => {
+              this.recensioni[i].commenti[j].username = u.username;
+              this.recensioni[i].commenti[j].userImg = "data:image/png;base64, " + u.userImage;
+              this.recensioni[i].commenti[j].userId = u.id;
+            });
+          }
         });
       }
       console.log("utente per rec");
