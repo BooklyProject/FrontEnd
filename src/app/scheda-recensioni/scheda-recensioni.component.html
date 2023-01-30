@@ -47,7 +47,7 @@
                                     <div class="cont">
                                         <div class="stars">
                                             <p>Voto:</p>
-                                            <ngx-star-rating [(ngModel)]="rec.voto" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>
+                                            <!--<ngx-star-rating [(ngModel)]="rec.voto" [id]="'rating2'" [disabled] ="true"></ngx-star-rating>-->
                                         </div>
                                     </div>
                                 </form>
@@ -64,10 +64,13 @@
                                     <div class="showCommentsIcon">                                        
                                         <button type="button" class="small text-muted mb-0" id="mostraCommenti" (click)="toggleComments(index)">Commenti</button>
                                     </div>
-                                    <i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                    <p class="small text-muted mb-0">{{rec.numMiPiace}}</p>
-                                    <i class="fa fa-thumbs-down mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                    <p class="small text-muted mb-0">{{rec.numNonMiPiace}}</p>
+                                    <i class="fa fa-thumbs-up mx-2 fa-xs" style="margin-top: -0.16rem;" [ngClass]="{
+                                        'like': rec.liked,
+                                        'non-like': !rec.liked
+                                        }" (click)="like(rec)"></i>
+                                    <p class="small text-muted mb-0">{{rec.numeroMiPiace}}</p>
+                                    <i class="fa fa-thumbs-down mx-2 fa-xs" style="margin-top: -0.16rem;" (click)="dislike(rec)"></i>
+                                    <p class="small text-muted mb-0">{{rec.numeroNonMiPiace}}</p>
                                 </div>
                             </div>
                         </div>
@@ -90,9 +93,9 @@
                                                     </div>
                                                     <div class="d-flex flex-row align-items-center">
                                                         <i class="fa fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                                        <p class="small text-muted mb-0">{{comm.numMiPiace}}</p>
+                                                        <p class="small text-muted mb-0">{{comm.numeroMiPiace}}</p>
                                                         <i class="fa fa-thumbs-down mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                                        <p class="small text-muted mb-0">{{comm.numNonMiPiace}}</p>
+                                                        <p class="small text-muted mb-0">{{comm.numeroNonMiPiace}}</p>
                                                     </div>
                                                 </div>
                                             </div>

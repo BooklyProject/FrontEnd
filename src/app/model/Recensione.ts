@@ -3,20 +3,22 @@ export interface Recensione {
     id: Number;
     descrizione: string;
     voto: number;
-    numMiPiace: number;
-    numNonMiPiace: number;
+    numeroMiPiace: number;
+    numeroNonMiPiace: number;
     commenti: Commento[];
     userId: number,
     username: string,
     userImg: string,
     showComments: boolean
+    liked: boolean
+    disliked: boolean
 }
 
 export interface Commento {
     id: Number;
     descrizione: string;
-    numMiPiace: number;
-    numNonMiPiace: number;
+    numeroMiPiace: number;
+    numeroNonMiPiace: number;
     userId: number,
     username: string,
     userImg: string

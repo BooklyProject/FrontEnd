@@ -37,7 +37,7 @@ export class SchedaRecensioniComponent implements OnInit {
   creaRecensione() {
     if(this.miaRecensione === false) {
       if(this.descrRecensione != ""){
-      const miaRecensione: Recensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numMiPiace: 0, numNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: "", showComments: false};
+      const miaRecensione: Recensione = {id: 0, descrizione: this.descrRecensione, voto: this.form.value.rating1, numeroMiPiace: 0, numeroNonMiPiace: 0, commenti: [], userId: 0, username: "", userImg: "", showComments: false, liked: false, disliked: false};
       this.server.addReview(this.sessionId, miaRecensione).subscribe(id => {
         if(id) {
           this.miaRecensione = true;
@@ -75,7 +75,7 @@ export class SchedaRecensioniComponent implements OnInit {
         if(i) {
           console.log("id: " + i);
           if(this.userLogged) {
-            var commento: Commento = {id: i, descrizione: this.commento, numMiPiace: 0, numNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id};
+            var commento: Commento = {id: i, descrizione: this.commento, numeroMiPiace: 0, numeroNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id};
             this.recensioni[index].commenti.push(commento);
             this.svuotaCampi();
           }
@@ -85,18 +85,46 @@ export class SchedaRecensioniComponent implements OnInit {
   }
 
   cancellaCommento(id: Number, index: number) {
-    console.log("idComm: " + id);
     this.server.deleteComment(id).subscribe(ok => {
       if(ok) {
         for(let i = 0; i < this.recensioni.length; i++) {
-          if(this.recensioni[i].commenti[index].id === id) {
+          if(this.recensioni[i].commenti.length > index && this.recensioni[i].commenti[index].id === id) {
             this.recensioni[i].commenti.splice(index, 1);
             break;
           }
         }
       }
-    })
+    });
+  }
 
+  like(rec: Recensione) {
+    console.log("like: " + rec.numeroMiPiace);
+    if(rec.liked) {
+      this.server.rimuoviLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+        if(ok) {
+          rec.numeroMiPiace--;
+          rec.liked = false;
+        }
+        else {
+          alert("Like non presente.");
+        }
+      });
+    }
+    else {
+      this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+        if(ok) {
+          rec.liked = true;
+          rec.numeroMiPiace++;
+        }
+        else {
+          alert("Like già presente.");
+        }
+      });
+    }
+  }
+
+  dislike(rec: Recensione) {
+    
   }
 
   ngOnInit(): void {
@@ -108,6 +136,7 @@ export class SchedaRecensioniComponent implements OnInit {
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
+      console.log("num like: " + this.recensioni[0].numeroMiPiace);
 
       this.server.getUser(this.sessionId).subscribe(u => {
         this.userLogged = u;
@@ -138,10 +167,6 @@ export class SchedaRecensioniComponent implements OnInit {
           }
         });
       }
-      console.log("utente per rec");
-      console.log("rec-length: " + this.recensioni.length);
-      //console.log("rec0-userId: " + this.recensioni[0].userId);
-      console.log("miarec: " + this.miaRecensione);
     });
   }
 

@@ -162,4 +162,36 @@ export class ServerService {
   getStats(sessionid: string): Observable<Stats>{
     return this.http.get<Stats>(this.url + "/getStats", {params: {jsessionid: sessionid}})
   }
+
+  aggiungiLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/addReviewLike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  rimuoviLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/removeReviewLike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  aggiungiDislikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/addReviewDislike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  rimuoviDislikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/removeReviewDislike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  aggiungiLikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/addCommentLike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
+
+  rimuoviLikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/removeCommentLike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
+
+  aggiungiDislikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/addCommentDislike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
+
+  rimuoviDislikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/removeCommentDislike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
 }

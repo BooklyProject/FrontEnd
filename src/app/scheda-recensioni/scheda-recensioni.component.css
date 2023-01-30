@@ -95,4 +95,12 @@ div.stars {
 .formNonVisibile{
     display: none;
 }
+
+.like {
+    color: blue;
+}
+
+.non-like {
+    color: black;
+}
   
