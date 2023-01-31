@@ -163,8 +163,8 @@ export class SchedaEventiComponent implements OnInit {
     if(this.descSegnalazione && this.tipoSegnalazione && this.idPostSegnalato){
       this.server.aggiungiSegnalazione(this.sessionId, this.tipoSegnalazione, this.idPostSegnalato, this.descSegnalazione).subscribe(ok =>{
         if(ok){
-          alert("Segnalazione creata");
-          this.chiudiFormSegnalazione;
+          alert("Segnalazione creata");  
+          this.chiudiFormSegnalazione();
         }
         else{
           alert("Errore nella creazione della segnalazione");
