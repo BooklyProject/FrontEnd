@@ -18,6 +18,17 @@
   right:0;
 }
 
+.foto{
+  text-align: center;
+}
+img{
+  margin-top: 30px;
+}
+.responsive {
+  width: 30%;
+  aspect-ratio: 1/1;
+}
+
 
 .light {
   background: #f3f5f7;

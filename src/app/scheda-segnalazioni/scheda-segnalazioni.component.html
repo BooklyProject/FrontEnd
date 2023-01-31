@@ -4,11 +4,15 @@
     <div class="line"></div>
 </div>
 
+<div class="foto" *ngIf="segnalazioni.length === 0">
+    <img class="responsive" src="/assets/img/nothing.png">
+</div>
+
 <div class="postcard light blue" *ngFor="let segn of segnalazioni; let index = index;">
     <div class="postcard__text t-dark">
-        <h1 class="postcard__title blue"><a href="#">post/recensione/evento segnalato (link)</a></h1>
+        <h1 class="postcard__title blue">DA SISTEMARE</h1>
         <div class="postcard__subtitle small">
-            <i>@Utente che ha fatto la segnalazione</i>
+            <i>@Utente che ha fatto la segnalazione. DA SISTEMARE</i>
         </div>
         <div class="postcard__bar"></div>
         <div class="postcard__preview-txt">{{segn.descrizione}}</div>
