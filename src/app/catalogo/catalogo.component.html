@@ -4,7 +4,9 @@
 	<button type="button" class="btn btn-outline-primary" (click)="searchBook()">Cerca</button>
 </div>
 </div>
-
+<div class="foto" *ngIf="book === ''">
+	<img class="responsive" src="assets/img/cercaLibri.png">
+</div>
 <div class="container" *ngIf="book != '' && booksCollection && params.searchTerm === book">
 <div class="container" *ngIf="!booksCollection.items; else collectionNotEmpty">
 	Nessun libro trovato

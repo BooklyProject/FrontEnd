@@ -30,19 +30,6 @@
             
             <p class="pEmail"><input class="emailNonModificabile" type="text" placeholder="Email" [(ngModel)]="email"></p>
             
-            <p class="pFile">
-                <input type="file" placeholder="Immagine" [(ngModel)]="image" [ngClass]="{
-                    'visuallizza': modifica,
-                    'nonVisualizza': !modifica
-                }">
-            </p>
-
-            <!--
-            <button (click)="modificaFoto()" class="btn btn-outline-primary bottoneFoto" [ngClass]="{
-                'visualizza': modifica,
-                'nonVisualizza': !modifica}">Modifica foto</button>
-            -->
-
             <button (click)="confermaInfo()" type="button" class="btn btn-outline-primary" [ngClass]="{
                 'nonCliccabile': !modifica
             }">Conferma</button>
@@ -79,6 +66,24 @@
         </div>
     </div>
 </div>
+<!--EVENTI A CUI SI HA PARTECIPATO-->
+<div class="col-xl-3 col-lg-6">
+    <div class="card l-bg-blue-dark">
+        <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-thumbs-up"></i></div>
+            <div class="mb-4">
+                <h5 class="card-title mb-0" style="white-space: nowrap;">Eventi a cui partecipi</h5>
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+                <div class="col-8">
+                    <h2 class="d-flex align-items-center mb-0">
+                        {{stats?.eventiPartecipati}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--GENERE PREFERITO-->
 <div class="col-xl-3 col-lg-6">
     <div class="card l-bg-blue-dark">
@@ -97,24 +102,6 @@
         </div>
     </div>
 </div>
-<!--RACCOLTE CREATE-->
-<div class="col-xl-3 col-lg-6">
-    <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large"><i class="fas fa-folder-open"></i></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0">Raccolte create</h5>
-            </div>
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h2 class="d-flex align-items-center mb-0">
-                        {{stats?.raccolteCreate}}
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!--AUTORE PREFERITO-->
 <div class="col-xl-3 col-lg-6">
     <div class="card l-bg-blue-dark">
@@ -127,78 +114,6 @@
                 <div class="col-8">
                     <h2 class="d-flex align-items-center mb-0">
                         {{stats?.autorePreferito}}
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--SEGUITI-->
-<div class="col-xl-3 col-lg-6">
-    <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0">Seguiti</h5>
-            </div>
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h2 class="d-flex align-items-center mb-0">
-                        {{stats?.seguiti}}
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--FOLLOWER-->
-<div class="col-xl-3 col-lg-6">
-    <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0">Follower</h5>
-            </div>
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h2 class="d-flex align-items-center mb-0">
-                        {{stats?.followers}}
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--EVENTI CREATI-->
-<div class="col-xl-3 col-lg-6">
-    <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large"><i class="fas fa-calendar"></i></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0">Eventi creati</h5>
-            </div>
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h2 class="d-flex align-items-center mb-0">
-                        {{stats?.eventiCreati}}
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--EVENTI A CUI SI HA PARTECIPATO-->
-<div class="col-xl-3 col-lg-6">
-    <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large"><i class="fas fa-thumbs-up"></i></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0" style="white-space: nowrap;">Eventi a cui hai partecipato</h5>
-            </div>
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h2 class="d-flex align-items-center mb-0">
-                        {{stats?.eventiPartecipati}}
                     </h2>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { ServerService } from '../server.service';
 })
 export class CatalogoComponent implements OnInit {
 
+  cercatoLibri: boolean = false;
   sessionId: string = "";
   booksCollection: CollectionResultModel | null = null;
   book: string = "";
@@ -23,6 +24,7 @@ export class CatalogoComponent implements OnInit {
     }
 
     else {
+      this.cercatoLibri = true;
       this.params.searchTerm = this.book;
       this.GoogleBooksService.getBooks(this.params).subscribe((response) => {
           if (response) {

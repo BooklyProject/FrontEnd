@@ -8,8 +8,8 @@ import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni
 import { PaginaRaccoltaComponent } from './pagina-raccolta/pagina-raccolta.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'catalogo', pathMatch: 'full'},
-  {path: 'catalogo', component: CatalogoComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: CatalogoComponent},
   {path: 'eventi', component: SchedaEventiComponent},
   {path: 'utente', component: SchedaUtenteComponent},
   {path: 'raccolte', component: SchedaRaccolteComponent},

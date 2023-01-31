@@ -60,9 +60,6 @@ export class SchedaUtenteComponent implements OnInit {
       this.utente.cognome = this.cognome;
       this.utente.email = this.email;
       this.utente.username = this.username;
-      if(this.image != null){
-        this.utente.userImage = "data:image/png;base64, " + this.image;
-      }
       this.modificaInfo();
       console.log(this.utente);
     }
@@ -75,7 +72,6 @@ export class SchedaUtenteComponent implements OnInit {
       this.cognome = this.utente.cognome;
       this.email = this.utente.email;
       this.username = this.utente.username;
-      this.image = "data:image/png;base64, " + this.utente.userImage;
       console.log(this.utente);
     }
   }

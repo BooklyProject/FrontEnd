@@ -11,6 +11,7 @@ import { User } from '../model/User';
 })
 export class SchedaRecensioniComponent implements OnInit {
   
+  
   showComments: boolean = false;
   miaRecensione: boolean = false;
   public recensioni: Recensione[] = [];
@@ -20,6 +21,13 @@ export class SchedaRecensioniComponent implements OnInit {
   sessionId: string = "";
   userLogged: User | null = null;
   commento: string = "";
+
+  segnalaRecensione(index: number){
+
+  }
+  segnalaCommento(id: Number, index: number){
+
+  }
 
   cancellaRecensione(index: number){
     this.server.eliminaRecensione(this.recensioni[index].id).subscribe(ok => {

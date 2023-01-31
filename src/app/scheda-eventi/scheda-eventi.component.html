@@ -62,7 +62,7 @@
                             <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                         </div>
                         <div class="widget-49-meeting-action">
-                            <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="eliminaEvento(index)">Elimina</a>
+                            <a role="button" class="btn btn-sm btn-flash-border-primary eliminaEvento" (click)="eliminaEvento(index)">Elimina</a>
                         </div>
                     </div>
                 </div>
@@ -82,6 +82,7 @@
     <h2 class="testi" *ngIf="eventiAccettati.length === 0">Partecipa ad un nuovo evento</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiAccettati; let index = index;">
         <div class="card card-margin">
+            <span (click)="segnalaEvento()" class="altoDx material-symbols-outlined segnalazione">flag</span>
             <div class="card-header no-border">
                 <h5 class="card-title" (click)="apriEventoPartecipa(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
@@ -100,7 +101,7 @@
                         <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
-                        <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="eliminaPart(index)">Non partecipare</a>
+                        <a role="button" class="btn btn-sm btn-flash-border-primary eliminaPartecipazione" (click)="eliminaPart(index)">Non partecipare</a>
                     </div>
                 </div>
             </div>
@@ -120,6 +121,7 @@
     <h2 class="testi" *ngIf="eventiDisponibili.length === 0">Non ci sono eventi disponibili</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiDisponibili; let index = index;">
         <div class="card card-margin">
+            <span (click)="segnalaEvento()" class="altoDx material-symbols-outlined segnalazione">flag</span>
             <div class="card-header no-border">
                 <h5 class="card-title" (click)="apriEventoDisponibile(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
@@ -138,7 +140,7 @@
                         <li class="widget-49-meeting-item"><span>Persone che partecipano: </span><span>{{evento.partecipanti}}</span></li>
                     </div>
                     <div class="widget-49-meeting-action">
-                        <a role="button" class="btn btn-sm btn-flash-border-primary" (click)="partecipa(index)">Partecipa</a>
+                        <a role="button" class="btn btn-sm btn-flash-border-primary partecipa" (click)="partecipa(index)">Partecipa</a>
                     </div>
                 </div>
             </div>

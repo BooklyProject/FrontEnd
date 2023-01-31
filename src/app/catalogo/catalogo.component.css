@@ -10,3 +10,14 @@
     grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
     gap: 1rem;
   }
+
+.foto{
+    text-align: center;
+}
+img{
+    margin-top: 30px;
+}
+.responsive {
+    width: 40%;
+    aspect-ratio: 1/1;
+}

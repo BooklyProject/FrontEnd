@@ -11,6 +11,21 @@
     background-color: #000;
 }
 
+span{
+    cursor: pointer
+}
+span:hover{
+    color: red;
+}
+
+.iconaCentrata{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
 .altoDx{
     margin-top: 15px;
     margin-right: 10px;

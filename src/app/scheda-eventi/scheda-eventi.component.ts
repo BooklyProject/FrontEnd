@@ -23,6 +23,10 @@ export class SchedaEventiComponent implements OnInit {
   giorno: string = "";
   ora: string = "";
 
+  segnalaEvento(){
+    
+  }
+
   getEventi() {
     this.server.getEventiCreati(this.sessionId).subscribe((e) => {
       this.eventiCreati = e;
