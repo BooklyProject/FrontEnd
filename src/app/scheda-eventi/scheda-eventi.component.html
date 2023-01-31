@@ -1,7 +1,7 @@
 <div *ngIf="eventoSelezionato === null; else placeholder">
 <button type="button" class="btn btn-primary" (click)="creaEvento()" [ngClass]="{
-    'bottoneVisibile': !creazioneEvento,
-    'bottoneNonVisibile': creazioneEvento
+    'bottoneVisibile': !creazioneEvento || !scrivereSegnalazione,
+    'bottoneNonVisibile': creazioneEvento || scrivereSegnalazione
 }">Crea evento</button>
 
 <div class="form" [ngClass]="{
@@ -31,6 +31,24 @@
     </div>
     <button type="button" class="btn btn-primary" (click) = "conferma()">Conferma</button>
     <button type="button" class="btn btn-danger" (click)="creaEvento()" style="margin-left: 5px;">Annulla</button>
+</div>
+
+<div class="form" [ngClass]="{
+    'formVisibile': scrivereSegnalazione,
+    'formNonVisibile': !scrivereSegnalazione
+}">
+
+    <div class="form-outline mb-4">
+        <label class="form-label">Tipo segnalazione</label>
+        <input type="text" class="form-control" [(ngModel)]="tipoSegnalazione"/>
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Descrizione</label>
+        <input type="text" class="form-control" [(ngModel)]="descSegnalazione"/>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="confermaSegnalazione()">Conferma</button>
+    <button type="button" class="btn btn-danger" (click)="chiudiFormSegnalazione()" style="margin-left: 5px;">Annulla</button>
 </div>
 
 <div class="separator">
@@ -82,7 +100,7 @@
     <h2 class="testi" *ngIf="eventiAccettati.length === 0">Partecipa ad un nuovo evento</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiAccettati; let index = index;">
         <div class="card card-margin">
-            <span (click)="segnalaEvento()" class="altoDx material-symbols-outlined segnalazione">flag</span>
+            <span (click)="apriFormSegnalazione(evento.id)" class="altoDx material-symbols-outlined segnalazione">flag</span>
             <div class="card-header no-border">
                 <h5 class="card-title" (click)="apriEventoPartecipa(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
@@ -121,7 +139,7 @@
     <h2 class="testi" *ngIf="eventiDisponibili.length === 0">Non ci sono eventi disponibili</h2>
     <div class="col-lg-4" *ngFor="let evento of eventiDisponibili; let index = index;">
         <div class="card card-margin">
-            <span (click)="segnalaEvento()" class="altoDx material-symbols-outlined segnalazione">flag</span>
+            <span (click)="apriFormSegnalazione(evento.id)" class="altoDx material-symbols-outlined segnalazione">flag</span>
             <div class="card-header no-border">
                 <h5 class="card-title" (click)="apriEventoDisponibile(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>

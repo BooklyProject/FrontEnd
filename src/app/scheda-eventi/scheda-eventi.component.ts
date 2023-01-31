@@ -10,6 +10,13 @@ import { ServerService } from '../server.service';
 })
 export class SchedaEventiComponent implements OnInit {
 
+  //SEGNALAZIONE
+  scrivereSegnalazione: boolean = false;
+  descSegnalazione: string = "";
+  tipoSegnalazione: string = "";
+  idPostSegnalato: Number | null = null;
+
+
   eventoSelezionato: Evento | null = null;
 
   creazioneEvento: boolean = false;
@@ -22,10 +29,6 @@ export class SchedaEventiComponent implements OnInit {
   luogo: string = "";
   giorno: string = "";
   ora: string = "";
-
-  segnalaEvento(){
-    
-  }
 
   getEventi() {
     this.server.getEventiCreati(this.sessionId).subscribe((e) => {
@@ -144,8 +147,30 @@ export class SchedaEventiComponent implements OnInit {
         alert("Attenzione, non è più possibile partecipare all'evento");
       }
     });
-    
+  }
 
+  apriFormSegnalazione(id: Number){
+    this.scrivereSegnalazione = !this.scrivereSegnalazione;
+    this.idPostSegnalato = id;
+  }
+
+  chiudiFormSegnalazione(){
+    this.scrivereSegnalazione = !this.scrivereSegnalazione;
+    this.idPostSegnalato = null;
+  }
+
+  confermaSegnalazione(){
+    if(this.descSegnalazione && this.tipoSegnalazione && this.idPostSegnalato){
+      this.server.aggiungiSegnalazione(this.sessionId, this.tipoSegnalazione, this.idPostSegnalato, this.descSegnalazione).subscribe(ok =>{
+        if(ok){
+          alert("Segnalazione creata");
+          this.chiudiFormSegnalazione;
+        }
+        else{
+          alert("Errore nella creazione della segnalazione");
+        }
+      }
+    )}
   }
   
   constructor(private server: ServerService, private route: ActivatedRoute) {
