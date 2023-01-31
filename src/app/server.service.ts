@@ -194,4 +194,10 @@ export class ServerService {
   rimuoviDislikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
     return this.http.post<Boolean>(this.url + "/removeCommentDislike?jsessionid=" + sessionid, {idCommento: idComm});
   }
+  aggiungiSegnalazione(sessionid: string, Tipo: string, idPost: Number, Descrizione: string): Observable<Boolean>{
+    var id = idPost.valueOf();
+    return this.http.get<Boolean>(this.url + "/addReport", {params:{sessionId: sessionid, tipo: Tipo, post: id, descrizione: Descrizione}});
+  }
+
 }
+
