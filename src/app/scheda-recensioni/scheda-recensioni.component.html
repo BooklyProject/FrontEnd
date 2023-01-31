@@ -26,6 +26,24 @@
     </div>
 </div>
 
+<div class="form" [ngClass]="{
+    'formVisibile': scrivereSegnalazione,
+    'formNonVisibile': !scrivereSegnalazione
+}">
+
+    <div class="form-outline mb-4">
+        <label class="form-label">Tipo segnalazione</label>
+        <input type="text" class="form-control" [(ngModel)]="tipoSegnalazione"/>
+    </div>
+    <div class="form-outline mb-4">
+        <label class="form-label">Descrizione</label>
+        <input type="text" class="form-control" [(ngModel)]="descSegnalazione"/>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="confermaSegnalazione()">Conferma</button>
+    <button type="button" class="btn btn-danger" (click)="chiudiFormSegnalazione()" style="margin-left: 5px;">Annulla</button>
+</div>
+
 <div class="separator">
     <div class="line"></div>
     <h2>Recensioni</h2>
@@ -40,7 +58,7 @@
                     <div class="card mb-4">
                         <div class="altoDx">
                             <span *ngIf="userLogged && userLogged.id === rec.userId" (click)="cancellaRecensione(index)" class="material-symbols-outlined">delete</span>
-                            <span *ngIf="userLogged && userLogged.id !== rec.userId" (click)="segnalaRecensione(index)" class="material-symbols-outlined">flag</span>
+                            <span *ngIf="userLogged && userLogged.id !== rec.userId" (click)="apriFormSegnalazione(rec.id)" class="material-symbols-outlined">flag</span>
                         </div>
                         <div class="card-body">
                             <p>{{rec.descrizione}}</p>
@@ -88,7 +106,7 @@
                                                 <span *ngIf="userLogged && userLogged.id === comm.userId" 
                                                 (click)="cancellaCommento(comm.id, index)" class="material-symbols-outlined">delete</span>
                                                 <span *ngIf="userLogged && userLogged.id !== comm.userId" 
-                                                (click)="segnalaCommento(comm.id, index)" class="material-symbols-outlined">flag</span>
+                                                (click)="apriFormSegnalazione(comm.id)" class="material-symbols-outlined">flag</span>
                                             </div>
                                             <div class="card-body">
                                                 <p>{{comm.descrizione}}</p>

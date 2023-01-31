@@ -10,7 +10,12 @@ import { User } from '../model/User';
   styleUrls: ['./scheda-recensioni.component.css']
 })
 export class SchedaRecensioniComponent implements OnInit {
-  
+
+  //SEGNALAZIONE
+  scrivereSegnalazione: boolean = false;
+  descSegnalazione: string = "";
+  tipoSegnalazione: string = "";
+  idPostSegnalato: Number | null = null;  
   
   showComments: boolean = false;
   miaRecensione: boolean = false;
@@ -21,13 +26,6 @@ export class SchedaRecensioniComponent implements OnInit {
   sessionId: string = "";
   userLogged: User | null = null;
   commento: string = "";
-
-  segnalaRecensione(index: number){
-
-  }
-  segnalaCommento(id: Number, index: number){
-
-  }
 
   cancellaRecensione(index: number){
     this.server.eliminaRecensione(this.recensioni[index].id).subscribe(ok => {
@@ -176,6 +174,30 @@ export class SchedaRecensioniComponent implements OnInit {
         });
       }
     });
+  }
+
+  apriFormSegnalazione(id: Number){
+    this.scrivereSegnalazione = !this.scrivereSegnalazione;
+    this.idPostSegnalato = id;
+  }
+
+  chiudiFormSegnalazione(){
+    this.scrivereSegnalazione = !this.scrivereSegnalazione;
+    this.idPostSegnalato = null;
+  }
+
+  confermaSegnalazione(){
+    if(this.descSegnalazione && this.tipoSegnalazione && this.idPostSegnalato){
+      this.server.aggiungiSegnalazione(this.sessionId, this.tipoSegnalazione, this.idPostSegnalato, this.descSegnalazione).subscribe(ok =>{
+        if(ok){
+          alert("Segnalazione creata");  
+          this.chiudiFormSegnalazione();
+        }
+        else{
+          alert("Errore nella creazione della segnalazione");
+        }
+      }
+    )}
   }
 
   constructor(private fb: FormBuilder, private server: ServerService){
