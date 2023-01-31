@@ -21,5 +21,7 @@ export interface Commento {
     numeroNonMiPiace: number;
     userId: number,
     username: string,
-    userImg: string
+    userImg: string,
+    liked: boolean,
+    disliked: boolean
 }

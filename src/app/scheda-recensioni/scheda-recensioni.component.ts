@@ -55,6 +55,7 @@ export class SchedaRecensioniComponent implements OnInit {
             miaRecensione.userId = this.userLogged.id;
             console.log("u: " + miaRecensione.id + " - " + miaRecensione.username);
             this.recensioni.splice(0, 0, miaRecensione);
+            this.svuotaCampi();
           }
            
         }
@@ -81,7 +82,7 @@ export class SchedaRecensioniComponent implements OnInit {
         if(i) {
           console.log("id: " + i);
           if(this.userLogged) {
-            var commento: Commento = {id: i, descrizione: this.commento, numeroMiPiace: 0, numeroNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id};
+            var commento: Commento = {id: i, descrizione: this.commento, numeroMiPiace: 0, numeroNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id, liked: false, disliked: false};
             this.recensioni[index].commenti.push(commento);
             this.svuotaCampi();
           }
@@ -103,7 +104,7 @@ export class SchedaRecensioniComponent implements OnInit {
     });
   }
 
-  like(rec: Recensione) {
+  likeRecensione(rec: Recensione) {
     console.log("like: " + rec.numeroMiPiace);
     if(rec.liked) {
       this.server.rimuoviLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
@@ -111,26 +112,156 @@ export class SchedaRecensioniComponent implements OnInit {
           rec.numeroMiPiace--;
           rec.liked = false;
         }
-        else {
-          alert("Like non presente.");
+      });
+    }
+    else {
+      if(rec.disliked) {
+        console.log("rimuovi dislike");
+        this.server.rimuoviDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+          if(ok) {
+            console.log("dislike rimosso");
+            rec.numeroNonMiPiace--;
+            rec.disliked = false;
+            this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok2 => {
+              if(ok2) {
+                console.log("like aggiunto");
+                rec.liked = true;
+                rec.numeroMiPiace++;
+                }
+            });
+          }
+        });
+      }
+      else {
+        this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+        if(ok) {
+          console.log("like aggiunto");
+          rec.liked = true;
+          rec.numeroMiPiace++;
+          }
+        });
+      } 
+    }
+  }
+
+  dislikeRecensione(rec: Recensione) {
+    console.log("dislike: " + rec.numeroNonMiPiace);
+    if(rec.disliked) {
+      this.server.rimuoviDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+        if(ok) {
+          console.log("dislike rimosso");
+          rec.numeroNonMiPiace--;
+          rec.disliked = false;
         }
       });
     }
     else {
-      this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
-        if(ok) {
-          rec.liked = true;
-          rec.numeroMiPiace++;
-        }
-        else {
-          alert("Like già presente.");
-        }
-      });
+      if(rec.liked) {
+        console.log("rimuovi dislike");
+        this.server.rimuoviLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+          if(ok) {
+            rec.numeroMiPiace--;
+            rec.liked = false;
+            this.server.aggiungiDislikeRecensione(this.sessionId, rec.id).subscribe(ok2 => {
+              if(ok2) {
+                console.log("dislike aggiunto");
+                rec.disliked = true;
+                rec.numeroNonMiPiace++;
+              }
+            });
+          }
+        });
+      }
+      else {
+        this.server.aggiungiDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
+          if(ok) {
+            console.log("dislike aggiunto");
+            rec.disliked = true;
+            rec.numeroNonMiPiace++;
+          }
+        });
+      }
     }
   }
 
-  dislike(rec: Recensione) {
-    
+  likeCommento(comm: Commento) {
+    console.log("like: " + comm.numeroMiPiace);
+    if(comm.liked) {
+      this.server.rimuoviLikeCommento(this.sessionId, comm.id).subscribe(ok => {
+        if(ok) {
+          comm.numeroMiPiace--;
+          comm.liked = false;
+        }
+      });
+    }
+    else {
+      if(comm.disliked) {
+        console.log("rimuovi dislike");
+        this.server.rimuoviDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
+          if(ok) {
+            console.log("dislike rimosso");
+            comm.numeroNonMiPiace--;
+            comm.disliked = false;
+            this.server.aggiungiLikeCommento(this.sessionId, comm.id).subscribe(ok2 => {
+              if(ok2) {
+                console.log("like aggiunto");
+                comm.liked = true;
+                comm.numeroMiPiace++;
+                }
+            });
+          }
+        });
+      }
+      else {
+        this.server.aggiungiLikeCommento(this.sessionId, comm.id).subscribe(ok => {
+        if(ok) {
+          console.log("like aggiunto");
+          comm.liked = true;
+          comm.numeroMiPiace++;
+          }
+        });
+      } 
+    }
+  }
+
+  dislikeCommento(comm: Commento) {
+    console.log("dislike: " + comm.numeroNonMiPiace);
+    if(comm.disliked) {
+      this.server.rimuoviDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
+        if(ok) {
+          console.log("dislike rimosso");
+          comm.numeroNonMiPiace--;
+          comm.disliked = false;
+        }
+      });
+    }
+    else {
+      if(comm.liked) {
+        console.log("rimuovi dislike");
+        this.server.rimuoviLikeCommento(this.sessionId, comm.id).subscribe(ok => {
+          if(ok) {
+            comm.numeroMiPiace--;
+            comm.liked = false;
+            this.server.aggiungiDislikeCommento(this.sessionId, comm.id).subscribe(ok2 => {
+              if(ok2) {
+                console.log("dislike aggiunto");
+                comm.disliked = true;
+                comm.numeroNonMiPiace++;
+              }
+            });
+          }
+        });
+      }
+      else {
+        this.server.aggiungiDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
+          if(ok) {
+            console.log("dislike aggiunto");
+            comm.disliked = true;
+            comm.numeroNonMiPiace++;
+          }
+        });
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -142,7 +273,6 @@ export class SchedaRecensioniComponent implements OnInit {
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
-      console.log("num like: " + this.recensioni[0].numeroMiPiace);
 
       this.server.getUser(this.sessionId).subscribe(u => {
         this.userLogged = u;
@@ -160,6 +290,22 @@ export class SchedaRecensioniComponent implements OnInit {
           }         
         });
 
+        this.server.getLikeRecensione(this.sessionId, this.recensioni[i].id).subscribe(ok => {
+          if(ok) {
+            console.log("liked");
+            this.recensioni[i].liked = true;
+          }
+          else {
+            this.server.getDislikeRecensione(this.sessionId, this.recensioni[i].id).subscribe(ok2 => {
+              if(ok2) {
+                console.log("disliked");
+                this.recensioni[i].disliked = true;
+              }
+              console.log("not liked or disliked");
+            });
+          }
+        });
+
         this.server.getCommenti(this.recensioni[i].id).subscribe(c => {
           this.recensioni[i].commenti = c;
           
@@ -170,6 +316,23 @@ export class SchedaRecensioniComponent implements OnInit {
               this.recensioni[i].commenti[j].userImg = "data:image/png;base64, " + u.userImage;
               this.recensioni[i].commenti[j].userId = u.id;
             });
+
+            this.server.getLikeCommento(this.sessionId, this.recensioni[i].commenti[j].id).subscribe(ok => {
+              if(ok) {
+                console.log("liked");
+                this.recensioni[i].commenti[j].liked = true;
+              }
+              else {
+                this.server.getDislikeCommento(this.sessionId, this.recensioni[i].commenti[j].id).subscribe(ok2 => {
+                  if(ok2) {
+                    console.log("disliked");
+                    this.recensioni[i].commenti[j].disliked = true;
+                  }
+                  console.log("not liked or disliked");
+                });
+              }
+            });
+
           }
         });
       }

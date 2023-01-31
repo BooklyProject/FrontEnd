@@ -131,6 +131,7 @@ export class SchedaEventiComponent implements OnInit {
   eliminaPart(index: number) {
     this.server.eliminaPartecipazione(this.sessionId, this.eventiAccettati[index].id).subscribe(ok => {
       if(ok) {
+        this.eventiAccettati[index].partecipanti--;
         this.eventiDisponibili.push(this.eventiAccettati[index]);
         this.eventiAccettati.splice(index, 1);
       }
@@ -140,6 +141,7 @@ export class SchedaEventiComponent implements OnInit {
   partecipa(index: number) {
     this.server.partecipaAEvento(this.sessionId, this.eventiDisponibili[index].id).subscribe(ok => {
       if(ok) {
+        this.eventiDisponibili[index].partecipanti++;
         this.eventiAccettati.push(this.eventiDisponibili[index]);
         this.eventiDisponibili.splice(index, 1);
       }

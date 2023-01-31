@@ -11,10 +11,10 @@
     background-color: #000;
 }
 
-span{
+.elimina-segnala{
     cursor: pointer
 }
-span:hover{
+.elimina-segnala:hover{
     color: red;
 }
 
@@ -118,4 +118,8 @@ div.stars {
 .non-like {
     color: black;
 }
-  
+
+.star {
+    float: left;
+    color: #ffcd3c;
+}

@@ -199,5 +199,20 @@ export class ServerService {
     return this.http.get<Boolean>(this.url + "/addReport", {params:{sessionId: sessionid, tipo: Tipo, post: id, descrizione: Descrizione}});
   }
 
+  getLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/getReviewLike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  getDislikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/getReviewDislike?jsessionid=" + sessionid, {idRecensione: idRec});
+  }
+
+  getLikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/getCommentLike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
+
+  getDislikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/getCommentDislike?jsessionid=" + sessionid, {idCommento: idComm});
+  }
 }
 
