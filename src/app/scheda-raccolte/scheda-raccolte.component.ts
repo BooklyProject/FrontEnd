@@ -73,23 +73,6 @@ export class SchedaRaccolteComponent implements OnInit {
     })
   }
 
-  /*cercaLibro() {
-    if(this.book === "") {
-      alert("Campo di ricerca vuoto!");
-    } else {
-      this.params.searchTerm = this.book;
-      this.GoogleBooksService.getBooks(this.params).subscribe((response) => {
-          if (response) {
-            this.booksCollection = response;
-            this.booksCollection.items = this.booksCollection.items.filter(book => book.volumeInfo.industryIdentifiers &&
-                                              book.volumeInfo.authors && book.volumeInfo.categories &&
-                                              book.volumeInfo.description);
-            this.booksCollection.totalItems = this.booksCollection.items.length;
-          }
-      });
-    }
-  }*/
-
   ngOnInit(): void {
     this.route.queryParams.subscribe(data => {
       var sessionId = data['jsessionid'];

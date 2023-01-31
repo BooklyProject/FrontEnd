@@ -8,6 +8,7 @@ import { Raccolta } from './model/Raccolta';
 import { Recensione, Commento } from './model/Recensione';
 import { Libro } from './model/Libro';
 import { Stats } from './model/Stats';
+import { Segnalazione } from './model/Segnalazione';
 
 
 @Injectable({
@@ -197,6 +198,17 @@ export class ServerService {
   aggiungiSegnalazione(sessionid: string, Tipo: string, idPost: Number, Descrizione: string): Observable<Boolean>{
     var id = idPost.valueOf();
     return this.http.get<Boolean>(this.url + "/addReport", {params:{sessionId: sessionid, tipo: Tipo, post: id, descrizione: Descrizione}});
+  }
+  getSegnalazioni(sessionid: string):Observable<Segnalazione[]>{
+    return this.http.get<Segnalazione[]>(this.url + "/reports", {params:{jsessionid: sessionid}});
+  }
+  bannaUtente(idUtente: Number): Observable<Boolean>{
+    var idU = idUtente.valueOf();
+    return this.http.get<Boolean>(this.url + "/banUser", {params:{id: idU}});
+  }
+  eliminaSegnalazione(idSegnalazione: Number): Observable<Boolean>{
+    var idS = idSegnalazione.valueOf();
+    return this.http.get<Boolean>(this.url + "/deleteReport", {params:{id: idS}});
   }
 
   getLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
