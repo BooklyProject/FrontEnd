@@ -1,4 +1,5 @@
 <ng-container *ngIf="sessionId">
+<div *ngIf="amministratore ===false; else soloAmministratore">
 <div class="sidenav" (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()"
     [ngClass]="{
         'sidenav-aperta': !miniSidebar,
@@ -16,4 +17,9 @@
     'main-compatto': miniSidebar}">
     <router-outlet></router-outlet>
 </div>
+</div>
 </ng-container>
+
+<ng-template #soloAmministratore>
+    <app-scheda-segnalazioni [sessionId]="sessionId"></app-scheda-segnalazioni>
+</ng-template>

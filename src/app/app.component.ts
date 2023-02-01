@@ -7,7 +7,8 @@ import { ServerService } from './server.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
+  amministratore: boolean = false;
   title = 'FrontEnd';
   miniSidebar:boolean = true;
   isLogged:Boolean = false;
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     var sessionId = urlParams.get("jsessionid");
     if (sessionId){
       this.server.checkLogin(sessionId).subscribe(ok => {
+      //SE AMMINISTRATORE: amministratore = true;
       this.isLogged = ok;
       if (ok){
         if (sessionId != null){

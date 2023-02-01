@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Segnalazione } from '../model/Segnalazione';
 import { ServerService } from '../server.service';
@@ -11,7 +11,7 @@ import { ServerService } from '../server.service';
 export class SchedaSegnalazioniComponent {
 
   segnalazioni: Segnalazione[] = [];
-  sessionId: string = "";
+  @Input() sessionId: string = "";
 
   getSegnalazioni(){
     this.server.getSegnalazioni(this.sessionId).subscribe((s) =>{
@@ -32,7 +32,7 @@ export class SchedaSegnalazioniComponent {
   }
 
   lasciaPerdere(index: number){
-    this.server.eliminaRecensione(this.segnalazioni[index].id).subscribe((ok) =>{
+    this.server.eliminaSegnalazione(this.segnalazioni[index].id).subscribe((ok) =>{
       if(ok){
         alert("Segnalazione correttamente eliminata");
       } else {
