@@ -1,10 +1,11 @@
 export interface Segnalazione{
     id: number;
     tipo: string;
-    idPost: number;
-    idUtente: number;
-    username: string;
-    idAmministratore: number;
+    post: number;
     descrizione: string;
+    utente: number;
+    username: string;
+    descrizionePost: string;
+    amministratore: number;
     isDone: boolean;
 }

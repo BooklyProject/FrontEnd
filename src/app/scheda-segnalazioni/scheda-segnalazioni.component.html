@@ -10,12 +10,13 @@
 
 <div class="postcard light blue" *ngFor="let segn of segnalazioni; let index = index;">
     <div class="postcard__text t-dark">
-        <h1 class="postcard__title blue">DA SISTEMARE</h1>
+        <h1 class="postcard__title blue">{{segn.tipo}}</h1>
         <div class="postcard__subtitle small">
-            <i></i>
+            <i>{{segn.descrizione}}</i>
+            <h6>{{segn.username}}</h6>
         </div>
         <div class="postcard__bar"></div>
-        <div class="postcard__preview-txt">{{segn.descrizione}}</div>
+        <div class="postcard__preview-txt">{{segn.descrizionePost}}</div>
         <div class="altoADestra">
             <button (click)="modera(index)" type="button" class="btn btn-outline-danger">Modera</button>
             <button (click)="lasciaPerdere(index)" type="button" class="btn btn-outline-primary" style="margin-left: 5px;">Lascia perdere</button>
