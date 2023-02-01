@@ -206,9 +206,11 @@ export class ServerService {
     var idU = idUtente.valueOf();
     return this.http.get<Boolean>(this.url + "/banUser", {params:{id: idU}});
   }
-  eliminaSegnalazione(idSegnalazione: Number): Observable<Boolean>{
-    var idS = idSegnalazione.valueOf();
-    return this.http.get<Boolean>(this.url + "/deleteReport", {params:{id: idS}});
+  eliminaSegnalazione(idSegnalazione: number): Observable<Boolean>{
+    return this.http.get<Boolean>(this.url + "/deleteReport", {params:{id: idSegnalazione}});
+  }
+  eliminaSegnalazioneEPost(idSegnalazione: number): Observable<Boolean>{
+    return this.http.get<Boolean>(this.url + "/deleteReportAndPost", {params:{id: idSegnalazione}});
   }
 
   getLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
@@ -231,8 +233,13 @@ export class ServerService {
     return this.http.post<User>(this.url + "/getUserId", {idUtente: id});
   }
 
-  getDescrizionePost(id: number): Observable<string> {
-    return this.http.post<string>(this.url + "/getPostDescription", {idPost: id});
+  getDescrizionePost(id: number): Observable<any> {
+    
+    const requestOptions: Object = {
+      responseType: 'text'
+    }
+    
+    return this.http.post<any>(this.url + "/getPostDescription", {idPost: id}, requestOptions);
   }
   
   modificaUtente(user: User): Observable<Boolean>{
