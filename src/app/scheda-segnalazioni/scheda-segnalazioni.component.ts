@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Segnalazione } from '../model/Segnalazione';
 import { ServerService } from '../server.service';
 
@@ -8,10 +7,10 @@ import { ServerService } from '../server.service';
   templateUrl: './scheda-segnalazioni.component.html',
   styleUrls: ['./scheda-segnalazioni.component.css']
 })
-export class SchedaSegnalazioniComponent {
+export class SchedaSegnalazioniComponent implements OnInit {
 
   segnalazioni: Segnalazione[] = [];
-  @Input() sessionId: string = "";
+  sessionId: string = "";
 
   getSegnalazioni(){
     this.server.getSegnalazioni(this.sessionId).subscribe((s) =>{
@@ -42,18 +41,18 @@ export class SchedaSegnalazioniComponent {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(data => {
-      var sessionId = data['jsessionid'];
-
-      if(sessionId != null) {
-        this.sessionId = sessionId;
-        console.log("sessionId catalogo: " + this.sessionId);
-        this.getSegnalazioni();
-      }
-    })
+    console.log("session: " + this.sessionId);
+    const urlParams = new URLSearchParams(window.location.search);
+    var sessionId = urlParams.get("jsessionid");
+    if(sessionId) {
+      this.sessionId = sessionId;
+    }
+    console.log("sessionId segnalazioni: " + this.sessionId);
+    this.getSegnalazioni();
   }
+    
 
-  constructor(private server: ServerService, private route: ActivatedRoute){
+  constructor(private server: ServerService){
 
   }
 }

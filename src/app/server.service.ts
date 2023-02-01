@@ -226,5 +226,9 @@ export class ServerService {
   getDislikeCommento(sessionid: string, idComm: Number): Observable<Boolean> {
     return this.http.post<Boolean>(this.url + "/getCommentDislike?jsessionid=" + sessionid, {idCommento: idComm});
   }
+
+  getUtente(id: number): Observable<User> {
+    return this.http.post<User>(this.url + "/getUserId", {idUtente: id});
+  }
 }
 

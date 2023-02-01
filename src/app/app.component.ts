@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServerService } from './server.service';
 
 @Component({
@@ -11,10 +12,9 @@ export class AppComponent implements OnInit {
   amministratore: boolean = false;
   title = 'FrontEnd';
   miniSidebar:boolean = true;
-  isLogged:Boolean = false;
   sessionId: string = "";
 
-  constructor(private server: ServerService) {
+  constructor(private server: ServerService, private router: Router) {
 
   }
 
@@ -22,13 +22,12 @@ export class AppComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     var sessionId = urlParams.get("jsessionid");
     if (sessionId){
-      this.server.checkLogin(sessionId).subscribe(ok => {
-      //SE AMMINISTRATORE: amministratore = true;
-      this.isLogged = ok;
-      if (ok){
-        if (sessionId != null){
-          this.sessionId = sessionId;
-        }
+      this.sessionId = sessionId;
+      this.server.checkLogin(this.sessionId).subscribe(ok => {
+      if(!ok) {
+        this.amministratore = true;
+        console.log("admin; " + this.amministratore);
+        //this.router.navigate(["/segnalazioni"], {queryParams: {jsessionid: this.sessionId}});
       }
       });
     }
