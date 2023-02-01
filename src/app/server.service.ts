@@ -230,15 +230,13 @@ export class ServerService {
   getUtente(id: number): Observable<User> {
     return this.http.post<User>(this.url + "/getUserId", {idUtente: id});
   }
-<<<<<<< Updated upstream
 
   getDescrizionePost(id: number): Observable<string> {
     return this.http.post<string>(this.url + "/getPostDescription", {idPost: id});
-
-=======
+  }
+  
   modificaUtente(user: User): Observable<Boolean>{
     return this.http.post<Boolean>(this.url + "/modifyProfile", {utente: user});
->>>>>>> Stashed changes
   }
 }
 
