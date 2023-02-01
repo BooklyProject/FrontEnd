@@ -60,6 +60,24 @@ export class SchedaUtenteComponent implements OnInit {
       this.utente.cognome = this.cognome;
       this.utente.email = this.email;
       this.utente.username = this.username;
+      var nuovoUtente: User = {
+        id: this.utente.id,
+        email: this.utente.email,
+        username: this.utente.username,
+        password: this.utente.password,
+        nome: this.utente.nome,
+        cognome: this.utente.cognome,
+        isBanned: this.utente.isBanned,
+        userImage: this.utente.userImage,
+        stats: this.utente.stats
+      }
+      this.server.modificaUtente(nuovoUtente).subscribe((ok) =>{
+        if(ok){
+          alert("Profilo modificato con successo");
+        } else {
+          alert("Errore nella modifica del profilo")
+        }
+      })
       this.modificaInfo();
       console.log(this.utente);
     }
