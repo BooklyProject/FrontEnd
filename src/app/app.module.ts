@@ -16,6 +16,8 @@ import { PaginaEventoComponent } from './pagina-evento/pagina-evento.component';
 import { SchedaSegnalazioniComponent } from './scheda-segnalazioni/scheda-segnalazioni.component';
 import { SchedaRecensioniComponent } from './scheda-recensioni/scheda-recensioni.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -38,7 +40,15 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     FormsModule,
     HttpClientModule,
     NgxStarRatingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+      progressBar: true,
+      countDuplicates: true,
+      extendedTimeOut: 3000,
+      positionClass: 'toast-bottom-right',
+    }),
   ],
   exports: [
     TruncatePipe
