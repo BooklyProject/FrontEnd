@@ -38,7 +38,11 @@ export class SchedaSegnalazioniComponent implements OnInit {
         this.server.eliminaSegnalazioneEPost(this.segnalazioni[index].id).subscribe(ok2 => {
           if(ok2) {
             alert("Segnalazione e post correttamente eliminati");
-            this.segnalazioni.splice(index, 1);
+            for(let i = 0; i < this.segnalazioni.length; i++){
+              if(this.segnalazioni[i].post === this.segnalazioni[index].post){
+                this.segnalazioni.splice(i, 1);
+              }
+            }
           }
         });
       }

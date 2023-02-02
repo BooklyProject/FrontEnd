@@ -209,7 +209,7 @@ export class ServerService {
     return this.http.get<Boolean>(this.url + "/deleteReport", {params:{id: idSegnalazione}});
   }
   eliminaSegnalazioneEPost(idSegnalazione: number): Observable<Boolean>{
-    return this.http.get<Boolean>(this.url + "/deleteReportAndPost", {params:{id: idSegnalazione}});
+    return this.http.get<Boolean>(this.url + "/deleteReportsAndPost", {params:{id: idSegnalazione}});
   }
 
   getLikeRecensione(sessionid: string, idRec: Number): Observable<Boolean> {
