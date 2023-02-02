@@ -32,6 +32,7 @@
     min-height: 370px;
 }
 
+/*
 .raccolte > .row{
     display: block;
     overflow-x: auto;
@@ -42,12 +43,14 @@
     display: inline-block;
     float: none;
 }
+*/
 
 .card-custom {
     overflow: hidden;
-    min-height: 350px;
-    min-width: 380px;
+    max-height: 450px;
+    max-width: 480px;
     box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    margin-top: 20px;
 }
   
 .card-custom-img {
