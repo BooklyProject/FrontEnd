@@ -31,7 +31,7 @@ export class CatalogoComponent implements OnInit {
             this.booksCollection = response;
             this.booksCollection.items = this.booksCollection.items.filter(book => book.volumeInfo.industryIdentifiers &&
                                               book.volumeInfo.authors && book.volumeInfo.categories &&
-                                              book.volumeInfo.description);
+                                              book.volumeInfo.description && book.volumeInfo.pageCount && book.volumeInfo.language);
             this.booksCollection.totalItems = this.booksCollection.items.length;
           }
       });

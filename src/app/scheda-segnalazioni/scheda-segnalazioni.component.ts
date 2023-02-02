@@ -32,7 +32,7 @@ export class SchedaSegnalazioniComponent implements OnInit {
   }
 
   modera(index: number){
-    this.server.bannaUtente(this.segnalazioni[index].utente).subscribe((ok) =>{
+    this.server.bannaUtente(this.segnalazioni[index].post).subscribe((ok) =>{
       if(ok){
         alert("Utente correttamente bandito");
         this.server.eliminaSegnalazioneEPost(this.segnalazioni[index].id).subscribe(ok2 => {

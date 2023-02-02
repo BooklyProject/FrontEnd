@@ -202,9 +202,8 @@ export class ServerService {
   getSegnalazioni(sessionid: string):Observable<Segnalazione[]>{
     return this.http.get<Segnalazione[]>(this.url + "/reports", {params:{jsessionid: sessionid}});
   }
-  bannaUtente(idUtente: Number): Observable<Boolean>{
-    var idU = idUtente.valueOf();
-    return this.http.get<Boolean>(this.url + "/banUser", {params:{id: idU}});
+  bannaUtente(id: number): Observable<Boolean>{
+    return this.http.get<Boolean>(this.url + "/banUser", {params:{idPost: id}});
   }
   eliminaSegnalazione(idSegnalazione: number): Observable<Boolean>{
     return this.http.get<Boolean>(this.url + "/deleteReport", {params:{id: idSegnalazione}});
