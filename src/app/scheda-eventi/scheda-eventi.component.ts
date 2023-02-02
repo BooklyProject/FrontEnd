@@ -159,6 +159,8 @@ export class SchedaEventiComponent implements OnInit {
   chiudiFormSegnalazione(){
     this.scrivereSegnalazione = !this.scrivereSegnalazione;
     this.idPostSegnalato = null;
+    this.tipoSegnalazione = "";
+    this.descSegnalazione = "";
   }
 
   confermaSegnalazione(){
@@ -172,7 +174,7 @@ export class SchedaEventiComponent implements OnInit {
           alert("Errore nella creazione della segnalazione");
         }
       }
-    )}
+    )};
   }
   
   constructor(private server: ServerService, private route: ActivatedRoute) {

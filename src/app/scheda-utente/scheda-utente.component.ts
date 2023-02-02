@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Stats } from '../model/Stats';
 import { User } from '../model/User';
@@ -39,6 +38,7 @@ export class SchedaUtenteComponent implements OnInit {
             this.email = this.utente.email;
             this.username = this.utente.username;
             this.image = "data:image/png;base64, " + this.utente.userImage;
+            this.utente.isBanned = false;
           }
         });
         this.server.getStats(this.sessionId).subscribe((s) =>{
@@ -71,6 +71,10 @@ export class SchedaUtenteComponent implements OnInit {
         userImage: this.utente.userImage,
         stats: this.utente.stats
       }
+      
+      console.log("id user: " + nuovoUtente.id + " - " + nuovoUtente.isBanned);
+      console.log("name: " + nuovoUtente.nome + " - " + nuovoUtente.cognome);
+      console.log("username: " + nuovoUtente.username + " - " + nuovoUtente.password + " - " + nuovoUtente.email);
       this.server.modificaUtente(nuovoUtente).subscribe((ok) =>{
         if(ok){
           alert("Profilo modificato con successo");
@@ -99,7 +103,7 @@ export class SchedaUtenteComponent implements OnInit {
     window.location.href = "http://localhost:8080/doLogout";
   }
 
-  constructor(private server: ServerService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private server: ServerService, private route: ActivatedRoute) {
 
   }
 }

@@ -99,9 +99,9 @@
                                     <div class="card-body p-4" *ngFor="let comm of rec.commenti; let index = index;">          
                                         <div class="card">
                                                 <span *ngIf="userLogged && userLogged.id === comm.userId" 
-                                                (click)="cancellaCommento(comm.id, index)" class="material-symbols-outlined altoDx">delete</span>
+                                                (click)="cancellaCommento(comm.id, index)" class="material-symbols-outlined altoDx" style="cursor: pointer;">delete</span>
                                                 <span *ngIf="userLogged && userLogged.id !== comm.userId" 
-                                                (click)="apriFormSegnalazione(comm.id)" class="material-symbols-outlined altoDx">flag</span>
+                                                (click)="apriFormSegnalazione(comm.id)" class="material-symbols-outlined altoDx" style="cursor: pointer;">flag</span>
                                             <div class="card-body">
                                                 <p>{{comm.descrizione}}</p>
                                                 <div class="d-flex justify-content-between">

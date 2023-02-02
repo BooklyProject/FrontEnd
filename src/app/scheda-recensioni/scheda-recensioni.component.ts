@@ -347,6 +347,8 @@ export class SchedaRecensioniComponent implements OnInit {
   chiudiFormSegnalazione(){
     this.scrivereSegnalazione = !this.scrivereSegnalazione;
     this.idPostSegnalato = null;
+    this.descSegnalazione = "";
+    this.tipoSegnalazione = "";
   }
 
   confermaSegnalazione(){
