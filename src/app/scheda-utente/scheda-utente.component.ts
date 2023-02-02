@@ -97,7 +97,6 @@ export class SchedaUtenteComponent implements OnInit {
   logout(){
     alert("Sei sicuro?");
     window.location.href = "http://localhost:8080/doLogout";
-
   }
 
   constructor(private server: ServerService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {

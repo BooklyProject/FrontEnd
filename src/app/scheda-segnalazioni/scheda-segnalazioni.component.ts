@@ -64,7 +64,11 @@ export class SchedaSegnalazioniComponent implements OnInit {
     console.log("sessionId segnalazioni: " + this.sessionId);
     this.getSegnalazioni();
   }
-    
+
+  logout(){
+    alert("Sei sicuro?");
+    window.location.href = "http://localhost:8080/doLogout";
+  }    
 
   constructor(private server: ServerService){
 
