@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ServerService } from './server.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
   miniSidebar:boolean = true;
   sessionId: string = "";
 
-  constructor(private server: ServerService, private router: Router) {
+  constructor(private server: ServerService) {
 
   }
 

@@ -273,6 +273,7 @@ export class SchedaRecensioniComponent implements OnInit {
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
+      console.log("len di rec: " + this.recensioni.length);
 
       this.server.getUser(this.sessionId).subscribe(u => {
         this.userLogged = u;

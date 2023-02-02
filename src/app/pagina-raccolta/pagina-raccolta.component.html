@@ -45,7 +45,7 @@
 <div class="postcard light blue" *ngFor="let libro of raccolta.libri">
         <img class="postcard__img titolo" src="{{libro.copertina}}" alt="Copertina libro" />
     <div class="postcard__text t-dark">
-        <h1 class="postcard__title blue">{{libro.nome}}</h1>
+        <h1 class="postcard__title blue" (click)="openBookPage(libro)" style="cursor: pointer;">{{libro.nome}}</h1>
         <div class="postcard__subtitle small">
             <i>{{libro.autore}}</i>
         </div>

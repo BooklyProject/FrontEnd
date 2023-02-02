@@ -48,6 +48,10 @@ export class ServerService {
       copertina: v.volumeInfo.imageLinks?.thumbnail});
   }
 
+  sendLibroRaccolta(sessionid: string, l: Libro): Observable<Boolean> {
+    return this.http.post<Boolean>(this.url + "/getBookFromCollection?jsessionid=" + sessionid, {libro: l});
+  }
+
   getEventiCreati(sessionid: string): Observable<Evento[]> {
 
     return this.http.get<Evento[]>(this.url + "/myEvents", {params: {jsessionid: sessionid}});

@@ -99,12 +99,21 @@ export class PaginaRaccoltaComponent implements OnInit {
               this.booksCollection = response;
               this.booksCollection.items = this.booksCollection.items.filter(book => book.volumeInfo.industryIdentifiers &&
                                                 book.volumeInfo.authors && book.volumeInfo.categories &&
-                                                book.volumeInfo.description);
+                                                book.volumeInfo.description && book.volumeInfo.pageCount && book.volumeInfo.language);
               this.booksCollection.items = this.booksCollection.items.slice(0, 5);
               this.booksCollection.totalItems = this.booksCollection.items.length;
             }
         });
       }
+    }
+
+    openBookPage(libro: Libro) {
+      if(libro != null) {
+        this.server.sendLibroRaccolta(this.sessionId, libro).subscribe(ok => {
+            console.log("res: " + ok);
+            window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
+        });
+      }    
     }
 
     ngOnInit(): void {
