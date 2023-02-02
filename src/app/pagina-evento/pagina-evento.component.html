@@ -9,7 +9,7 @@
 <div class="row">
 <div class="col-12 col-md-6 maps">
     <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
-        <google-map *ngIf="mapCenter" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
+        <google-map *ngIf="mapCenter" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions" [width]="null" [height]="200">
         <map-marker
             #marker="mapMarker"
             [position]="mapCenter"
@@ -19,7 +19,7 @@
         </google-map>
     </div> 
 </div>
-<div class="col-12 col-md-6 pr-md-0">
+<div class="col-12 col-md-6 pr-md-0" style="width: 100%;">
     <div id="info" class="shadow-sm rounded border p-3 h-100">
         <ul>
             <li><h3>Descrizione</h3><p>{{evento?.descrizione}}</p></li>
