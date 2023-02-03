@@ -47,13 +47,11 @@ export class SchedaRecensioniComponent implements OnInit {
       this.server.addReview(this.sessionId, miaRecensione).subscribe(id => {
         if(id) {
           this.miaRecensione = true;
-          console.log("id rec: " + id);
           miaRecensione.id = id;
           if(this.userLogged) {
             miaRecensione.username = this.userLogged?.username;
             miaRecensione.userImg = "data:image/png;base64, " + this.userLogged.userImage;
             miaRecensione.userId = this.userLogged.id;
-            console.log("u: " + miaRecensione.id + " - " + miaRecensione.username);
             this.recensioni.splice(0, 0, miaRecensione);
             this.svuotaCampi();
           }
@@ -72,7 +70,6 @@ export class SchedaRecensioniComponent implements OnInit {
   svuotaCampi() {
     this.descrRecensione = "";
     this.form.value.rating1 = 0;
-    console.log("rat: " +  this.form.value.rating1);
     this.commento = "";
   }
 
@@ -80,7 +77,6 @@ export class SchedaRecensioniComponent implements OnInit {
     if(this.commento) {
       this.server.addComment(this.sessionId, this.recensioni[index].id, this.commento).subscribe(i => {
         if(i) {
-          console.log("id: " + i);
           if(this.userLogged) {
             var commento: Commento = {id: i, descrizione: this.commento, numeroMiPiace: 0, numeroNonMiPiace: 0, username: this.userLogged?.username, userImg: "data:image/png;base64, " + this.userLogged.userImage, userId: this.userLogged.id, liked: false, disliked: false};
             this.recensioni[index].commenti.push(commento);
@@ -105,7 +101,6 @@ export class SchedaRecensioniComponent implements OnInit {
   }
 
   likeRecensione(rec: Recensione) {
-    console.log("like: " + rec.numeroMiPiace);
     if(rec.liked) {
       this.server.rimuoviLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
         if(ok) {
@@ -116,15 +111,12 @@ export class SchedaRecensioniComponent implements OnInit {
     }
     else {
       if(rec.disliked) {
-        console.log("rimuovi dislike");
         this.server.rimuoviDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
           if(ok) {
-            console.log("dislike rimosso");
             rec.numeroNonMiPiace--;
             rec.disliked = false;
             this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok2 => {
               if(ok2) {
-                console.log("like aggiunto");
                 rec.liked = true;
                 rec.numeroMiPiace++;
                 }
@@ -135,7 +127,6 @@ export class SchedaRecensioniComponent implements OnInit {
       else {
         this.server.aggiungiLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
         if(ok) {
-          console.log("like aggiunto");
           rec.liked = true;
           rec.numeroMiPiace++;
           }
@@ -145,11 +136,9 @@ export class SchedaRecensioniComponent implements OnInit {
   }
 
   dislikeRecensione(rec: Recensione) {
-    console.log("dislike: " + rec.numeroNonMiPiace);
     if(rec.disliked) {
       this.server.rimuoviDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
         if(ok) {
-          console.log("dislike rimosso");
           rec.numeroNonMiPiace--;
           rec.disliked = false;
         }
@@ -157,14 +146,12 @@ export class SchedaRecensioniComponent implements OnInit {
     }
     else {
       if(rec.liked) {
-        console.log("rimuovi dislike");
         this.server.rimuoviLikeRecensione(this.sessionId, rec.id).subscribe(ok => {
           if(ok) {
             rec.numeroMiPiace--;
             rec.liked = false;
             this.server.aggiungiDislikeRecensione(this.sessionId, rec.id).subscribe(ok2 => {
               if(ok2) {
-                console.log("dislike aggiunto");
                 rec.disliked = true;
                 rec.numeroNonMiPiace++;
               }
@@ -175,7 +162,6 @@ export class SchedaRecensioniComponent implements OnInit {
       else {
         this.server.aggiungiDislikeRecensione(this.sessionId, rec.id).subscribe(ok => {
           if(ok) {
-            console.log("dislike aggiunto");
             rec.disliked = true;
             rec.numeroNonMiPiace++;
           }
@@ -185,7 +171,6 @@ export class SchedaRecensioniComponent implements OnInit {
   }
 
   likeCommento(comm: Commento) {
-    console.log("like: " + comm.numeroMiPiace);
     if(comm.liked) {
       this.server.rimuoviLikeCommento(this.sessionId, comm.id).subscribe(ok => {
         if(ok) {
@@ -196,15 +181,12 @@ export class SchedaRecensioniComponent implements OnInit {
     }
     else {
       if(comm.disliked) {
-        console.log("rimuovi dislike");
         this.server.rimuoviDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
           if(ok) {
-            console.log("dislike rimosso");
             comm.numeroNonMiPiace--;
             comm.disliked = false;
             this.server.aggiungiLikeCommento(this.sessionId, comm.id).subscribe(ok2 => {
               if(ok2) {
-                console.log("like aggiunto");
                 comm.liked = true;
                 comm.numeroMiPiace++;
                 }
@@ -215,7 +197,6 @@ export class SchedaRecensioniComponent implements OnInit {
       else {
         this.server.aggiungiLikeCommento(this.sessionId, comm.id).subscribe(ok => {
         if(ok) {
-          console.log("like aggiunto");
           comm.liked = true;
           comm.numeroMiPiace++;
           }
@@ -225,11 +206,9 @@ export class SchedaRecensioniComponent implements OnInit {
   }
 
   dislikeCommento(comm: Commento) {
-    console.log("dislike: " + comm.numeroNonMiPiace);
     if(comm.disliked) {
       this.server.rimuoviDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
         if(ok) {
-          console.log("dislike rimosso");
           comm.numeroNonMiPiace--;
           comm.disliked = false;
         }
@@ -237,14 +216,12 @@ export class SchedaRecensioniComponent implements OnInit {
     }
     else {
       if(comm.liked) {
-        console.log("rimuovi dislike");
         this.server.rimuoviLikeCommento(this.sessionId, comm.id).subscribe(ok => {
           if(ok) {
             comm.numeroMiPiace--;
             comm.liked = false;
             this.server.aggiungiDislikeCommento(this.sessionId, comm.id).subscribe(ok2 => {
               if(ok2) {
-                console.log("dislike aggiunto");
                 comm.disliked = true;
                 comm.numeroNonMiPiace++;
               }
@@ -255,7 +232,6 @@ export class SchedaRecensioniComponent implements OnInit {
       else {
         this.server.aggiungiDislikeCommento(this.sessionId, comm.id).subscribe(ok => {
           if(ok) {
-            console.log("dislike aggiunto");
             comm.disliked = true;
             comm.numeroNonMiPiace++;
           }
@@ -273,7 +249,6 @@ export class SchedaRecensioniComponent implements OnInit {
 
     this.server.getRecensioni(this.sessionId).subscribe(r => {
       this.recensioni = r;
-      console.log("len di rec: " + this.recensioni.length);
 
       this.server.getUser(this.sessionId).subscribe(u => {
         this.userLogged = u;
@@ -284,25 +259,20 @@ export class SchedaRecensioniComponent implements OnInit {
           this.recensioni[i].username = u.username;
           this.recensioni[i].userImg = "data:image/png;base64, " + u.userImage;
           this.recensioni[i].userId = u.id;
-          console.log("u: " + this.recensioni[i].id + " - " + this.recensioni[i].username); 
           if(this.recensioni[i].userId === this.userLogged?.id) {
-            console.log(this.recensioni[0].userId + " e " + this.userLogged.id);
             this.miaRecensione = true;
           }         
         });
 
         this.server.getLikeRecensione(this.sessionId, this.recensioni[i].id).subscribe(ok => {
           if(ok) {
-            console.log("liked");
             this.recensioni[i].liked = true;
           }
           else {
             this.server.getDislikeRecensione(this.sessionId, this.recensioni[i].id).subscribe(ok2 => {
               if(ok2) {
-                console.log("disliked");
                 this.recensioni[i].disliked = true;
               }
-              console.log("not liked or disliked");
             });
           }
         });
@@ -310,7 +280,6 @@ export class SchedaRecensioniComponent implements OnInit {
         this.server.getCommenti(this.recensioni[i].id).subscribe(c => {
           this.recensioni[i].commenti = c;
           
-          console.log("length comm: " + this.recensioni[i].commenti.length);
           for(let j = 0; j < this.recensioni[i].commenti.length; j++) {
             this.server.getScrittoreCommento(this.recensioni[i].commenti[j].id).subscribe(u => {
               this.recensioni[i].commenti[j].username = u.username;
@@ -320,16 +289,13 @@ export class SchedaRecensioniComponent implements OnInit {
 
             this.server.getLikeCommento(this.sessionId, this.recensioni[i].commenti[j].id).subscribe(ok => {
               if(ok) {
-                console.log("liked");
                 this.recensioni[i].commenti[j].liked = true;
               }
               else {
                 this.server.getDislikeCommento(this.sessionId, this.recensioni[i].commenti[j].id).subscribe(ok2 => {
                   if(ok2) {
-                    console.log("disliked");
                     this.recensioni[i].commenti[j].disliked = true;
                   }
-                  console.log("not liked or disliked");
                 });
               }
             });

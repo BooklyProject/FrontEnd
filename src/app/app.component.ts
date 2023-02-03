@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
       this.server.checkLogin(this.sessionId).subscribe(ok => {
       if(!ok) {
         this.amministratore = true;
-        console.log("admin; " + this.amministratore);
-        //this.router.navigate(["/segnalazioni"], {queryParams: {jsessionid: this.sessionId}});
       }
       });
     }

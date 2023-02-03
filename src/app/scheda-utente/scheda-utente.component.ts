@@ -30,7 +30,6 @@ export class SchedaUtenteComponent implements OnInit {
         this.sessionId = sessionId;
         
         this.server.getUser(this.sessionId).subscribe((u) => {
-          console.log("utente: " + u.nome);
           if(u != null) {
             this.utente = u;
             this.nome = this.utente.nome;
@@ -72,9 +71,6 @@ export class SchedaUtenteComponent implements OnInit {
         stats: this.utente.stats
       }
       
-      console.log("id user: " + nuovoUtente.id + " - " + nuovoUtente.isBanned);
-      console.log("name: " + nuovoUtente.nome + " - " + nuovoUtente.cognome);
-      console.log("username: " + nuovoUtente.username + " - " + nuovoUtente.password + " - " + nuovoUtente.email);
       this.server.modificaUtente(nuovoUtente).subscribe((ok) =>{
         if(ok){
           alert("Profilo modificato con successo");
@@ -83,7 +79,6 @@ export class SchedaUtenteComponent implements OnInit {
         }
       })
       this.modificaInfo();
-      console.log(this.utente);
     }
   }
 
@@ -94,7 +89,6 @@ export class SchedaUtenteComponent implements OnInit {
       this.cognome = this.utente.cognome;
       this.email = this.utente.email;
       this.username = this.utente.username;
-      console.log(this.utente);
     }
   }
 

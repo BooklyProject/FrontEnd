@@ -62,7 +62,7 @@
         <h2 class="testi" *ngIf="eventiCreati.length === 0">Aggiungi nuovo evento</h2>
         <div class="col-lg-4" *ngFor="let evento of eventiCreati; let index = index;">
             <div class="card card-margin">
-                <div class="card-header no-border">
+                <div class="card-header no-border" style="overflow:hidden;">
                     <h5 class="card-title" (click)="apriEventoCreato(index)" style="cursor: pointer;">{{evento.nome}}</h5>
                 </div>
                 <div class="card-body pt-0">
@@ -71,7 +71,7 @@
                             <div class="widget-49-date-primary">
                                 <span class="widget-49-date-day"> {{evento.printDate}} </span>
                             </div>
-                            <div class="widget-49-meeting-info">
+                            <div class="widget-49-meeting-info" style="overflow:hidden;">
                                 <span class="widget-49-pro-title">{{evento.luogo}}</span>
                                 <span class="widget-49-meeting-time">{{evento.orario}}</span>
                             </div>
@@ -101,7 +101,7 @@
     <div class="col-lg-4" *ngFor="let evento of eventiAccettati; let index = index;">
         <div class="card card-margin">
             <span (click)="apriFormSegnalazione(evento.id)" class="altoDx material-symbols-outlined segnalazione">flag</span>
-            <div class="card-header no-border">
+            <div class="card-header no-border" style="overflow:hidden;">
                 <h5 class="card-title" (click)="apriEventoPartecipa(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
@@ -110,7 +110,7 @@
                         <div class="widget-49-date-primary">
                             <span class="widget-49-date-day"> {{evento.printDate}} </span>
                         </div>
-                        <div class="widget-49-meeting-info">
+                        <div class="widget-49-meeting-info" style="overflow:hidden;">
                             <span class="widget-49-pro-title">{{evento.luogo}}</span>
                             <span class="widget-49-meeting-time">{{evento.orario}}</span>
                         </div>
@@ -140,7 +140,7 @@
     <div class="col-lg-4" *ngFor="let evento of eventiDisponibili; let index = index;">
         <div class="card card-margin">
             <span (click)="apriFormSegnalazione(evento.id)" class="altoDx material-symbols-outlined segnalazione">flag</span>
-            <div class="card-header no-border">
+            <div class="card-header no-border" style="overflow:hidden;">
                 <h5 class="card-title" (click)="apriEventoDisponibile(index)" style="cursor: pointer;"> {{evento.nome}}</h5>
             </div>
             <div class="card-body pt-0">
@@ -149,7 +149,7 @@
                         <div class="widget-49-date-primary">
                             <span class="widget-49-date-day"> {{evento.printDate}} </span>
                         </div>
-                        <div class="widget-49-meeting-info">
+                        <div class="widget-49-meeting-info" style="overflow:hidden;">
                             <span class="widget-49-pro-title">{{evento.luogo}}</span>
                             <span class="widget-49-meeting-time">{{evento.orario}}</span>
                         </div>

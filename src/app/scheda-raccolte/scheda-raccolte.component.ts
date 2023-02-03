@@ -22,10 +22,8 @@ export class SchedaRaccolteComponent implements OnInit {
     this.server.getRaccolteCreate(this.sessionId).subscribe((r) => {
       this.raccolte = r;
       for(let r of this.raccolte) {
-        console.log("raccolta: " +  r.id + " " + r.nome);
         this.server.getLibriDiRaccolta(r.id).subscribe(l => {
           r.libri = l;
-          console.log("libri: " + r.libri);
           r.numLibri = r.libri.length;
         });
       }
@@ -67,7 +65,6 @@ export class SchedaRaccolteComponent implements OnInit {
   eliminaRaccolta(index: number){
     this.server.eliminaRaccolta(this.raccolte[index].id).subscribe(ok => {
       if(ok) {
-        console.log(this.raccolte[index].nome)
         this.raccolte.splice(index, 1);
       }
     })
@@ -79,7 +76,6 @@ export class SchedaRaccolteComponent implements OnInit {
 
       if(sessionId != null) {
         this.sessionId = sessionId;
-        console.log("sessionId catalogo: " + this.sessionId);
         this.getRaccolte();
       }
     })

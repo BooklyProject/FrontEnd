@@ -15,15 +15,11 @@ export class SchedaSegnalazioniComponent implements OnInit {
   getSegnalazioni(){
     this.server.getSegnalazioni(this.sessionId).subscribe((s) =>{
       this.segnalazioni = s;
-      //console.log("id: " + this.segnalazioni[0].post);
 
       for(let i of this.segnalazioni) {
-        console.log("segnalazione: " + i.descrizione + " " + i.tipo);
         this.server.getUtente(i.utente).subscribe(u => {
           i.username = u.username;
-          console.log("username: " + i.username);
         });
-        console.log("id: " + i.post);
         this.server.getDescrizionePost(i.post).subscribe(descr => {
           i.descrizionePost = descr;
         });
@@ -38,7 +34,6 @@ export class SchedaSegnalazioniComponent implements OnInit {
         this.server.eliminaSegnalazioneEPost(this.segnalazioni[index].id).subscribe(ok2 => {
           if(ok2) {
             alert("Segnalazione e post correttamente eliminati");
-            console.log("id post: " + this.segnalazioni[index].post);
             const idSegnDaEliminare = [];
             for (let i = 0; i < this.segnalazioni.length; i++) {
               if (this.segnalazioni[i].post === this.segnalazioni[index].post) {
@@ -64,13 +59,11 @@ export class SchedaSegnalazioniComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("session: " + this.sessionId);
     const urlParams = new URLSearchParams(window.location.search);
     var sessionId = urlParams.get("jsessionid");
     if(sessionId) {
       this.sessionId = sessionId;
     }
-    console.log("sessionId segnalazioni: " + this.sessionId);
     this.getSegnalazioni();
   }
 

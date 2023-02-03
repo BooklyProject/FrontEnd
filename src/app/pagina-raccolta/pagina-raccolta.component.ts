@@ -29,7 +29,6 @@ export class PaginaRaccoltaComponent implements OnInit {
     }
 
     addBook(item: Volume){
-      console.log(item.volumeInfo);
       
       if(this.booksCollection != null && this.raccolta?.id != undefined
         && item.volumeInfo.authors && item.volumeInfo.categories && item.volumeInfo.imageLinks?.thumbnail){
@@ -47,7 +46,6 @@ export class PaginaRaccoltaComponent implements OnInit {
         this.server.addLibroRaccolta(this.raccolta?.id, libro).subscribe(ok =>{
           if(ok){
             alert(item.volumeInfo.title + " aggiunto alla raccolta");
-            console.log(item);
             this.raccolta?.libri.push(libro);
             this.book = "";
             this.apriChiudiForm();
@@ -69,19 +67,15 @@ export class PaginaRaccoltaComponent implements OnInit {
     }
     eliminaLibro(libro: Libro){
       if(this.raccolta?.id != undefined){
-        console.log(libro);
         this.server.eliminaLibroRaccolta(this.raccolta?.id, libro.isbn).subscribe(ok => {
           if(ok) {
-            console.log("ok: " + ok);
             if(this.raccolta) {
-              console.log("raccolta: " + this.raccolta.id);
               const indexOfObject = this.raccolta.libri.findIndex((object) => {
                 return object.isbn === libro.isbn;
               });
               if (indexOfObject !== -1) {
                 this.raccolta.libri.splice(indexOfObject, 1);
               }
-              console.log("raccolta.libri: " + this.raccolta.libri);
             }
           }
         });
@@ -110,7 +104,6 @@ export class PaginaRaccoltaComponent implements OnInit {
     openBookPage(libro: Libro) {
       if(libro != null) {
         this.server.sendLibroRaccolta(this.sessionId, libro).subscribe(ok => {
-            console.log("res: " + ok);
             window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
         });
       }    

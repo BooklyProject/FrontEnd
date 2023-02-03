@@ -44,7 +44,6 @@ export class CatalogoComponent implements OnInit {
 
         if(sessionId != null) {
           this.sessionId = sessionId;
-          console.log("sessionId catalogo: " + this.sessionId);
         }
       })
   }
@@ -52,7 +51,6 @@ export class CatalogoComponent implements OnInit {
   openBookDetailPage(volume: Volume): void {
     if(volume != null) {
       this.server.sendBook(this.sessionId, volume).subscribe(ok => {
-          console.log("res: " + ok);
           window.location.href = "http://localhost:8080/getBook?jsessionid=" + this.sessionId;
       });
     }

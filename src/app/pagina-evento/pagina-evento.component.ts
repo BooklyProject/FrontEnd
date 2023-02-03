@@ -66,12 +66,6 @@ export class PaginaEventoComponent implements OnInit {
   
             this.mapCenter = location.geometry.location;
   
-            /*setTimeout(() => {
-              if (this.map !== undefined) {
-                this.map.panTo(location.geometry.location);
-              }
-            }, 500);*/
-  
             this.address = location.formatted_address;
             this.formattedAddress = location.formatted_address;
             this.markerInfoContent = location.formatted_address;

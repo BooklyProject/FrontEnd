@@ -58,7 +58,7 @@
                     <div class="card mb-4">
                         <span *ngIf="userLogged && userLogged.id === rec.userId" (click)="cancellaRecensione(index)" class="material-symbols-outlined elimina-segnala altoDx">delete</span>
                         <span *ngIf="userLogged && userLogged.id !== rec.userId" (click)="apriFormSegnalazione(rec.id)" class="material-symbols-outlined elimina-segnala altoDx">flag</span>
-                        <div class="card-body">
+                        <div class="card-body" style="margin-right: 5%">
                             <p>{{rec.descrizione}}</p>
                             <div class="info">
                                 <div class="star" *ngFor="let item of [].constructor(rec.voto)">
@@ -102,7 +102,7 @@
                                                 (click)="cancellaCommento(comm.id, index)" class="material-symbols-outlined altoDx" style="cursor: pointer;">delete</span>
                                                 <span *ngIf="userLogged && userLogged.id !== comm.userId" 
                                                 (click)="apriFormSegnalazione(comm.id)" class="material-symbols-outlined altoDx" style="cursor: pointer;">flag</span>
-                                            <div class="card-body">
+                                            <div class="card-body" style="margin-right: 5%">
                                                 <p>{{comm.descrizione}}</p>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex flex-row align-items-center">
