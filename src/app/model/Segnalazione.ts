@@ -7,5 +7,4 @@ export interface Segnalazione{
     username: string;
     descrizionePost: string;
     amministratore: number;
-    isDone: boolean;
 }
