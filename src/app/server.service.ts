@@ -35,8 +35,6 @@ export class ServerService {
         isbn = i.identifier;
       }
     }
-    console.log("descr: " + v.volumeInfo.description);
-    console.log("lingua: " + v.volumeInfo.language);
     return this.http.post<Boolean>(this.url + "/sendBook?jsessionid=" + sessionid, {
       isbn: isbn, 
       nome: v.volumeInfo.title, 
@@ -130,7 +128,7 @@ export class ServerService {
   }
 
   addLibroRaccolta(idraccolta: Number, libro: Libro): Observable<Boolean>{
-    console.log("copertina: " + libro.copertina);
+    
     return this.http.post<Boolean>(this.url + "/addBook?idRaccolta=" + idraccolta, {
       isbn: libro.isbn,
       nome: libro.nome, 

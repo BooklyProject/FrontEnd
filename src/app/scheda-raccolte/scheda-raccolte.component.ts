@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Raccolta } from '../model/Raccolta';
-import { CollectionResultModel } from '../GoogleBooks/models/collection-result.interface';
-import { SearchParams } from '../GoogleBooks/models/search-params.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../server.service';
 

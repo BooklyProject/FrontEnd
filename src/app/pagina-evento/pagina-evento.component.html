@@ -6,10 +6,10 @@
     <h2>{{evento?.nome}}</h2>
     <div class="line"></div>
 </div>
-<div class="row">
+<div class="row" style="margin-top:30px">
 <div class="col-12 col-md-6 maps">
     <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
-        <google-map *ngIf="mapCenter" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions" [width]="null" [height]="200">
+        <google-map *ngIf="mapCenter" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions" [width]="null" [height]="400">
         <map-marker
             #marker="mapMarker"
             [position]="mapCenter"
