@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class GeocodingService {
 
-  googleApiKey: string = 'AIzaSyBa1MRMfVQZqElNr3rWsupVfqhaa3lTO90';
+  googleApiKey: string = 'INSERT HERE YOUR API KEY';
 
   getLocation(term: string): Observable<GeocoderResponse> {
     const url = `https://maps.google.com/maps/api/geocode/json?address=${term}&sensor=false&key=${this.googleApiKey}`;
